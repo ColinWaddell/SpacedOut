@@ -1,0 +1,38 @@
+<ion-view title="Add" id="page4" class=" ">
+    <ion-content padding="true" class="has-header">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="user.name" placeholder="">
+        </label>
+
+        <ion-list>
+          <ion-radio ng-model="user.type" ng-value="'Staff'">Staff</ion-radio>
+          <ion-radio ng-model="user.type" ng-value="'Guest'">Guest</ion-radio>
+        </ion-list>
+
+        <ul class="">
+          <li class="item item-toggle">
+             Signed In?
+             <label class="toggle toggle-assertive">
+               <input
+                 type="checkbox" ng-model="user.signed_in"
+                 ng-true-value="'true'" ng-false-value="'false'">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        </ul>
+
+        <div class="padding">
+          <button
+            class="button button-block button-positive"
+            ng-disabled="user.name.length < 2"
+            ng-click="rosterAdd()">
+              Add {{add.type}}
+          </button>
+        </div>
+      </div>
+    </ion-content>
+</ion-view>

@@ -1,5 +1,24 @@
 angular.module('app.routes', [])
 
+
+.constant('DB_CONFIG',
+  {
+    name: 'DB',
+    tables: [
+      {
+        name: 'roster',
+        columns: [
+          {name: 'id', type: 'integer primary key'},
+          {name: 'name', type: 'text'},
+          {name: 'type', type: 'text'},
+          {name: 'signed_in', type: 'integer'},
+          {name: 'last_activity', type: 'text'}
+        ]
+      }
+    ]
+  }
+)
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -7,10 +26,18 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
 
-      .state('tabsController.spacedOut', {
+  .state('tabsController.spacedOutAdd', {
+    url: '/add',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/add.html',
+        controller: 'spacedOutAddCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.spacedOut', {
     url: '/roster',
     views: {
       'tab2': {
@@ -38,6 +65,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page1/roster')
 
-  
+
 
 });

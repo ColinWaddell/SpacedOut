@@ -1,3 +1,25 @@
 <ion-view title="Spaced Out" id="page3" class=" ">
-    <ion-content padding="true" class="has-header"></ion-content>
+  <ion-content padding="true" class="has-header">
+    <ul class="list">
+    <div ng-repeat="entry in roster.entries | orderBy : 'name'">
+      <div
+        class="item item-divider"
+        ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
+        {{firstLetter(entry.name)}}
+      </div>
+      <div class="item item-toggle">
+        {{entry.name}} <a class="subdued">{{entry.last_activity | date:'MM/dd/yyyy'}}</a>
+        <label class="toggle toggle-positive">
+          <input
+            type="checkbox"
+            ng-model="entry.signed_in"
+            ng-change="toggleStatus(entry)"
+            ng-true-value="'true'" ng-false-value="'false'">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
