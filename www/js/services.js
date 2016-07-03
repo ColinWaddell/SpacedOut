@@ -5,8 +5,8 @@ angular.module('app.services', [])
     self.db = null;
 
     self.init = function() {
-         Use self.db = window.sqlitePlugin.openDatabase({name: DB_CONFIG.name}); in production
-        //self.db = window.openDatabase(DB_CONFIG.name, '1.0', 'database', -1);
+        //self.db = window.sqlitePlugin.openDatabase({name: DB_CONFIG.name}); // Production
+        self.db = window.openDatabase(DB_CONFIG.name, '1.0', 'database', -1);
 
         angular.forEach(DB_CONFIG.tables, function(table) {
             var columns = [];
@@ -53,7 +53,7 @@ angular.module('app.services', [])
     return self;
 })
 
-.factory('Roster', function(DB) {
+.factory('Roster', function(DB, $filter) {
     var self = this;
 
     var observerCallbacks = [];
@@ -78,7 +78,7 @@ angular.module('app.services', [])
     };
 
     self.add = function(user) {
-      last_activity = Date().toLocaleString();
+      last_activity = "";
       return DB.query(
         'INSERT INTO roster (name, signed_in, type, last_activity) VALUES (?,?,?,?)',
         [user.name, user.signed_in, user.type, last_activity])
@@ -89,7 +89,7 @@ angular.module('app.services', [])
     }
 
     self.setStatus = function(id, signed_in){
-      last_activity = Date().toLocaleString();
+      last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
       return DB.query(
         'UPDATE roster SET signed_in = (?), last_activity = (?) WHERE id = (?)',
         [signed_in, last_activity, id])

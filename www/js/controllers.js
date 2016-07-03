@@ -32,7 +32,7 @@ angular.module('app.controllers', [])
   $scope.user = userDefault;
 })
 
-.controller('spacedOutCtrl', function($scope, Roster) {
+.controller('spacedOutCtrl', function($scope, $filter, Roster) {
   $scope.roster = {'entries': []};
 
   $scope.firstLetter = function(name) {
@@ -44,7 +44,7 @@ angular.module('app.controllers', [])
 
   $scope.toggleStatus = function(user){
     Roster.setStatus(user.id, user.signed_in);
-    user.last_activity = Date().toLocaleString();
+    user.last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
   }
 
   $scope.rosterPopulate = function(data){

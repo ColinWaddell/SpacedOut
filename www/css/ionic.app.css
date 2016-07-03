@@ -9730,3 +9730,7 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.entry-name {
+  display: inline-block;
+  min-width: 20%; }

@@ -8,7 +8,10 @@
         {{firstLetter(entry.name)}}
       </div>
       <div class="item item-toggle">
-        {{entry.name}} <a class="subdued">{{entry.last_activity | date:'MM/dd/yyyy'}}</a>
+        <span class="entry-name">{{entry.name}}</span>
+        <a ng-if="entry.last_activity!==''" class="subdued">
+          Signed {{entry.signed_in=='true' ? 'in' : 'out'}} <span am-time-ago="entry.last_activity"></span>
+        </a>
         <label class="toggle toggle-positive">
           <input
             type="checkbox"
