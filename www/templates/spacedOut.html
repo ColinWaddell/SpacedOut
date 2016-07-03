@@ -12,17 +12,25 @@
         <div class="col">
           <div class="button-bar bar-dark">
             <a class="button" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
-            <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">In</a>
-            <a class="button" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">Out</a>
+            <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">
+              In
+            </a>
+            <a class="button" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">
+              Out
+            </a>
           </div>
         </div>
       </div>
     </div>
     <div ng-if="interface.multiselect" class="filters">
-      <div class="button-bar bar-dark">
-        <a class="button" ng-click="multiselectCancel()">Cancel</a>
-        <a class="button" ng-click="toggleStatus({'status':'in'})">In</a>
-        <a class="button" ng-click="toggleStatus({'status':'ou'})">Out</a>
+      <div class="row">
+        <div class="col">
+          <div class="button-bar bar-dark">
+            <a class="button" ng-click="multiselectCancel()">Cancel</a>
+            <a class="button" ng-click="toggleStatus({'status':'in'})">In</a>
+            <a class="button" ng-click="toggleStatus({'status':'ou'})">Out</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="entries">

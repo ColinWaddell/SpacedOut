@@ -82,7 +82,7 @@ angular.module('app.services', [])
         (user.status === "in") ?
           $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
           "";
-          
+
       return DB.query(
         'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)',
         [user.name, user.status, user.type, last_activity])
@@ -120,7 +120,6 @@ angular.module('app.services', [])
 
 .filter('filterEntries', function() {
     return function( items, interface ) {
-      console.log('filterEntries');
       var filtered = [];
       angular.forEach(items, function(item) {
         if(interface.status==='all' || interface.status==item.status)
