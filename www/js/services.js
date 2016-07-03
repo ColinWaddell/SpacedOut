@@ -78,21 +78,25 @@ angular.module('app.services', [])
     };
 
     self.add = function(user) {
-      last_activity = "";
+      last_activity =
+        (user.status === "in") ?
+          $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
+          "";
+          
       return DB.query(
-        'INSERT INTO roster (name, signed_in, type, last_activity) VALUES (?,?,?,?)',
-        [user.name, user.signed_in, user.type, last_activity])
+        'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)',
+        [user.name, user.status, user.type, last_activity])
       .then(function(result){
         notifyObservers();
         return result.insertId;
       });
     }
 
-    self.setStatus = function(id, signed_in){
+    self.setStatus = function(id, status){
       last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
       return DB.query(
-        'UPDATE roster SET signed_in = (?), last_activity = (?) WHERE id = (?)',
-        [signed_in, last_activity, id])
+        'UPDATE roster SET status = (?), last_activity = (?) WHERE id = (?)',
+        [status, last_activity, id])
         .then(function(result){
 
         });
@@ -112,4 +116,17 @@ angular.module('app.services', [])
     }
 
     return self;
+})
+
+.filter('filterEntries', function() {
+    return function( items, interface ) {
+      console.log('filterEntries');
+      var filtered = [];
+      angular.forEach(items, function(item) {
+        if(interface.status==='all' || interface.status==item.status)
+          if(interface.type==='all' || interface.type==item.type)
+            filtered.push(item);
+      });
+      return filtered;
+    };
 });

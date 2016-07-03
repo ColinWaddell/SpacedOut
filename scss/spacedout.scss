@@ -1,5 +1,16 @@
+.entries{
+  padding-top:10px;
+  .name{
+    display: inline-block;
+    min-width: 30%;
+  }
+  .selected{
+    background: #dde;
+  }
+}
 
-.entry-name{
-  display: inline-block;
-  min-width: 20%;
+.filters{
+  .selected{
+    background-color: #262626;
+  }
 }

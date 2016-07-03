@@ -1,4 +1,4 @@
-<ion-view title="Add" id="page4" class=" ">
+<ion-view title="New User" id="page4" class=" ">
     <ion-content padding="true" class="has-header">
       <div class="list">
         <label class="item item-input">
@@ -7,17 +7,17 @@
         </label>
 
         <ion-list>
-          <ion-radio ng-model="user.type" ng-value="'Staff'">Staff</ion-radio>
-          <ion-radio ng-model="user.type" ng-value="'Guest'">Guest</ion-radio>
+          <ion-radio ng-model="user.type" ng-value="'staff'">Staff</ion-radio>
+          <ion-radio ng-model="user.type" ng-value="'guest'">Guest</ion-radio>
         </ion-list>
 
         <ul class="">
           <li class="item item-toggle">
              Signed In?
-             <label class="toggle toggle-assertive">
+             <label class="toggle toggle-dark">
                <input
-                 type="checkbox" ng-model="user.signed_in"
-                 ng-true-value="'true'" ng-false-value="'false'">
+                 type="checkbox" ng-model="user.status"
+                 ng-true-value="'in'" ng-false-value="'out'">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -27,7 +27,7 @@
 
         <div class="padding">
           <button
-            class="button button-block button-positive"
+            class="button button-block button-dark"
             ng-disabled="user.name.length < 2"
             ng-click="rosterAdd()">
               Add {{add.type}}

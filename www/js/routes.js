@@ -11,7 +11,7 @@ angular.module('app.routes', [])
           {name: 'id', type: 'integer primary key'},
           {name: 'name', type: 'text'},
           {name: 'type', type: 'text'},
-          {name: 'signed_in', type: 'integer'},
+          {name: 'status', type: 'text'},
           {name: 'last_activity', type: 'text'}
         ]
       }

@@ -1,28 +1,59 @@
 <ion-view title="Spaced Out" id="page3" class=" ">
   <ion-content padding="true" class="has-header">
-    <ul class="list">
-    <div ng-repeat="entry in roster.entries | orderBy : 'name'">
-      <div
-        class="item item-divider"
-        ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
-        {{firstLetter(entry.name)}}
-      </div>
-      <div class="item item-toggle">
-        <span class="entry-name">{{entry.name}}</span>
-        <a ng-if="entry.last_activity!==''" class="subdued">
-          Signed {{entry.signed_in=='true' ? 'in' : 'out'}} <span am-time-ago="entry.last_activity"></span>
-        </a>
-        <label class="toggle toggle-positive">
-          <input
-            type="checkbox"
-            ng-model="entry.signed_in"
-            ng-change="toggleStatus(entry)"
-            ng-true-value="'true'" ng-false-value="'false'">
-          <div class="track">
-            <div class="handle"></div>
+    <div ng-if="!interface.multiselect" class="filters">
+      <div class="row">
+        <div class="col">
+          <div class="button-bar bar-dark">
+            <a class="button" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">All</a>
+            <a class="button" ng-click="interface.type='staff'" ng-class="{selected: interface.type=='staff'}">Staff</a>
+            <a class="button" ng-click="interface.type='guest'" ng-class="{selected: interface.type=='guest'}">Guests</a>
           </div>
-        </label>
+        </div>
+        <div class="col">
+          <div class="button-bar bar-dark">
+            <a class="button" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
+            <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">In</a>
+            <a class="button" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">Out</a>
+          </div>
+        </div>
       </div>
+    </div>
+    <div ng-if="interface.multiselect" class="filters">
+      <div class="button-bar bar-dark">
+        <a class="button" ng-click="multiselectCancel()">Cancel</a>
+        <a class="button" ng-click="toggleStatus({'status':'in'})">In</a>
+        <a class="button" ng-click="toggleStatus({'status':'ou'})">Out</a>
+      </div>
+    </div>
+    <div class="entries">
+      <ul class="list">
+        <div ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
+          <div
+            class="item item-divider"
+            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
+            {{firstLetter(entry.name)}}
+          </div>
+          <div
+            class="item item-toggle"
+            ng-class="{selected: entry.selected}"
+            on-hold="entry.selected=true; interface.multiselect=true" >
+            <span class="name">{{entry.name}}</span>
+            <a ng-if="entry.last_activity!==''"class="subdued">
+              Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
+            </a>
+            <label class="toggle toggle-dark">
+              <input
+                type="checkbox"
+                ng-model="entry.status"
+                ng-change="toggleStatus(entry)"
+                ng-true-value="'in'" ng-false-value="'out'">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </ul>
     </div>
   </ion-content>
 </ion-view>

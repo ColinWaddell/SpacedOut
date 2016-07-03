@@ -9731,6 +9731,13 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.entry-name {
-  display: inline-block;
-  min-width: 20%; }
+.entries {
+  padding-top: 10px; }
+  .entries .name {
+    display: inline-block;
+    min-width: 30%; }
+  .entries .selected {
+    background: #dde; }
+
+.filters .selected {
+  background-color: #262626; }
