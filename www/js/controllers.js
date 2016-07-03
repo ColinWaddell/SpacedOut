@@ -36,7 +36,7 @@ angular.module('app.controllers', [])
   $scope.user = userDefault;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, Roster) {
+.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, Roster) {
   $scope.roster = {'entries': []};
   $scope.interface = {
     'status': 'all',
@@ -96,6 +96,13 @@ angular.module('app.controllers', [])
     }
 
   }
+
+  $scope.shortcutJump = function(id) {
+    id = "shortcut"+id;
+    var old = $location.hash();
+    $location.hash(id);
+    $anchorScroll();
+  };
 
   $scope.rosterPopulate = function(data){
       $scope.roster.entries = data;
