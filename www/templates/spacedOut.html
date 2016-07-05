@@ -49,7 +49,7 @@
           </div>
           <div
             class="item item-toggle"
-            ng-class="{selected: entry.selected, staff: entry.type=='staff'}">
+            ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
             <span class="name">{{entry.name}}</span>
             <a ng-if="entry.last_activity!==''"class="subdued">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>

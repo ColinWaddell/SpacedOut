@@ -9738,7 +9738,7 @@ a.button {
 .entries .selected {
   background: #dde; }
 
-.entries .staff {
+.entries .guest {
   background: #efefef;
   font-style: italic; }
 
