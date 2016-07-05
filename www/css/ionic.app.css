@@ -9731,13 +9731,16 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.entries {
-  padding-top: 10px; }
-  .entries .name {
-    display: inline-block;
-    min-width: 30%; }
-  .entries .selected {
-    background: #dde; }
+.entries .name {
+  display: inline-block;
+  min-width: 30%; }
+
+.entries .selected {
+  background: #dde; }
+
+.entries .staff {
+  background: #efefef;
+  font-style: italic; }
 
 .filters .selected {
   background-color: #262626; }

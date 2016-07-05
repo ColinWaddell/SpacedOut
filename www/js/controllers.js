@@ -53,6 +53,22 @@ angular.module('app.controllers', [])
     );
   }
 
+  $scope.selectEntry = function(entry){
+    if($scope.interface.multiselect){
+      entry.selected = !(entry.selected==true);
+      var numselected=0;
+      $scope.roster.entries.forEach(
+        function(entry){
+          if(entry.selected)
+            numselected++
+        }
+      );
+
+      if(!numselected)
+        $scope.multiselectCancel();
+    }
+  }
+
   $scope.filterStatus = function(status){
     $scope.interface.status = status;
   }
