@@ -33,17 +33,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="button-bar bar-dark">
-          <a ng-repeat="entry in roster.entries" class="button"
-            ng-click="shortcutJump(firstLetter(entry.name))";
-            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
-            {{firstLetter(entry.name)}}
-          </a>
-        </div>
-      </div>
-    </div>
     <div class="entries">
       <ul class="list">
         <div ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
