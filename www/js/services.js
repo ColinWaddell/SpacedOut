@@ -53,7 +53,53 @@ angular.module('app.services', [])
     return self;
 })
 
-.factory('Roster', function(DB, $filter) {
+.factory('Log', function(DB, $filter) {
+    var self = this;
+
+    var observerCallbacks = [];
+
+    //register an observer
+    this.registerObserverCallback = function(callback){
+      observerCallbacks.push(callback);
+    };
+
+    //call this when you know 'foo' has been changed
+    var notifyObservers = function(){
+      angular.forEach(observerCallbacks, function(callback){
+        callback();
+      });
+    };
+
+    self.all = function() {
+        return DB.query('SELECT * FROM log')
+        .then(function(result){
+            return DB.fetchAll(result);
+        });
+    };
+
+    self.log = function(eventType, entry) {
+      last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
+      return DB.query(
+        'INSERT INTO log (name, event, status, type, last_activity) VALUES (?,?,?,?,?)',
+        [entry.name, eventType, entry.status, entry.type, last_activity])
+      .then(function(result){
+        notifyObservers();
+        return result.insertId;
+      });
+    }
+
+    self.deleteAll= function () {
+      return DB.query(
+        'DROP TABLE log')
+      .then(function(result){
+        DB.init();
+      });
+    }
+
+    return self;
+})
+
+.factory('Roster', function(DB, Log, $filter) {
     var self = this;
 
     var observerCallbacks = [];
@@ -88,23 +134,29 @@ angular.module('app.services', [])
         [user.name, user.status, user.type, last_activity])
       .then(function(result){
         notifyObservers();
+        Log.log('add', user);
         return result.insertId;
       });
     }
 
-    self.setStatus = function(id, status){
+    self.setStatus = function(user, status){
       last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
       return DB.query(
         'UPDATE roster SET status = (?), last_activity = (?) WHERE id = (?)',
-        [status, last_activity, id])
+        [status, last_activity, user.id])
         .then(function(result){
-
+          notifyObservers();
+          Log.log('status', user);
         });
     }
 
-    self.delete = function (id){
+    self.delete = function (user){
       return DB.query(
-        'DELETE FROM roster WHERE id = ?', [id]);
+        'DELETE FROM roster WHERE id = ?', [user.id])
+        .then(function(result){
+          notifyObservers();
+          Log.log('delete', user);
+        });
     }
 
     self.deleteAll= function () {

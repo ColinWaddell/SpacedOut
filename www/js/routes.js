@@ -14,6 +14,17 @@ angular.module('app.routes', [])
           {name: 'status', type: 'text'},
           {name: 'last_activity', type: 'text'}
         ]
+      },
+      {
+        name: 'log',
+        columns: [
+          {name: 'id', type: 'integer primary key'},
+          {name: 'name', type: 'text'},
+          {name: 'event', type: 'text'},
+          {name: 'type', type: 'text'},
+          {name: 'status', type: 'text'},
+          {name: 'last_activity', type: 'text'}
+        ]
       }
     ]
   }

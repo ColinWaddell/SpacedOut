@@ -96,14 +96,14 @@ angular.module('app.controllers', [])
       $scope.roster.entries.forEach(function(entry){
         if(entry.selected){
           entry.status = user.status;
-          Roster.setStatus(entry.id, user.status);
+          Roster.setStatus(entry, user.status);
         }
       });
 
       $scope.multiselectCancel();
     }
     else{
-      Roster.setStatus(user.id, user.status);
+      Roster.setStatus(user, user.status);
       user.last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
 
       if (user.status==='out' && user.type==='guest'){
