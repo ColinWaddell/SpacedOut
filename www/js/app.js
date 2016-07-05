@@ -13,7 +13,8 @@ angular.module(
     'app.routes',
     'app.services',
     'app.directives',
-    'angularMoment'
+    'angularMoment',
+    'ionic-toast'
   ])
 
 .run(function($ionicPlatform) {

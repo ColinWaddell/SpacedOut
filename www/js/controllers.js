@@ -36,7 +36,7 @@ angular.module('app.controllers', [])
   $scope.user = userDefault;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, Roster) {
+.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster) {
   $scope.roster = {'entries': []};
   $scope.interface = {
     'status': 'all',
@@ -107,6 +107,36 @@ angular.module('app.controllers', [])
       user.last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
 
       if (user.status==='out' && user.type==='guest'){
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Remove Guest',
+          template: user.name + ' is a guest.<br /><br />Remove them from the Roster?',
+          buttons: [
+            {
+              text: 'No Thanks',
+              type: 'button-default',
+              onTap: function(e) {
+                return false;
+              }
+            },
+            {
+              text: 'Yes Please',
+              type: 'button-default',
+              onTap: function(e) {
+                return true;
+              }
+            }
+        ]
+        });
+
+        confirmPopup.then(function(res) {
+          if(res) {
+            // Delete Guest
+            Roster.delete(user.id);
+            $scope.rosterReload();
+          } else {
+
+          }
+        });
 
       }
     }
