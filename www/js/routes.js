@@ -58,10 +58,20 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.alert', {
+    url: '/alert',
+    views: {
+      'tab3': {
+        templateUrl: 'templates/alert.html',
+        controller: 'alertCtrl'
+      }
+    }
+  })
+
   .state('tabsController.settings', {
     url: '/settings',
     views: {
-      'tab3': {
+      'tab4': {
         templateUrl: 'templates/settings.html',
         controller: 'settingsCtrl'
       }

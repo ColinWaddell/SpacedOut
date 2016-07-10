@@ -1,5 +1,10 @@
 angular.module('app.controllers', [])
 
+
+.controller('alertCtrl', function($scope, Roster) {
+  
+})
+
 .controller('settingsCtrl', function($scope, Roster) {
   $scope.Nuke = function(){
     Roster.deleteAll();
@@ -37,12 +42,31 @@ angular.module('app.controllers', [])
 })
 
 .controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster) {
-  $scope.roster = {'entries': []};
+  $scope.roster = {
+    'entries': []
+  };
+
   $scope.interface = {
     'status': 'all',
     'type': 'all',
     'multiselect': false
   }
+
+  $scope.rosterCount = function(id, value){
+    var count = 0;
+
+    if(!$scope.roster.entries)
+      return;
+
+    $scope.roster.entries.forEach(
+      function(entry){
+        if(entry[id]===value)
+          count++;
+      }
+    )
+
+    return count;
+  };
 
   $scope.multiselectCancel = function(){
     $scope.interface.multiselect = false;

@@ -90,7 +90,7 @@ angular.module('app.services', [])
 
     self.deleteAll= function () {
       return DB.query(
-        'DROP TABLE log')
+        'DELETE FROM log')
       .then(function(result){
         DB.init();
       });
@@ -161,7 +161,7 @@ angular.module('app.services', [])
 
     self.deleteAll= function () {
       return DB.query(
-        'DROP TABLE roster')
+        'DELETE FROM roster')
       .then(function(result){
         DB.init();
       });

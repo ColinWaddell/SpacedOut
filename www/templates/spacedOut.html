@@ -5,19 +5,25 @@
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col">
             <div class="button-bar bar-dark">
-              <a class="button" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">All</a>
-              <a class="button" ng-click="interface.type='staff'" ng-class="{selected: interface.type=='staff'}">Staff</a>
-              <a class="button" ng-click="interface.type='guest'" ng-class="{selected: interface.type=='guest'}">Guests</a>
+              <a class="button" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">
+                All
+              </a>
+              <a class="button" ng-click="interface.type='staff'" ng-class="{selected: interface.type=='staff'}">
+                Staff ({{rosterCount('type', 'staff')}})
+              </a>
+              <a class="button" ng-click="interface.type='guest'" ng-class="{selected: interface.type=='guest'}">
+                Guests ({{rosterCount('type', 'guest')}})
+              </a>
             </div>
           </div>
           <div class="col">
             <div class="button-bar bar-dark">
               <a class="button" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
               <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">
-                In
+                In ({{rosterCount('status', 'in')}})
               </a>
               <a class="button" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">
-                Out
+                Out ({{rosterCount('status', 'out')}})
               </a>
             </div>
           </div>
