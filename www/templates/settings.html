@@ -14,24 +14,25 @@
             </div>
             <select
               ng-model="settings.screensaver_time"
-              ng-change="tempScaleChange();"
+              ng-change="update();"
               ng-options="ss_time.id as ss_time.title for ss_time in screensaver_times">
             </select>
           </label>
         </li>
 
         <li class="item item-toggle">
-           Enable Alert Email
-           <label class="toggle toggle-assertive">
-             <input
-               type="checkbox"
-               ng-model="settings.rights_access_settings"
-               ng-true-value="1" ng-false-value="0"
-             >
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
+          Enable Alert Email
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_send_alert"
+              ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
         </li>
 
         <li class="item item-divider">
@@ -50,6 +51,7 @@
             <input
               type="text"
               ng-model="settings.alert_email"
+              ng-change="update();"
               placeholder="Email sent when 'Alert' is pressed"
             >
           </label>
@@ -72,17 +74,18 @@
         </li>
 
         <li class="item item-toggle">
-           Access Settings
-           <label class="toggle toggle-assertive">
-             <input
-               type="checkbox"
-               ng-model="settings.rights_access_settings"
-               ng-true-value="1" ng-false-value="0"
-             >
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
+          Access Settings
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_access_settings"
+              ng-true-value="1" ng-false-value="0"
+             ng-change="update();"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
         </li>
 
         <li class="item item-toggle">
@@ -92,6 +95,7 @@
               type="checkbox"
               ng-model="settings.rights_add_staff"
               ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
             >
             <div class="track">
               <div class="handle"></div>
@@ -106,6 +110,7 @@
               type="checkbox"
               ng-model="settings.rights_remove_staff"
               ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
             >
             <div class="track">
               <div class="handle"></div>
@@ -120,6 +125,7 @@
               type="checkbox"
               ng-model="settings.rights_add_guest"
               ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
             >
             <div class="track">
               <div class="handle"></div>
@@ -134,6 +140,7 @@
               type="checkbox"
               ng-model="settings.rights_remove_guest"
               ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
             >
             <div class="track">
               <div class="handle"></div>

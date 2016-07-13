@@ -110,8 +110,8 @@ angular.module('app.services', [])
          password, rights_access_settings,      \
          rights_add_staff, rights_remove_staff, \
          rights_add_guest, rights_remove_guest) \
-        VALUES (?,?,?,?,?,?,?,?)",
-      [1, "", "", 1, 0, 0, 0, 0, 0])
+        VALUES (?,?,?,?,?,?,?,?,?)",
+      [1, "", 1, "", 0, 0, 0, 0, 0])
     .then(function(result){
       console.log(result);
     });
@@ -132,7 +132,7 @@ angular.module('app.services', [])
          rights_access_settings=(?),                         \
          rights_add_staff=(?),  rights_remove_staff=(?),     \
          rights_add_guest=(?),  rights_remove_guest=(?)      \
-         WHERE id=0",
+         WHERE id=1",
       [
         settings.screensaver_time, 
         settings.alert_email,

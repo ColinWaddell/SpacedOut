@@ -47,11 +47,11 @@ angular.module('app.routes', [])
 
 .constant(
   'SS_TIMES', [
-    {id: '0',  title:'Off'},
-    {id: '1',  title:'1 minute'},
-    {id: '2',  title:'2 minutes'},
-    {id: '5',  title:'5 minutes'},
-    {id: '10', title:'10 minutes'},
+    {id: 0,  title:'Off'},
+    {id: 1,  title:'1 minute'},
+    {id: 2,  title:'2 minutes'},
+    {id: 5,  title:'5 minutes'},
+    {id: 10, title:'10 minutes'},
 ])
 
 .constant(

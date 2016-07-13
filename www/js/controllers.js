@@ -25,8 +25,14 @@ angular.module('app.controllers', [])
     Settings.reset();
   }
 
-  $scope.settings = Settings.get();
+  $scope.update = function(){
+    if($scope.settings){
+      Settings.update($scope.settings);
+    }
+  }
+
   $scope.screensaver_times = SS_TIMES;
+  Settings.get().then(function(settings){$scope.settings = settings;});
 
 })
 
