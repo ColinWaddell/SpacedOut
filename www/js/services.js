@@ -260,4 +260,22 @@ angular.module('app.services', [])
       });
       return filtered;
     };
+})
+
+.factory('Admin', function($ionicPopup){
+  var self = this;
+
+  self.request = function(){
+    $ionicPopup.prompt({
+       title: 'Password Check',
+       template: 'Enter your secret password',
+       inputType: 'password',
+       inputPlaceholder: 'Your password'
+       }).then(function(res) {
+         console.log('Your password is', res);
+       }); 
+  }
+
+
+  return self;
 });

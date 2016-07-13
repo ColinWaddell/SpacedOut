@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 
 
-.controller('alertCtrl', function($scope, Settings, Roster) {
+.controller('alertCtrl', function($scope, Settings, Roster, Admin) {
   $scope.alertSend = function() {
       if(window.plugins && window.plugins.emailComposer) {
         window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
@@ -17,10 +17,15 @@ angular.module('app.controllers', [])
         null);                   // Attachment Data
     }
   }
+
+  $scope.pass = function(){
+    Admin.request();
+  }
+  
 })
 
 .controller('settingsCtrl', function($scope, Roster, Settings, SS_TIMES) {
-  $scope.admin = {'endabled': false};
+  $scope.admin = {'enabled': false};
 
   $scope.Nuke = function(){
     Roster.deleteAll();
@@ -39,9 +44,8 @@ angular.module('app.controllers', [])
 })
 
 .controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, USER_DEFAULT) {
-  var userDefault = {'name': "", 'type': 'staff', 'status': 'out'};
 
-  $scope.admin = {'endabled': false};
+  $scope.admin = {'enabled': false};
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
