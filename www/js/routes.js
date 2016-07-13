@@ -55,9 +55,8 @@ angular.module('app.routes', [])
 ])
 
 .constant(
-  'SETTINGSDFTL',{
-    tempScale: 'C',
-    iconDefault: 'clothing'
+  'USER_DEFAULT', {
+    'name': "", 'type': 'staff', 'status': 'out'
   }
 )
 

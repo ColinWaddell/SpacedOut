@@ -20,6 +20,8 @@ angular.module('app.controllers', [])
 })
 
 .controller('settingsCtrl', function($scope, Roster, Settings, SS_TIMES) {
+  $scope.admin = {'endabled': false};
+
   $scope.Nuke = function(){
     Roster.deleteAll();
     Settings.reset();
@@ -36,8 +38,10 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, Roster) {
+.controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, USER_DEFAULT) {
   var userDefault = {'name': "", 'type': 'staff', 'status': 'out'};
+
+  $scope.admin = {'endabled': false};
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
@@ -63,10 +67,11 @@ angular.module('app.controllers', [])
       );
   }
 
-  $scope.user = userDefault;
+  Settings.get().then(function(settings){$scope.settings = settings;});
+  $scope.user = USER_DEFAULT;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster) {
+.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Settings) {
   $scope.roster = {
     'entries': []
   };
@@ -221,7 +226,8 @@ angular.module('app.controllers', [])
         );
     }
 
-    Roster.registerObserverCallback($scope.rosterReload);
+  Roster.registerObserverCallback($scope.rosterReload);
 
-    $scope.rosterReload();
+  Settings.get().then(function(settings){$scope.settings = settings;});
+  $scope.rosterReload();
 })
