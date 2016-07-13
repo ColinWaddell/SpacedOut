@@ -1,5 +1,156 @@
 <ion-view title="Settings" id="page4" class=" ">
     <ion-content padding="true" class="has-header">
-      <a ng-click="Nuke()">Nuke</a>
+
+      <ul class="list">
+
+        <li class="item item-divider">
+          Interface
+        </li>
+
+        <li>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Screen Saver
+            </div>
+            <select
+              ng-model="settings.screensaver_time"
+              ng-change="tempScaleChange();"
+              ng-options="ss_time.id as ss_time.title for ss_time in screensaver_times">
+            </select>
+          </label>
+        </li>
+
+        <li class="item item-toggle">
+           Enable Alert Email
+           <label class="toggle toggle-assertive">
+             <input
+               type="checkbox"
+               ng-model="settings.rights_access_settings"
+               ng-true-value="1" ng-false-value="0"
+             >
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+
+        <li class="item item-divider">
+          Event Log
+        </li>
+
+        <li class="item">
+          <button class=" button-full button-positive">
+            View Log
+          </button>
+        </li>
+
+        <li>
+          <label class="item item-input">
+            <span class="input-label">Alert Contact Address</span>
+            <input
+              type="text"
+              ng-model="settings.alert_email"
+              placeholder="Email sent when 'Alert' is pressed"
+            >
+          </label>
+        </li>
+
+        <li class="item item-divider">
+          Administrator
+        </li>
+
+        <li class="item">
+          <button
+            ng-click="UpdatePassword()"
+            class="button-full button-positive">
+              {{settings.password==""?'Set Password':'Change Password'}}
+          </button>
+        </li>
+
+        <li class="item item-divider">
+          Password required for:
+        </li>
+
+        <li class="item item-toggle">
+           Access Settings
+           <label class="toggle toggle-assertive">
+             <input
+               type="checkbox"
+               ng-model="settings.rights_access_settings"
+               ng-true-value="1" ng-false-value="0"
+             >
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+
+        <li class="item item-toggle">
+          Add Staff
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_add_staff"
+              ng-true-value="1" ng-false-value="0"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        <li class="item item-toggle">
+          Remove Staff
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_remove_staff"
+              ng-true-value="1" ng-false-value="0"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        <li class="item item-toggle">
+          Add Guests
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_add_guest"
+              ng-true-value="1" ng-false-value="0"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        <li class="item item-toggle">
+          Remove Guests
+          <label class="toggle toggle-assertive">
+            <input
+              type="checkbox"
+              ng-model="settings.rights_remove_guest"
+              ng-true-value="1" ng-false-value="0"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        <li class="item item-divider">
+          Application Storage
+        </li>
+
+        <li class="item">
+          <button ng-click="Nuke()" class="button-full button-positive">
+            Delete All Stored Data
+          </button>
+        </li>
+
+      </ul>
     </ion-content>
 </ion-view>

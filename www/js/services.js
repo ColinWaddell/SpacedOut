@@ -99,6 +99,86 @@ angular.module('app.services', [])
     return self;
 })
 
+.factory('Settings', function(DB) {
+  var self = this;
+
+  self.preloadSettingsDefaults = function(){
+    DB.query(
+        "INSERT INTO settings                   \
+        (screensaver_time, alert_email,         \
+         rights_send_alert,                     \
+         password, rights_access_settings,      \
+         rights_add_staff, rights_remove_staff, \
+         rights_add_guest, rights_remove_guest) \
+        VALUES (?,?,?,?,?,?,?,?)",
+      [1, "", "", 1, 0, 0, 0, 0, 0])
+    .then(function(result){
+      console.log(result);
+    });
+  }
+
+  self.get = function(){
+    return DB.query('SELECT * FROM settings')
+    .then(function(result){
+        return DB.fetch(result);
+    });
+  }
+
+  self.update = function(settings){
+    DB.query(
+        "UPDATE settings SET                                 \
+         screensaver_time=(?),  alert_email=(?),             \
+         rights_send_alert=(?),                              \
+         rights_access_settings=(?),                         \
+         rights_add_staff=(?),  rights_remove_staff=(?),     \
+         rights_add_guest=(?),  rights_remove_guest=(?)      \
+         WHERE id=0",
+      [
+        settings.screensaver_time, 
+        settings.alert_email,
+        settings.rights_send_alert,
+        settings.rights_access_settings,
+        settings.rights_add_staff,
+        settings.rights_remove_staff,
+        settings.rights_add_guest,
+        settings.rights_remove_guest,
+      ]
+    )
+    .then(function(result){
+      console.log(result);
+    });
+  }
+
+  self.init = function(){
+    /* Check if settings are empty
+       and preload with defaults
+       if required */
+    return DB.query(
+      "SELECT count(*) FROM settings")
+    .then(function(count){
+      count = count.rows[0]['count(*)'];
+      if(!count){
+        self.preloadSettingsDefaults();
+      }
+    });
+
+  }
+
+  self.reset = function () {
+    return DB.query(
+      'DROP TABLE settings')
+    .then(function(result){
+      DB.init();
+    });
+  }
+
+
+
+  self.init();
+  return self;
+})
+
+
 .factory('Roster', function(DB, Log, $filter) {
     var self = this;
 

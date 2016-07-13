@@ -1,14 +1,33 @@
 angular.module('app.controllers', [])
 
 
-.controller('alertCtrl', function($scope, Roster) {
-  
+.controller('alertCtrl', function($scope, Settings, Roster) {
+  $scope.alertSend = function() {
+      if(window.plugins && window.plugins.emailComposer) {
+        window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+            console.log("Response -> " + result);
+        },
+        "Feedback for your App", // Subject
+        "",                      // Body
+        ["test@example.com"],    // To
+        null,                    // CC
+        null,                    // BCC
+        false,                   // isHTML
+        null,                    // Attachments
+        null);                   // Attachment Data
+    }
+  }
 })
 
-.controller('settingsCtrl', function($scope, Roster) {
+.controller('settingsCtrl', function($scope, Roster, Settings, SS_TIMES) {
   $scope.Nuke = function(){
     Roster.deleteAll();
+    Settings.reset();
   }
+
+  $scope.settings = Settings.get();
+  $scope.screensaver_times = SS_TIMES;
+
 })
 
 .controller('spacedOutAddCtrl', function($scope, $state, Roster) {

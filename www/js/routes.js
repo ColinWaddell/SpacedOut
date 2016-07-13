@@ -25,8 +25,39 @@ angular.module('app.routes', [])
           {name: 'status', type: 'text'},
           {name: 'last_activity', type: 'text'}
         ]
+      },
+      {
+        name: 'settings',
+        columns: [
+          {name: 'id', type: 'integer primary key'},
+          {name: 'screensaver_time', type: 'integer'},
+          {name: 'alert_email', type: 'text'},
+          {name: 'password', type: 'text'},
+          {name: 'rights_send_alert', type: 'integer'},
+          {name: 'rights_access_settings', type: 'integer'},
+          {name: 'rights_add_staff', type: 'integer'},
+          {name: 'rights_remove_staff', type: 'integer'},
+          {name: 'rights_add_guest', type: 'integer'},
+          {name: 'rights_remove_guest', type: 'integer'}
+        ]
       }
     ]
+  }
+)
+
+.constant(
+  'SS_TIMES', [
+    {id: '0',  title:'Off'},
+    {id: '1',  title:'1 minute'},
+    {id: '2',  title:'2 minutes'},
+    {id: '5',  title:'5 minutes'},
+    {id: '10', title:'10 minutes'},
+])
+
+.constant(
+  'SETTINGSDFTL',{
+    tempScale: 'C',
+    iconDefault: 'clothing'
   }
 )
 
