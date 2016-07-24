@@ -21,7 +21,9 @@ angular.module('app.controllers', [])
   $scope.pass = function(){
     Admin.request();
   }
-  
+
+  $scope.admin = Admin.status;
+
 })
 
 .controller('settingsCtrl', function($scope, Roster, Settings, SS_TIMES) {
@@ -43,9 +45,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, USER_DEFAULT) {
-
-  $scope.admin = {'enabled': false};
+.controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, Admin, USER_DEFAULT) {
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
@@ -73,6 +73,7 @@ angular.module('app.controllers', [])
 
   Settings.get().then(function(settings){$scope.settings = settings;});
   $scope.user = USER_DEFAULT;
+  $scope.admin = Admin.status;
 })
 
 .controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Settings) {
@@ -97,7 +98,7 @@ angular.module('app.controllers', [])
         if(entry[id]===value)
           count++;
       }
-    )
+    );
 
     return count;
   };

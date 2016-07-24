@@ -60,6 +60,12 @@ angular.module('app.routes', [])
   }
 )
 
+.constant(
+  'DEFAULT_ADMIN_TTL', 60
+)
+
+
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states

@@ -117,6 +117,13 @@ angular.module('app.services', [])
     });
   }
 
+  self.getPassword= function(){
+    return DB.query('SELECT password FROM settings')
+    .then(function(result){
+        return DB.fetch(result);
+    });
+  }
+
   self.get = function(){
     return DB.query('SELECT * FROM settings')
     .then(function(result){
@@ -134,7 +141,7 @@ angular.module('app.services', [])
          rights_add_guest=(?),  rights_remove_guest=(?)      \
          WHERE id=1",
       [
-        settings.screensaver_time, 
+        settings.screensaver_time,
         settings.alert_email,
         settings.rights_send_alert,
         settings.rights_access_settings,
@@ -262,20 +269,42 @@ angular.module('app.services', [])
     };
 })
 
-.factory('Admin', function($ionicPopup){
+.factory('Admin', function($ionicPopup, Settings, ionicToast, DEFAULT_ADMIN_TTL){
   var self = this;
 
+  self.status = {
+    enabled: false,
+    ttl: DEFAULT_ADMIN_TTL
+  };
+
+  self.tryPassword = function(attempt){
+    Settings.getPassword().then(
+      function(result){
+        password = result.password;
+        if(password==attempt){
+          self.status.enabled = true;
+          self.status.ttl = DEFAULT_ADMIN_TTL;
+        }
+        else{
+          self.status.enabled = false;
+          ionicToast.show(
+            'Incorrect Password', 'middle', false, 1500
+          );
+        }
+      });
+  };
+
   self.request = function(){
+
     $ionicPopup.prompt({
        title: 'Password Check',
        template: 'Enter your secret password',
        inputType: 'password',
        inputPlaceholder: 'Your password'
-       }).then(function(res) {
-         console.log('Your password is', res);
-       }); 
-  }
-
+     }).then(function(pass) {
+       self.tryPassword(pass);
+     });
+  };
 
   return self;
 });
