@@ -128,6 +128,11 @@ angular.module('app.services', [])
     });
   }
 
+  self.setSetting = function(request, value){
+    var req = 'UPDATE settings SET ' + request + '=(?) WHERE id=1';
+    DB.query(req,[value]);
+  }
+
   self.onUpdate = function(scope, callback){
     var handler = $rootScope.$on('settings-update', callback);
     scope.$on('$destroy', handler);

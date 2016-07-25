@@ -30,7 +30,7 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('settingsCtrl', function($scope, Roster, Settings, Admin, SS_TIMES, ADD_OPTIONS) {
+.controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Roster, Settings, Admin, SS_TIMES, ADD_OPTIONS) {
   $scope.admin = Admin.status;
 
   $scope.Nuke = function(){
@@ -46,6 +46,78 @@ angular.module('app.controllers', [])
 
   $scope.updatePassword = function(){
 
+    var dialog_current = {
+      title: 'Current Password',
+      template: 'Enter your current password',
+      inputType: 'password',
+      inputPlaceholder: 'Current password'
+    };
+
+    var dialog_new = {
+      title: 'New Password',
+      template: 'Enter your new password',
+      inputType: 'password',
+      inputPlaceholder: 'New password'
+    }
+
+    var dialog_repeat = {
+      title: 'Repeat New Password',
+      template: 'Repeat your new password',
+      inputType: 'password',
+      inputPlaceholder: 'Repeat password'
+    }
+
+    var getNewPassword = function(){
+      $ionicPopup.prompt(dialog_new)
+      .then(function(new_pass) {
+        if (new_pass.length===0){
+          ionicToast.show(
+            'No password set', 'middle', false, 1500
+          );
+          return;
+        }
+
+        $ionicPopup.prompt(dialog_repeat)
+        .then(function(repeat_pass) {
+          if(new_pass===repeat_pass){
+            // password ok
+            Settings.setSetting('password', new_pass)
+            ionicToast.show(
+              'New Password set', 'middle', false, 1500
+            );
+          }
+          else{
+            // passwords dont match
+            ionicToast.show(
+              'Passwords Don\'t Match', 'middle', false, 1500
+            );
+          }
+        });
+      });
+    }
+
+    Settings.getSetting('password').then(
+      function(result){
+        current_password = result.password;
+
+        if (current_password.length===0){
+          getNewPassword();
+        }
+        else{
+          $ionicPopup.prompt(dialog_current)
+          .then(function(attempt) {
+             if(attempt===current_password){
+               getNewPassword();
+             }
+             else{
+               // incorrect password
+               ionicToast.show(
+                 'Incorrect Password', 'middle', false, 1500
+               );
+             }
+           });
+        }
+      });
   }
 
   Settings.onUpdate($scope, function(){
@@ -210,8 +282,6 @@ angular.module('app.controllers', [])
             // Delete Guest
             Roster.delete(user);
             $scope.rosterReload();
-          } else {
-
           }
         });
 
