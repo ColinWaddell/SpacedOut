@@ -111,6 +111,9 @@ angular.module('app.routes', [])
         templateUrl: 'templates/settings.html',
         controller: 'settingsCtrl'
       }
+    },
+    onEnter: function($state){
+
     }
   })
 

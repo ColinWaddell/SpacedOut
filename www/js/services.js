@@ -117,12 +117,14 @@ angular.module('app.services', [])
     });
   }
 
-  self.getPassword= function(){
-    return DB.query('SELECT password FROM settings')
+  self.getSetting = function(request){
+    var req = 'SELECT ' + request + ' FROM settings';
+    return DB.query(req)
     .then(function(result){
         return DB.fetch(result);
     });
   }
+
 
   self.get = function(){
     return DB.query('SELECT * FROM settings')
@@ -272,11 +274,6 @@ angular.module('app.services', [])
 
   var timerPromise;
 
-  self.status = {
-    enabled: false,
-    ttl: DEFAULT_ADMIN_TTL
-  };
-
   self.timerUpdateAdmin = function(){
     self.status.ttl--;
     if(self.status.ttl < 1){
@@ -297,7 +294,7 @@ angular.module('app.services', [])
   }
 
   self.tryPassword = function(attempt){
-    Settings.getPassword().then(
+    Settings.getSetting('password').then(
       function(result){
         password = result.password;
         if(password==attempt){
@@ -313,7 +310,6 @@ angular.module('app.services', [])
   };
 
   self.request = function(){
-
     $ionicPopup.prompt({
        title: 'Password Check',
        template: 'Enter your secret password',
@@ -322,6 +318,11 @@ angular.module('app.services', [])
      }).then(function(pass) {
        self.tryPassword(pass);
      });
+  };
+
+  self.status = {
+    enabled: false,
+    ttl: DEFAULT_ADMIN_TTL
   };
 
   return self;

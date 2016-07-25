@@ -26,8 +26,8 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('settingsCtrl', function($scope, Roster, Settings, SS_TIMES) {
-  $scope.admin = {'enabled': false};
+.controller('settingsCtrl', function($scope, Roster, Settings, Admin, SS_TIMES) {
+  $scope.admin = Admin.status;
 
   $scope.Nuke = function(){
     Roster.deleteAll();
@@ -42,7 +42,6 @@ angular.module('app.controllers', [])
 
   $scope.screensaver_times = SS_TIMES;
   Settings.get().then(function(settings){$scope.settings = settings;});
-
 })
 
 .controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, Admin, USER_DEFAULT) {
