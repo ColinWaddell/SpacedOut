@@ -6,6 +6,6 @@
   },
   "dependencies": {
     "angular-moment": "^0.10.3",
-    "ionic-toast": "^0.3.0"
+    "ionic-toast": "^0.4.1"
   }
 }

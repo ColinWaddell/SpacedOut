@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 
 
-.controller('alertCtrl', function($scope, Settings, Roster, Admin) {
+.controller('alertCtrl', function($scope, Settings, Roster, Admin, ionicToast) {
   $scope.alertSend = function() {
       if(window.plugins && window.plugins.emailComposer) {
         window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
@@ -16,10 +16,6 @@ angular.module('app.controllers', [])
         null,                    // Attachments
         null);                   // Attachment Data
     }
-  }
-
-  $scope.pass = function(){
-    Admin.request();
   }
 
   Settings.onUpdate($scope, function(){
@@ -110,10 +106,12 @@ angular.module('app.controllers', [])
                getNewPassword();
              }
              else{
-               // incorrect password
-               ionicToast.show(
-                 'Incorrect Password', 'middle', false, 1500
-               );
+               if(attempt.length){
+                 // incorrect password
+                 ionicToast.show(
+                   'Incorrect Password', 'middle', false, 1500
+                 );
+               }
              }
            });
         }
