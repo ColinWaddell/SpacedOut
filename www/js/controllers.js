@@ -208,7 +208,7 @@ angular.module('app.controllers', [])
         confirmPopup.then(function(res) {
           if(res) {
             // Delete Guest
-            Roster.delete(user.id);
+            Roster.delete(user);
             $scope.rosterReload();
           } else {
 
