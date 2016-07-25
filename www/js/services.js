@@ -179,8 +179,6 @@ angular.module('app.services', [])
     });
   }
 
-
-
   self.init();
   return self;
 })
@@ -269,24 +267,44 @@ angular.module('app.services', [])
     };
 })
 
-.factory('Admin', function($ionicPopup, Settings, ionicToast, DEFAULT_ADMIN_TTL){
+.factory('Admin', function($ionicPopup, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
   var self = this;
+
+  var timerPromise;
 
   self.status = {
     enabled: false,
     ttl: DEFAULT_ADMIN_TTL
   };
 
+  self.timerUpdateAdmin = function(){
+    self.status.ttl--;
+    if(self.status.ttl < 1){
+      self.timerStopAdmin();
+    }
+  }
+
+  self.timerStartAdmin = function(){
+    self.status.enabled = true;
+    self.status.ttl = DEFAULT_ADMIN_TTL;
+    $interval.cancel(timerPromise);
+    timerPromise = $interval(self.timerUpdateAdmin, 1000);
+  };
+
+  self.timerStopAdmin = function(){
+    self.status.enabled = false;
+    $interval.cancel(timerPromise);
+  }
+
   self.tryPassword = function(attempt){
     Settings.getPassword().then(
       function(result){
         password = result.password;
         if(password==attempt){
-          self.status.enabled = true;
-          self.status.ttl = DEFAULT_ADMIN_TTL;
+          self.timerStartAdmin();
         }
         else{
-          self.status.enabled = false;
+          self.timerStopAdmin();
           ionicToast.show(
             'Incorrect Password', 'middle', false, 1500
           );

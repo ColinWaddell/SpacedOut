@@ -120,8 +120,6 @@ angular.module('app.routes', [])
     abstract:true
   })
 
-$urlRouterProvider.otherwise('/page1/roster')
-
-
+  $urlRouterProvider.otherwise('/page1/roster')
 
 });
