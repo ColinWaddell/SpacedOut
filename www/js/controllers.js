@@ -44,6 +44,10 @@ angular.module('app.controllers', [])
     }
   }
 
+  $scope.updatePassword = function(){
+
+  }
+
   Settings.onUpdate($scope, function(){
     Settings.get().then(function(settings){$scope.settings = settings;});
   });
@@ -179,7 +183,7 @@ angular.module('app.controllers', [])
       Roster.setStatus(user, user.status);
       user.last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
 
-      if (user.status==='out' && user.type==='guest'){
+      if ($scope.settings.rights_auto_remove_guest && user.status==='out' && user.type==='guest'){
         var confirmPopup = $ionicPopup.confirm({
           title: 'Remove Guest',
           template: user.name + ' is a guest.<br /><br />Remove them from the Roster?',

@@ -105,15 +105,16 @@ angular.module('app.services', [])
   self.preloadSettingsDefaults = function(){
     DB.query(
         "INSERT INTO settings      \
-        (screensaver_time,        \
-        alert_email,              \
-         password,                \
-         rights_send_alert,       \
-         rights_access_settings,  \
-         rights_add_remove_users, \
-         add_option)              \
-        VALUES (?,?,?,?,?,?,?)",
-      [1, "", "", 0, 0, 0, 0])
+        (screensaver_time,         \
+         alert_email,              \
+         password,                 \
+         rights_send_alert,        \
+         rights_access_settings,   \
+         rights_add_remove_users,  \
+         rights_auto_remove_guest, \
+         add_option)               \
+        VALUES (?,?,?,?,?,?,?,?)",
+      [1, "", "", 0, 0, 0, 1, 0])
     .then(function(result){
       console.log(result);
     });
@@ -146,6 +147,7 @@ angular.module('app.services', [])
          rights_send_alert=(?),                   \
          rights_access_settings=(?),              \
          rights_add_remove_users=(?),             \
+         rights_auto_remove_guest=(?),            \
          add_option=(?)                           \
          WHERE id=1",
       [
@@ -154,6 +156,7 @@ angular.module('app.services', [])
         settings.rights_send_alert,
         settings.rights_access_settings,
         settings.rights_add_remove_users,
+        settings.rights_auto_remove_guest,
         settings.add_option
       ]
     )
@@ -298,32 +301,45 @@ angular.module('app.services', [])
     $state.go('tabsController.spacedOut');
   }
 
-  self.tryPassword = function(attempt, success){
-    Settings.getSetting('password').then(
-      function(result){
-        password = result.password;
-        if(password==attempt){
-          self.timerStartAdmin();
-          if (success) success();
-        }
-        else{
-          self.timerStopAdmin();
-          ionicToast.show(
-            'Incorrect Password', 'middle', false, 1500
-          );
-        }
-      });
+  self.tryPassword = function(attempt, answer, success){
+      if(answer==attempt){
+        self.timerStartAdmin();
+        if (success) success();
+      }
+      else{
+        self.timerStopAdmin();
+        ionicToast.show(
+          'Incorrect Password', 'middle', false, 1500
+        );
+      }
   };
 
   self.request = function(message, success){
-    $ionicPopup.prompt({
-       title: 'Admin Password Required',
-       template: message || 'Enter your admin password',
-       inputType: 'password',
-       inputPlaceholder: 'Your password'
-     }).then(function(pass) {
-       self.tryPassword(pass, success);
-     });
+
+    Settings.getSetting('password').then(
+      function(result){
+        password = result.password;
+
+        if (password.length===0){
+          $ionicPopup.alert({
+             title: 'Admin Access',
+             template: 'You still need to set an Admin Password in Settings'
+           }).then(function(attempt) {
+             self.timerStartAdmin();
+             if (success) success();
+           });
+        }
+        else{
+          $ionicPopup.prompt({
+             title: 'Admin Password Required',
+             template: message || 'Enter your admin password',
+             inputType: 'password',
+             inputPlaceholder: 'Your password'
+           }).then(function(attempt) {
+             self.tryPassword(attempt, password, success);
+           });
+        }
+      });
   };
 
   self.status = {

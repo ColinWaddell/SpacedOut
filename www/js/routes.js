@@ -36,7 +36,8 @@ angular.module('app.routes', [])
           {name: 'password', type: 'text'},
           {name: 'rights_send_alert', type: 'integer'},
           {name: 'rights_access_settings', type: 'integer'},
-          {name: 'rights_add_remove_users', type: 'integer'}
+          {name: 'rights_add_remove_users', type: 'integer'},
+          {name: 'rights_auto_remove_guest', tpye: 'integer'}
         ]
       }
     ]
