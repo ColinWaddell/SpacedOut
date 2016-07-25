@@ -7,7 +7,7 @@
         </label>
 
         <ion-list>
-          <ion-radio ng-model="user.type" ng-value="'staff'">Staff</ion-radio>
+          <ion-radio ng-model="user.type" ng-if="!settings.add_option" ng-value="'staff'">Staff</ion-radio>
           <ion-radio ng-model="user.type" ng-value="'guest'">Guest</ion-radio>
         </ion-list>
 
@@ -35,4 +35,6 @@
         </div>
       </div>
     </ion-content>
+
+    <div ng-include src="'templates/adminBar.html'"></div>
 </ion-view>

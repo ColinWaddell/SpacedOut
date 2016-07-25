@@ -22,11 +22,15 @@ angular.module('app.controllers', [])
     Admin.request();
   }
 
-  $scope.admin = Admin.status;
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){$scope.settings = settings;});
+  });
+  Settings.get().then(function(settings){$scope.settings = settings;});
 
+  $scope.admin = Admin.status;
 })
 
-.controller('settingsCtrl', function($scope, Roster, Settings, Admin, SS_TIMES) {
+.controller('settingsCtrl', function($scope, Roster, Settings, Admin, SS_TIMES, ADD_OPTIONS) {
   $scope.admin = Admin.status;
 
   $scope.Nuke = function(){
@@ -40,8 +44,13 @@ angular.module('app.controllers', [])
     }
   }
 
-  $scope.screensaver_times = SS_TIMES;
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){$scope.settings = settings;});
+  });
+
   Settings.get().then(function(settings){$scope.settings = settings;});
+  $scope.screensaver_times = SS_TIMES;
+  $scope.add_options = ADD_OPTIONS;
 })
 
 .controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, Admin, USER_DEFAULT) {
@@ -70,15 +79,21 @@ angular.module('app.controllers', [])
       );
   }
 
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){$scope.settings = settings;});
+  });
+
   Settings.get().then(function(settings){$scope.settings = settings;});
   $scope.user = USER_DEFAULT;
   $scope.admin = Admin.status;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Settings) {
+.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Admin, Settings) {
   $scope.roster = {
     'entries': []
   };
+
+  $scope.admin = Admin.status;
 
   $scope.interface = {
     'status': 'all',
@@ -231,6 +246,10 @@ angular.module('app.controllers', [])
     }
 
   Roster.registerObserverCallback($scope.rosterReload);
+
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){$scope.settings = settings;});
+  })
 
   Settings.get().then(function(settings){$scope.settings = settings;});
   $scope.rosterReload();

@@ -19,18 +19,16 @@
           </label>
         </li>
 
-        <li class="item item-toggle">
-          Enable Alert Email
-          <label class="toggle toggle-assertive">
-            <input
-              type="checkbox"
-              ng-model="settings.rights_send_alert"
-              ng-true-value="1" ng-false-value="0"
-              ng-change="update();"
-            >
-            <div class="track">
-              <div class="handle"></div>
+        <li>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Add Screen
             </div>
+            <select
+              ng-model="settings.add_option"
+              ng-change="update();"
+              ng-options="option.id as option.title for option in add_options">
+            </select>
           </label>
         </li>
 
@@ -45,7 +43,7 @@
               type="text"
               ng-model="settings.alert_email"
               ng-change="update();"
-              placeholder="Email sent when 'Alert' is pressed"
+              placeholder="Address to send the Roster when 'Alert' is pressed"
             >
           </label>
         </li>
@@ -88,11 +86,11 @@
         </li>
 
         <li class="item item-toggle">
-          Add Staff
+          Add and Remove Users
           <label class="toggle toggle-assertive">
             <input
               type="checkbox"
-              ng-model="settings.rights_add_staff"
+              ng-model="settings.rights_add_remove_users"
               ng-true-value="1" ng-false-value="0"
               ng-change="update();"
             >
@@ -103,41 +101,11 @@
         </li>
 
         <li class="item item-toggle">
-          Remove Staff
+          Send Alert
           <label class="toggle toggle-assertive">
             <input
               type="checkbox"
-              ng-model="settings.rights_remove_staff"
-              ng-true-value="1" ng-false-value="0"
-              ng-change="update();"
-            >
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </li>
-
-        <li class="item item-toggle">
-          Add Guests
-          <label class="toggle toggle-assertive">
-            <input
-              type="checkbox"
-              ng-model="settings.rights_add_guest"
-              ng-true-value="1" ng-false-value="0"
-              ng-change="update();"
-            >
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </li>
-
-        <li class="item item-toggle">
-          Remove Guests
-          <label class="toggle toggle-assertive">
-            <input
-              type="checkbox"
-              ng-model="settings.rights_remove_guest"
+              ng-model="settings.rights_send_alert"
               ng-true-value="1" ng-false-value="0"
               ng-change="update();"
             >
@@ -159,4 +127,5 @@
 
       </ul>
     </ion-content>
+    <div ng-include src="'templates/adminBar.html'"></div>
 </ion-view>

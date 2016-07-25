@@ -31,14 +31,12 @@ angular.module('app.routes', [])
         columns: [
           {name: 'id', type: 'integer primary key'},
           {name: 'screensaver_time', type: 'integer'},
+          {name: 'add_option', type: 'integer'},
           {name: 'alert_email', type: 'text'},
           {name: 'password', type: 'text'},
           {name: 'rights_send_alert', type: 'integer'},
           {name: 'rights_access_settings', type: 'integer'},
-          {name: 'rights_add_staff', type: 'integer'},
-          {name: 'rights_remove_staff', type: 'integer'},
-          {name: 'rights_add_guest', type: 'integer'},
-          {name: 'rights_remove_guest', type: 'integer'}
+          {name: 'rights_add_remove_users', type: 'integer'}
         ]
       }
     ]
@@ -52,6 +50,12 @@ angular.module('app.routes', [])
     {id: 2,  title:'2 minutes'},
     {id: 5,  title:'5 minutes'},
     {id: 10, title:'10 minutes'},
+])
+
+.constant(
+  'ADD_OPTIONS', [
+    {id: 0,  title:'Staff And Guests'},
+    {id: 1,  title:'Guests Only'}
 ])
 
 .constant(
@@ -81,6 +85,20 @@ angular.module('app.routes', [])
         templateUrl: 'templates/add.html',
         controller: 'spacedOutAddCtrl'
       }
+    },
+    onEnter: function($state, Settings, Admin){
+      Settings.get().then(
+        function(settings){
+          if(settings.rights_add_remove_users){
+            if(!Admin.status.enabled){
+              Admin.request(
+                "Admin rights are required to add and remove users",
+                function(){$state.go('tabsController.spacedOutAdd');}
+              );
+            }
+          }
+        }
+      );
     }
   })
 
@@ -101,6 +119,20 @@ angular.module('app.routes', [])
         templateUrl: 'templates/alert.html',
         controller: 'alertCtrl'
       }
+    },
+    onEnter: function($state, Settings, Admin){
+      Settings.get().then(
+        function(settings){
+          if(settings.rights_send_alert){
+            if(!Admin.status.enabled){
+              Admin.request(
+                "Admin rights are required to send alert email",
+                function(){$state.go('tabsController.alert');}
+              );
+            }
+          }
+        }
+      );
     }
   })
 
@@ -112,8 +144,19 @@ angular.module('app.routes', [])
         controller: 'settingsCtrl'
       }
     },
-    onEnter: function($state){
-
+    onEnter: function($state, Settings, Admin){
+      Settings.get().then(
+        function(settings){
+          if(settings.rights_access_settings){
+            if(!Admin.status.enabled){
+              Admin.request(
+                "Admin rights are required to access settings",
+                function(){$state.go('tabsController.settings');}
+              );
+            }
+          }
+        }
+      );
     }
   })
 

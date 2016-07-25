@@ -99,19 +99,21 @@ angular.module('app.services', [])
     return self;
 })
 
-.factory('Settings', function(DB) {
+.factory('Settings', function(DB, $rootScope) {
   var self = this;
 
   self.preloadSettingsDefaults = function(){
     DB.query(
-        "INSERT INTO settings                   \
-        (screensaver_time, alert_email,         \
-         rights_send_alert,                     \
-         password, rights_access_settings,      \
-         rights_add_staff, rights_remove_staff, \
-         rights_add_guest, rights_remove_guest) \
-        VALUES (?,?,?,?,?,?,?,?,?)",
-      [1, "", 1, "", 0, 0, 0, 0, 0])
+        "INSERT INTO settings      \
+        (screensaver_time,        \
+        alert_email,              \
+         password,                \
+         rights_send_alert,       \
+         rights_access_settings,  \
+         rights_add_remove_users, \
+         add_option)              \
+        VALUES (?,?,?,?,?,?,?)",
+      [1, "", "", 0, 0, 0, 0])
     .then(function(result){
       console.log(result);
     });
@@ -125,6 +127,10 @@ angular.module('app.services', [])
     });
   }
 
+  self.onUpdate = function(scope, callback){
+    var handler = $rootScope.$on('settings-update', callback);
+    scope.$on('$destroy', handler);
+  }
 
   self.get = function(){
     return DB.query('SELECT * FROM settings')
@@ -135,26 +141,24 @@ angular.module('app.services', [])
 
   self.update = function(settings){
     DB.query(
-        "UPDATE settings SET                                 \
-         screensaver_time=(?),  alert_email=(?),             \
-         rights_send_alert=(?),                              \
-         rights_access_settings=(?),                         \
-         rights_add_staff=(?),  rights_remove_staff=(?),     \
-         rights_add_guest=(?),  rights_remove_guest=(?)      \
+        "UPDATE settings SET                      \
+         screensaver_time=(?),  alert_email=(?),  \
+         rights_send_alert=(?),                   \
+         rights_access_settings=(?),              \
+         rights_add_remove_users=(?),             \
+         add_option=(?)                           \
          WHERE id=1",
       [
         settings.screensaver_time,
         settings.alert_email,
         settings.rights_send_alert,
         settings.rights_access_settings,
-        settings.rights_add_staff,
-        settings.rights_remove_staff,
-        settings.rights_add_guest,
-        settings.rights_remove_guest,
+        settings.rights_add_remove_users,
+        settings.add_option
       ]
     )
     .then(function(result){
-      console.log(result);
+      $rootScope.$emit('settings-update');
     });
   }
 
@@ -269,7 +273,7 @@ angular.module('app.services', [])
     };
 })
 
-.factory('Admin', function($ionicPopup, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
+.factory('Admin', function($ionicPopup, $state, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
   var self = this;
 
   var timerPromise;
@@ -291,14 +295,16 @@ angular.module('app.services', [])
   self.timerStopAdmin = function(){
     self.status.enabled = false;
     $interval.cancel(timerPromise);
+    $state.go('tabsController.spacedOut');
   }
 
-  self.tryPassword = function(attempt){
+  self.tryPassword = function(attempt, success){
     Settings.getSetting('password').then(
       function(result){
         password = result.password;
         if(password==attempt){
           self.timerStartAdmin();
+          if (success) success();
         }
         else{
           self.timerStopAdmin();
@@ -309,20 +315,21 @@ angular.module('app.services', [])
       });
   };
 
-  self.request = function(){
+  self.request = function(message, success){
     $ionicPopup.prompt({
-       title: 'Password Check',
-       template: 'Enter your secret password',
+       title: 'Admin Password Required',
+       template: message || 'Enter your admin password',
        inputType: 'password',
        inputPlaceholder: 'Your password'
      }).then(function(pass) {
-       self.tryPassword(pass);
+       self.tryPassword(pass, success);
      });
   };
 
   self.status = {
     enabled: false,
-    ttl: DEFAULT_ADMIN_TTL
+    ttl: DEFAULT_ADMIN_TTL,
+    cancel: self.timerStopAdmin
   };
 
   return self;
