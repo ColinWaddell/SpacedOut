@@ -47,7 +47,10 @@ angular.module('app.services', [])
     };
 
     self.fetch = function(result) {
+      if (result.rows.length)
         return result.rows.item(0);
+      else
+        return null;
     };
 
     return self;
@@ -177,8 +180,13 @@ angular.module('app.services', [])
     return DB.query(
       "SELECT count(*) FROM settings")
     .then(function(count){
-      count = count.rows[0]['count(*)'];
-      if(!count){
+      if (count.rows.length && count.rows[0]){
+        count = count.rows[0]['count(*)'];
+        if(!count){
+          self.preloadSettingsDefaults();
+        }
+      }
+      else{
         self.preloadSettingsDefaults();
       }
     });

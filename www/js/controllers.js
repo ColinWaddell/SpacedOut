@@ -66,7 +66,7 @@ angular.module('app.controllers', [])
     var getNewPassword = function(){
       $ionicPopup.prompt(dialog_new)
       .then(function(new_pass) {
-        if (new_pass.length===0){
+        if (!new_pass || new_pass.length===0){
           ionicToast.show(
             'No password set', 'middle', false, 1500
           );
@@ -96,7 +96,7 @@ angular.module('app.controllers', [])
       function(result){
         current_password = result.password;
 
-        if (current_password.length===0){
+        if (!current_password || current_password.length===0){
           getNewPassword();
         }
         else{
