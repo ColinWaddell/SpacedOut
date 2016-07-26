@@ -8,7 +8,7 @@
    typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
    typeof define === 'function' && define.amd ? define(['moment'], factory) :
    factory(global.moment)
-}(this, function (moment) { 'use strict';
+}(this, function (moment) { '//use strict//';
 
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {

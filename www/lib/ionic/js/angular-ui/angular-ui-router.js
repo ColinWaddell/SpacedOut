@@ -13,7 +13,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 (function (window, angular, undefined) {
 /*jshint globalstrict:true*/
 /*global angular:false*/
-'use strict';
+'//use strict//';
 
 var isDefined = angular.isDefined,
     isFunction = angular.isFunction,

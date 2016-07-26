@@ -3,7 +3,7 @@
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
-(function(window, document, undefined) {'use strict';
+(function(window, document, undefined) {'//use strict//';
 
 /**
  * @description
@@ -14255,7 +14255,7 @@ ASTCompiler.prototype = {
     this.stage = 'main';
     this.recurse(ast);
     var fnString =
-      // The build and minification steps remove the string "use strict" from the code, but this is done using a regex.
+      // The build and minification steps remove the string "//use strict//" from the code, but this is done using a regex.
       // This is a workaround for this until we do a better job at only removing the prefix only when we should.
       '"' + this.USE + ' ' + this.STRICT + '";\n' +
       this.filterPrefix() +

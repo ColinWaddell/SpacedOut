@@ -6,7 +6,7 @@ angular.module('app.services', [])
 
     self.init = function() {
         //self.db = window.sqlitePlugin.openDatabase({name: DB_CONFIG.name}); // Production
-        self.db = window.openDatabase(DB_CONFIG.name, '1.0', 'database', -1);
+        self.db = window.openDatabase(DB_CONFIG.name, '1.0', 'database',  5 * 1024 * 1024);
 
         angular.forEach(DB_CONFIG.tables, function(table) {
             var columns = [];

@@ -5,7 +5,7 @@
    typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
    typeof define === 'function' && define.amd ? define(['moment'], factory) :
    factory(global.moment)
-}(this, function (moment) { 'use strict';
+}(this, function (moment) { '//use strict//';
 
 
     var en_au = moment.defineLocale('en-au', {
