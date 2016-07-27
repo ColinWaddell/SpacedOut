@@ -28,6 +28,7 @@ angular.module('app.controllers', [])
 
 .controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Roster, Settings, Admin, SS_TIMES, ADD_OPTIONS) {
   $scope.admin = Admin.status;
+  $scope.settings = {};
 
   $scope.Nuke = function(){
     Roster.deleteAll();
@@ -119,10 +120,14 @@ angular.module('app.controllers', [])
   }
 
   Settings.onUpdate($scope, function(){
-    Settings.get().then(function(settings){$scope.settings = settings;});
+    Settings.get().then(function(settings){
+      $scope.settings = Object.assign({}, settings);
+    });
   });
 
-  Settings.get().then(function(settings){$scope.settings = settings;});
+  Settings.get().then(function(settings){
+    $scope.settings = Object.assign({}, settings);
+  });
   $scope.screensaver_times = SS_TIMES;
   $scope.add_options = ADD_OPTIONS;
 })
@@ -296,7 +301,7 @@ angular.module('app.controllers', [])
   };
 
   $scope.rosterPopulate = function(data){
-      $scope.roster.entries = data;
+      $scope.roster.entries = JSON.parse(JSON.stringify(data));
   }
 
   $scope.rosterError = function (){
@@ -320,9 +325,13 @@ angular.module('app.controllers', [])
   Roster.registerObserverCallback($scope.rosterReload);
 
   Settings.onUpdate($scope, function(){
-    Settings.get().then(function(settings){$scope.settings = settings;});
+    Settings.get().then(function(settings){
+      $scope.settings = Object.assign({}, settings);
+    });
   })
 
-  Settings.get().then(function(settings){$scope.settings = settings;});
+  Settings.get().then(function(settings){
+    $scope.settings = Object.assign({}, settings);
+  });
   $scope.rosterReload();
 })
