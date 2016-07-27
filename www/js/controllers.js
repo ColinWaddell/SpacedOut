@@ -121,12 +121,12 @@ angular.module('app.controllers', [])
 
   Settings.onUpdate($scope, function(){
     Settings.get().then(function(settings){
-      $scope.settings = Object.assign({}, settings);
+      $scope.settings = settings;
     });
   });
 
   Settings.get().then(function(settings){
-    $scope.settings = Object.assign({}, settings);
+    $scope.settings = settings;
   });
   $scope.screensaver_times = SS_TIMES;
   $scope.add_options = ADD_OPTIONS;
@@ -326,12 +326,12 @@ angular.module('app.controllers', [])
 
   Settings.onUpdate($scope, function(){
     Settings.get().then(function(settings){
-      $scope.settings = Object.assign({}, settings);
+      $scope.settings = JSON.parse(JSON.stringify(settings));
     });
   })
 
   Settings.get().then(function(settings){
-    $scope.settings = Object.assign({}, settings);
+    $scope.settings = JSON.parse(JSON.stringify(settings));
   });
   $scope.rosterReload();
 })
