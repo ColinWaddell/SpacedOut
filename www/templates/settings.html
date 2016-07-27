@@ -34,7 +34,7 @@
 
         <li class="item item-toggle">
           Ask to remove Guests on Logout?
-          <label class="toggle toggle-assertive">
+          <label class="toggle">
             <input
               type="checkbox"
               ng-model="settings.rights_auto_remove_guest"
@@ -64,7 +64,7 @@
         </li>
 
         <li class="item">
-          <button class=" button-full button-positive">
+          <button class=" button-full">
             View Log
           </button>
         </li>
@@ -76,7 +76,7 @@
         <li class="item">
           <button
             ng-click="updatePassword()"
-            class="button-full button-positive">
+            class="button-full">
               {{settings.password==""?'Set Password':'Change Password'}}
           </button>
         </li>
@@ -87,7 +87,7 @@
 
         <li class="item item-toggle">
           Access Settings
-          <label class="toggle toggle-assertive">
+          <label class="toggle">
             <input
               type="checkbox"
               ng-model="settings.rights_access_settings"
@@ -102,7 +102,7 @@
 
         <li class="item item-toggle">
           Add and Remove Users
-          <label class="toggle toggle-assertive">
+          <label class="toggle">
             <input
               type="checkbox"
               ng-model="settings.rights_add_remove_users"
@@ -117,7 +117,7 @@
 
         <li class="item item-toggle">
           Send Alert
-          <label class="toggle toggle-assertive">
+          <label class="toggle">
             <input
               type="checkbox"
               ng-model="settings.rights_send_alert"
@@ -135,7 +135,7 @@
         </li>
 
         <li class="item">
-          <button ng-click="Nuke()" class="button-full button-positive">
+          <button ng-click="Nuke()" class="button-full">
             Delete All Stored Data
           </button>
         </li>

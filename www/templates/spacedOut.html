@@ -1,10 +1,10 @@
-<ion-view hide-nav-bar="true"  title="" id="page3" class=" ">
+<ion-view hide-nav-bar="true"  title="" id="page3" class="">
 
   <ion-header-bar align-title="left">
     <div class="bar bar-header bar-light">
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col">
-            <div class="button-bar bar-dark">
+            <div class="button-bar">
               <a class="button" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">
                 All
               </a>
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="button-bar bar-dark">
+            <div class="button-bar">
               <a class="button" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
               <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">
                 In ({{rosterCount('status', 'in')}})
@@ -30,7 +30,7 @@
       </div>
       <div class="row" ng-if="interface.multiselect" class="filters">
           <div class="col">
-            <div class="button-bar bar-dark">
+            <div class="button-bar">
               <a class="button" ng-click="toggleStatus({'status':'ou'})">Out</a>
               <a class="button" ng-click="multiselectCancel()">Cancel</a>
               <a class="button" ng-click="toggleStatus({'status':'in'})">In</a>
@@ -60,7 +60,7 @@
             <a ng-if="entry.last_activity!==''"class="subdued">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
             </a>
-            <label class="toggle toggle-dark">
+            <label class="toggle">
               <input
                 type="checkbox"
                 ng-model="entry.status"

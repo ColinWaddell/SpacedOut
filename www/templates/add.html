@@ -14,7 +14,7 @@
         <ul class="">
           <li class="item item-toggle">
              Signed In?
-             <label class="toggle toggle-dark">
+             <label class="toggle">
                <input
                  type="checkbox" ng-model="user.status"
                  ng-true-value="'in'" ng-false-value="'out'">
@@ -27,7 +27,7 @@
 
         <div class="padding">
           <button
-            class="button button-block button-dark"
+            class="button button-block"
             ng-disabled="user.name.length < 2"
             ng-click="rosterAdd()">
               Add {{add.type}}
