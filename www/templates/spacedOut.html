@@ -52,10 +52,10 @@
             class="item item-toggle"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
             <span class="name">{{entry.name}}</span>
-            <a ng-if="entry.last_activity!==''" class="subdued">
+            <a ng-if="entry.last_activity!==''" class="roster-activity">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
             </a>
-            <label class="toggle">
+            <label class="toggle toggle-royal">
               <input
                 type="checkbox"
                 ng-model="entry.status"

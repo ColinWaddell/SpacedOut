@@ -12,7 +12,7 @@
 }
 
 .item{
-  border-top: 1px solid $fadedblue;
+  border-top: 1px solid $base-background-color;
 }
 
 .item-divider,
@@ -20,6 +20,11 @@
   border-top: none;
 }
 
+.roster-activity{
+  color: #999;
+  font-style: italic;
+  font-size: 0.9em;
+}
 
 .entries{
   .name{
@@ -42,10 +47,10 @@
 }
 
 .button-bar{
+  box-shadow: $spaced-out-shadow-mild;
   .button{
     border: 0px;
-    border-left: 1px solid $fadedblue;
-    box-shadow: $spaced-out-shadow-mild;
+    border-left: 1px solid $item-default-bg;
   }
 
   .button:first-child{
@@ -58,7 +63,7 @@
 }
 .button.button-dark.activated{
   background: $darkblue !important;
-  border-left: 1px solid $fadedblue;
+  border-left: 1px solid $item-default-bg;
 }
 
 .item-radio input {
