@@ -1,28 +1,28 @@
 <ion-view hide-nav-bar="true"  title="" id="page3" class="">
 
   <ion-header-bar align-title="left">
-    <div class="bar bar-header bar-light">
+    <div class="bar bar-header">
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col">
             <div class="button-bar">
-              <a class="button" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">
+              <a class="button button-dark" ng-click="interface.type='all'" ng-class="{selected: interface.type=='all'}">
                 All
               </a>
-              <a class="button" ng-click="interface.type='staff'" ng-class="{selected: interface.type=='staff'}">
+              <a class="button button-dark" ng-click="interface.type='staff'" ng-class="{selected: interface.type=='staff'}">
                 Staff ({{rosterCount('type', 'staff')}})
               </a>
-              <a class="button" ng-click="interface.type='guest'" ng-class="{selected: interface.type=='guest'}">
+              <a class="button button-dark" ng-click="interface.type='guest'" ng-class="{selected: interface.type=='guest'}">
                 Guests ({{rosterCount('type', 'guest')}})
               </a>
             </div>
           </div>
           <div class="col">
             <div class="button-bar">
-              <a class="button" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
-              <a class="button" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">
+              <a class="button button-dark" ng-click="interface.status='all'" ng-class="{selected: interface.status=='all'}">All</a>
+              <a class="button button-dark" ng-click="interface.status='in'"  ng-class="{selected: interface.status=='in'}">
                 In ({{rosterCount('status', 'in')}})
               </a>
-              <a class="button" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">
+              <a class="button button-dark" ng-click="interface.status='out'" ng-class="{selected: interface.status=='out'}">
                 Out ({{rosterCount('status', 'out')}})
               </a>
             </div>
@@ -57,7 +57,7 @@
             class="item item-toggle"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
             <span class="name">{{entry.name}}</span>
-            <a ng-if="entry.last_activity!==''"class="subdued">
+            <a ng-if="entry.last_activity!==''" class="subdued">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
             </a>
             <label class="toggle">
