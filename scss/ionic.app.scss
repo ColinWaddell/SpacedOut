@@ -18,7 +18,10 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-@import "spacedout";
+@import "spacedout_variables";
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+
+@import "spacedout_custom";

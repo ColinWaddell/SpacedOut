@@ -15,33 +15,6 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-.item-select select {
-  color: #eee !important; }
-
-.item {
-  border-bottom: 1px solid red; }
-
-.entries .name {
-  display: inline-block;
-  min-width: 30%; }
-
-.entries .guest {
-  background: #efefef;
-  font-style: italic; }
-
-.entries .selected {
-  background: #dde; }
-
-.filters .selected {
-  background-color: #262626; }
-
-.button.button-dark.selected {
-  background: #2a2e31 !important; }
-
-.button.button-dark.activated {
-  background: #316877 !important;
-  border: none !important; }
-
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -9841,3 +9814,34 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.item-select select {
+  color: #eee !important; }
+
+.item {
+  border-top: 1px solid red; }
+
+.item-divider,
+.item-divider + .item {
+  border-top: none; }
+
+.entries .name {
+  display: inline-block;
+  min-width: 30%; }
+
+.entries .guest {
+  background: #efefef;
+  font-style: italic; }
+
+.entries .selected {
+  background: #dde; }
+
+.filters .selected {
+  background-color: #262626; }
+
+.button.button-dark.selected {
+  background: #2a2e31 !important; }
+
+.button.button-dark.activated {
+  background: #316877 !important;
+  border: none !important; }
