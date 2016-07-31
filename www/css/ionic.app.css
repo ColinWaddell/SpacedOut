@@ -9815,11 +9815,17 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.bar .bar-header {
+  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.8); }
+
+.list {
+  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.8); }
+
 .item-select select {
   color: #eee !important; }
 
 .item {
-  border-top: 1px solid red; }
+  border-top: 1px solid #626b79; }
 
 .item-divider,
 .item-divider + .item {
@@ -9838,6 +9844,13 @@ a.button {
 
 .filters .selected {
   background-color: #262626; }
+
+.button-bar .button {
+  border: 0px;
+  border-left: 1px solid #626b79; }
+
+.button-bar .button:first-child {
+  border: 0px; }
 
 .button.button-dark.selected {
   background: #2a2e31 !important; }

@@ -15,7 +15,7 @@
           <ion-radio ng-model="user.type" ng-value="'guest'">Guest</ion-radio>
         </ion-list>
 
-        <ul class="">
+
           <li class="item item-toggle">
              Signed In?
              <label class="toggle">
@@ -27,16 +27,16 @@
                </div>
              </label>
           </li>
-        </ul>
 
-        <div class="padding">
+
+        <li class="item">
           <button
             class="button button-block"
             ng-disabled="user.name.length < 2"
             ng-click="rosterAdd()">
               Add {{add.type}}
           </button>
-        </div>
+        </li>
       </div>
     </ion-content>
 

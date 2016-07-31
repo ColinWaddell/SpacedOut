@@ -1,10 +1,18 @@
 
+.bar .bar-header{
+  box-shadow: $spaced-out-shadow;
+}
+
+.list{
+  box-shadow: $spaced-out-shadow;
+}
+
 .item-select select{
   color: #eee !important;
 }
 
 .item{
-  border-top: 1px solid red;
+  border-top: 1px solid $fadedblue;
 }
 
 .item-divider,
@@ -32,6 +40,19 @@
     background-color: #262626;
   }
 }
+
+
+.button-bar{
+  .button{
+    border: 0px;
+    border-left: 1px solid $fadedblue;
+  }
+
+  .button:first-child{
+    border: 0px;
+  }
+}
+
 
 .button.button-dark.selected{
   background: $darkblue !important;
