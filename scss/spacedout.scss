@@ -21,6 +21,7 @@ $item-border-width:               0;
 $item-default-text:               #eee;
 // $item-default-active-bg:          #D9D9D9 !default;
 $item-default-active-border:      none;
+$card-border-radius:              0;
 
 $item-divider-bg:                 #212121;
 $item-divider-color:              #ccc;
@@ -36,6 +37,15 @@ $bar-default-border:              none;
 //$bar-default-active-bg:           $bar-light-active-bg;
 //$bar-default-active-border:       $bar-light-active-border;
 $button-border-radius:            0;
+$input-label-color:               #eee;
+
+.item-select select{
+  color: #eee !important;
+}
+
+.item{
+  border-bottom: 1px solid red;
+}
 
 .entries{
   .name{

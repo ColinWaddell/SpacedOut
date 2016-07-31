@@ -15,6 +15,12 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+.item-select select {
+  color: #eee !important; }
+
+.item {
+  border-bottom: 1px solid red; }
+
 .entries .name {
   display: inline-block;
   min-width: 30%; }
@@ -6666,7 +6672,7 @@ button.item.item-button-right {
 .list-inset {
   overflow: hidden;
   margin: 20px 10px;
-  border-radius: 2px;
+  border-radius: 0;
   background-color: #fff; }
 
 .card {
@@ -6688,24 +6694,24 @@ button.item.item-button-right {
 .card .item:first-child,
 .list-inset .item:first-child,
 .padding > .list .item:first-child {
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px; }
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
   .card .item:first-child .item-content,
   .list-inset .item:first-child .item-content,
   .padding > .list .item:first-child .item-content {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px; }
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
 
 .card .item:last-child,
 .list-inset .item:last-child,
 .padding > .list .item:last-child {
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px; }
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
   .card .item:last-child .item-content,
   .list-inset .item:last-child .item-content,
   .padding > .list .item:last-child .item-content {
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px; }
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
 
 .card .item:last-child,
 .list-inset .item:last-child {
@@ -7687,7 +7693,7 @@ textarea {
   padding: 7px 10px 7px 0px;
   max-width: 200px;
   width: 35%;
-  color: #444;
+  color: #eee;
   font-size: 16px; }
 
 .placeholder-icon {
