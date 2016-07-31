@@ -41,11 +41,11 @@
   }
 }
 
-
 .button-bar{
   .button{
     border: 0px;
     border-left: 1px solid $fadedblue;
+    box-shadow: $spaced-out-shadow-mild;
   }
 
   .button:first-child{
@@ -53,11 +53,17 @@
   }
 }
 
-
 .button.button-dark.selected{
   background: $darkblue !important;
 }
 .button.button-dark.activated{
-  background: $calm !important;
-  border: none !important;
+  background: $darkblue !important;
+  border-left: 1px solid $fadedblue;
+}
+
+.item-radio input {
+  &:checked + .radio-content .item-content {
+    /* style the item content when its checked */
+    background: $item-default-bg;
+  }
 }
