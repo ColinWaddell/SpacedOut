@@ -1,6 +1,5 @@
-<ion-view title="Settings" id="page4" class=" ">
-    <ion-content padding="true" class="has-header">
-
+<ion-view hide-nav-bar="true" id="page4" class=" ">
+    <ion-content padding="true">
       <ul class="list">
         <li class="item item-divider">
           Interface {{access}}
@@ -34,7 +33,7 @@
 
         <li class="item item-toggle">
           Ask to remove Guests on Logout?
-          <label class="toggle">
+          <label class="toggle toggle-calm">
             <input
               type="checkbox"
               ng-model="settings.rights_auto_remove_guest"
@@ -87,7 +86,7 @@
 
         <li class="item item-toggle">
           Access Settings
-          <label class="toggle">
+          <label class="toggle toggle-calm">
             <input
               type="checkbox"
               ng-model="settings.rights_access_settings"
@@ -100,7 +99,7 @@
           </label>
         </li>
 
-        <li class="item item-toggle">
+        <li class="item item-toggle toggle-calm">
           Add and Remove Users
           <label class="toggle">
             <input
@@ -115,7 +114,7 @@
           </label>
         </li>
 
-        <li class="item item-toggle">
+        <li class="item item-toggle toggle-calm">
           Send Alert
           <label class="toggle">
             <input
