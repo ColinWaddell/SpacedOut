@@ -204,6 +204,40 @@ angular.module('app.controllers', [])
     'multiselect': false
   }
 
+  $scope.deleteSelected = function(){
+    var selected = [];
+
+    var deleteEntries = function(){
+      $scope.roster.entries.forEach(
+        function(entry){
+          if(entry.selected){
+            selected.push(entry);
+          }
+        }
+      );
+
+      selected.forEach(function(entry){
+        Roster.delete(entry);
+      })
+
+      if (selected.length){
+        $scope.rosterReload();
+      }
+
+      $scope.multiselectCancel();
+    }
+
+    if (Admin.status.enabled){
+      deleteEntries();
+    }
+    else{
+      Admin.request(
+        "You need to be an admin to delete users",
+        deleteEntries
+      );
+    }
+  };
+
   $scope.rosterCount = function(id, value){
     var count = 0;
 
@@ -222,6 +256,10 @@ angular.module('app.controllers', [])
 
   $scope.multiselectCancel = function(){
     $scope.interface.multiselect = false;
+
+    if(!$scope.roster.entries)
+      return;
+
     $scope.roster.entries.forEach(
       function(entry){
         entry.selected = false;

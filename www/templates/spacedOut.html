@@ -23,19 +23,30 @@
           </div>
       </div>
       <div class="row" ng-if="interface.multiselect" class="filters">
-          <div class="col">
-            <div class="button-bar">
-              <a class="button button-calm" ng-click="toggleStatus({'status':'ou'})">Out</a>
-              <a class="button button-calm" ng-click="multiselectCancel()">Cancel</a>
-              <a class="button button-calm" ng-click="toggleStatus({'status':'in'})">In</a>
-            </div>
+
+        <div class="col col-10">
+          <div class="button-bar">
+            <button
+              ng-click="deleteSelected()"
+              class="button button-assertive icon ion-ios-trash-outline">
+            </button>
           </div>
+        </div>
+
+        <div class="col">
+          <div class="button-bar">
+            <a class="button button-calm" ng-click="toggleStatus({'status':'ou'})">Out</a>
+            <a class="button button-calm" ng-click="multiselectCancel()">Cancel</a>
+            <a class="button button-calm" ng-click="toggleStatus({'status':'in'})">In</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </ion-header-bar>
 
   <ion-content padding="true" class="has-header">
-    <div class="entries" ng-hide="roster.entries">
+    <div class="entries" ng-if="!roster.entries.length">
       <ul class="list">
         <li class="item">
           <h1 class="light">There's no names in the roster...</h1>
@@ -50,7 +61,7 @@
         </li>
       </ul>
     </div>
-    <div class="entries" ng-show="roster.entries">
+    <div class="entries" ng-if="roster.entries">
       <ul class="list">
         <div
           on-hold="entry.selected=true; interface.multiselect=true"
