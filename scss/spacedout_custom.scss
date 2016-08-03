@@ -51,19 +51,21 @@
   .button{
     border: 0px;
     border-left: 1px solid $item-default-bg;
+
+    .button-dark.activated{
+      background: $darkblue !important;
+      border-left: 1px solid $item-default-bg;
+    }
   }
 
   .button:first-child{
     border: 0px;
   }
+
 }
 
 .button.button-dark.selected{
   background: $darkblue !important;
-}
-.button.button-dark.activated{
-  background: $darkblue !important;
-  border-left: 1px solid $item-default-bg;
 }
 
 .item-radio input {
