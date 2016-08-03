@@ -76,7 +76,8 @@ angular.module('app.services', [])
     self.all = function() {
         return DB.query('SELECT * FROM log')
         .then(function(result){
-            return DB.fetchAll(result);
+            var result = DB.fetchAll(result);
+            return result.reverse();
         });
     };
 

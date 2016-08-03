@@ -1,7 +1,7 @@
 
 $font-size-base:                  14px;
 $base-background-color:           #303030;
-$base-color:                      #f5f5f5;
+$base-color:                      #333;
 $positive:                        #387ef5;
 $fadedblue:                       #626b79;
 $border-radius-base:              4px;
@@ -37,11 +37,11 @@ $item-default-border:             none;
 $item-default-active-bg:          #D9D9D9;
 //$item-default-active-border:      $item-light-active-border;
 $bar-height:                      60px;
-$bar-default-bg:                  #212121;
+$bar-default-bg:                  darken($calm, 15%);
 //$bar-default-text:                $bar-light-text;
 $bar-default-border:              none;
 //$bar-default-active-bg:           $bar-light-active-bg;
 //$bar-default-active-border:       $bar-light-active-border;
-$button-border-radius:            0;
+
 $input-label-color:               #eee;
 $input-color:                     #eee;

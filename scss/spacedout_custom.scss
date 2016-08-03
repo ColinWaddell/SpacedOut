@@ -51,11 +51,15 @@
   .button{
     border: 0px;
     border-left: 1px solid $item-default-bg;
-
-    .button-dark.activated{
+    box-shadow: none;
+    .button-calm.activated{
+      box-shadow: none;
       background: $darkblue !important;
-      border-left: 1px solid $item-default-bg;
     }
+  }
+
+  .selected{
+    background-color: lighten($calm, 5%);;
   }
 
   .button:first-child{
@@ -68,6 +72,15 @@
   background: $darkblue !important;
 }
 
+.button{
+  box-shadow: $spaced-out-shadow-mild;
+}
+
+.button.activated{
+  box-shadow: none;
+  border: 0;
+}
+
 .item-radio input {
   &:checked + .radio-content .item-content {
     /* style the item content when its checked */
@@ -77,20 +90,34 @@
 
 .table{
   .header .col {
-      background-color:lightgrey;
+    background-color: $calm;
   }
 
   .col {
-      border: solid 1px grey;
-      border-bottom-style: none;
-      border-right-style: none;
+    border: 0;
+    border-bottom-style: none;
+    border-right-style: none;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .col:first-child {
+    text-align: left;
   }
 
   .col:last-child {
-      border-right: solid 1px grey;
+    text-align: right;
   }
+}
 
-  .row:last-child .col {
-      border-bottom: solid 1px grey;
-  }
+.table:nth-child(even){
+  background-color: lighten($dark, 30%);
+}
+
+.table:nth-child(odd){
+  background-color: lighten($dark, 10%);
+}
+
+.table:first-child{
+  background-color: $dark;
 }
