@@ -1,0 +1,36 @@
+<ion-view hide-nav-bar="true" id="page4" class=" ">
+    <ion-content padding="true">
+      <ul class="list">
+        <li class="item item-divider">
+          <a href="#/page1/settings" class="button button-calm">
+            <i class="icon ion-arrow-left-b"></i>
+            &nbsp; Back to Settings
+          </a>
+        </li>
+        <li class="item">
+          <div class="table row header">
+            <div class="col">Time</div>
+            <div class="col">Name</div>
+            <div class="col">Staff/Guest</div>
+            <div class="col">Event</div>
+          </div>
+          <div class="table row" ng-repeat="entry in log.entries">
+            <div class="col">
+              <span>{{entry.last_activity  | date:'dd/MM/yy @ h:mma'}}</span>
+            </div>
+            <div class="col">{{entry.name}}</div>
+            <div class="col">{{entry.type}}</div>
+            <div class="col">
+              {{
+                entry.event == "status"
+                ? 'Signed '+ entry.status.toUpperCase()
+                : 'User ' + entry.event.toUpperCase()
+              }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </ion-content>
+
+    <div ng-include src="'templates/adminBar.html'"></div>
+</ion-view>
