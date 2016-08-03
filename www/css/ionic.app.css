@@ -9855,6 +9855,9 @@ a.button {
   .button-bar .button {
     border: 0px;
     border-left: 1px solid #424242; }
+    .button-bar .button .button-dark.activated {
+      background: #2a2e31 !important;
+      border-left: 1px solid #424242; }
   .button-bar .button:first-child {
     border: 0px; }
 
@@ -9864,3 +9867,17 @@ a.button {
 .item-radio input:checked + .radio-content .item-content {
   /* style the item content when its checked */
   background: #424242; }
+
+.table .header .col {
+  background-color: lightgrey; }
+
+.table .col {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none; }
+
+.table .col:last-child {
+  border-right: solid 1px grey; }
+
+.table .row:last-child .col {
+  border-bottom: solid 1px grey; }

@@ -1,5 +1,29 @@
 angular.module('app.controllers', [])
 
+.controller('logCtrl', function($scope, Roster, Log, Admin, $ionicPopup, ionicToast) {
+
+  $scope.logPopulate = function(data){
+      $scope.log.entries = JSON.parse(JSON.stringify(data));
+  }
+
+  $scope.logError = function (){
+    var alertPopup = $ionicPopup.alert({
+      title: 'Roster Error',
+      template: 'Sorry - Try restarting the app.',
+      okText: 'Apology Accepted'
+    });
+  }
+
+  $scope.log =
+    Log
+      .all()
+      .then(
+        $scope.logPopulate,
+        $scope.logError
+      );
+
+  $scope.admin = Admin.status;
+})
 
 .controller('alertCtrl', function($scope, Settings, Roster, Admin, ionicToast) {
   $scope.alertSend = function() {

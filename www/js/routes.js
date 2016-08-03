@@ -161,6 +161,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.log', {
+    url: '/log',
+    views: {
+      'tab4': {
+        templateUrl: 'templates/log.html',
+        controller: 'logCtrl'
+      }
+    }
+  })
+
   .state('tabsController', {
     url: '/page1',
     templateUrl: 'templates/tabsController.html',
