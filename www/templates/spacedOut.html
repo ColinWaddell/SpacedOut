@@ -2,10 +2,12 @@
   <ion-header-bar align-title="left">
     <div class="bar bar-header">
       <div class="row" ng-if="!interface.multiselect" class="filters">
-          <div class="col">
+          <div class="col col-25">
+          </div>
+          <div class="col col-75">
             <div class="button-bar">
               <a class="button button-calm" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
-                All
+                All ({{rosterCount('type', 'staff') + rosterCount('type', 'guest')}})
               </a>
               <a class="button button-calm" ng-click="interface.type='staff'; interface.status='all'" ng-class="{selected: interface.type=='staff'}">
                 Staff ({{rosterCount('type', 'staff')}})
