@@ -23,6 +23,18 @@ angular.module('app.controllers', [])
       );
 
   $scope.admin = Admin.status;
+
+  $scope.logReload = function(settings){
+    $scope.log =
+      Log
+        .all()
+        .then(
+          $scope.logPopulate,
+          $scope.logError
+        );
+  };
+
+  Log.registerObserverCallback($scope.logReload);
 })
 
 .controller('alertCtrl', function($scope, Settings, Roster, Admin, ionicToast) {
