@@ -9816,10 +9816,10 @@ a.button {
   transition-duration: 0s; }
 
 .bar .bar-header {
-  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.8); }
+  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.2); }
 
 .list {
-  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.8); }
+  box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.2); }
 
 .item-select select {
   color: #eee !important; }
@@ -9845,13 +9845,13 @@ a.button {
   font-style: italic; }
 
 .entries .selected {
-  background: #dde; }
+  background: #2a5865; }
 
 .filters .selected {
   background-color: #262626; }
 
 .button-bar {
-  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.5); }
+  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.1); }
   .button-bar .button {
     border: 0px;
     border-left: 1px solid #424242;
@@ -9868,7 +9868,7 @@ a.button {
   background: #2a2e31 !important; }
 
 .button {
-  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.5); }
+  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.1); }
 
 .button.activated {
   box-shadow: none;

@@ -92,7 +92,7 @@ angular.module('app.services', [])
       });
     }
 
-    self.deleteAll= function () {
+    self.Clear = function () {
       return DB.query(
         'DELETE FROM log')
       .then(function(result){

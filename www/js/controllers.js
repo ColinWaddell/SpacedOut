@@ -50,13 +50,95 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Roster, Settings, Admin, SS_TIMES, ADD_OPTIONS) {
+.controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Roster, Settings, Admin, Log, SS_TIMES, ADD_OPTIONS) {
   $scope.admin = Admin.status;
   $scope.settings = {};
 
-  $scope.Nuke = function(){
-    Roster.deleteAll();
-    Settings.reset();
+  $scope.NukeLog = function(){
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Clear Log',
+      template: 'Are you sure you want to clear the log',
+      buttons: [
+        {
+          text: 'No Thanks',
+          type: 'button-default',
+          onTap: function(e) {
+            return false;
+          }
+        },
+        {
+          text: 'Yes Please',
+          type: 'button-default',
+          onTap: function(e) {
+            return true;
+          }
+        }
+    ]
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        Log.Clear();
+      }
+    });
+  }
+
+  $scope.NukeRoster = function(){
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Clear Roster',
+      template: 'Are you sure you want to remove all users from the roster?',
+      buttons: [
+        {
+          text: 'No Thanks',
+          type: 'button-default',
+          onTap: function(e) {
+            return false;
+          }
+        },
+        {
+          text: 'Yes Please',
+          type: 'button-default',
+          onTap: function(e) {
+            return true;
+          }
+        }
+    ]
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        Roster.deleteAll();
+      }
+    });
+  }
+
+  $scope.NukeSettings = function(){
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Reset Settings',
+      template: 'Are you sure you want to reset the settings to their defaults and clear the admin password?',
+      buttons: [
+        {
+          text: 'No Thanks',
+          type: 'button-default',
+          onTap: function(e) {
+            return false;
+          }
+        },
+        {
+          text: 'Yes Please',
+          type: 'button-default',
+          onTap: function(e) {
+            return true;
+          }
+        }
+    ]
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        Settings.reset();
+      }
+    });
   }
 
   $scope.update = function(){
