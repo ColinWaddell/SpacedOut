@@ -39,25 +39,49 @@ angular.module('app.controllers', [])
 
 .controller('alertCtrl', function($scope, Settings, Roster, Admin, ionicToast) {
   $scope.alertSend = function() {
-      if(window.plugins && window.plugins.emailComposer) {
-        window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
-            console.log("Response -> " + result);
-        },
-        "Feedback for your App", // Subject
-        "",                      // Body
-        ["test@example.com"],    // To
-        null,                    // CC
-        null,                    // BCC
-        false,                   // isHTML
-        null,                    // Attachments
-        null);                   // Attachment Data
-    }
+    Roster
+      .all()
+      .then(
+        function(data){
+          var entries = JSON.parse(JSON.stringify(data));
+
+          var BuildEmail = function(){
+              var email = "<table>";
+              email += "<tr><th>Name</th><th>Status</th></tr>"
+
+              entries.forEach(
+                function(entry){
+                  email += "<tr><th>" + entry.name + "</th><th>Signed " + entry.status.toUpperCase() + "</th></tr>";
+                }
+              );
+
+              email += "</table>";
+
+              return email;
+          };
+
+          if(window.plugins && window.plugins.emailComposer) {
+              window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+                  console.log("Response -> " + result);
+              },
+              "Spaced Out Roster",          // Subject
+              BuildEmail(),                     // Body
+              [$scope.settings.alert_email],    // To
+              null,                             // CC
+              null,                             // BCC
+              true,                             // isHTML
+              null,                             // Attachments
+              null);                            // Attachment Data
+          }
+      });
   }
 
   Settings.onUpdate($scope, function(){
     Settings.get().then(function(settings){$scope.settings = settings;});
   });
-  Settings.get().then(function(settings){$scope.settings = settings;});
+  Settings.get().then(function(settings){
+    $scope.settings = settings;
+  });
 
   $scope.admin = Admin.status;
 })
@@ -93,7 +117,15 @@ angular.module('app.controllers', [])
         Log.Clear();
       }
     });
-  }
+  };
+
+  $scope.RosterImport = function(){
+
+  };
+
+  $scope.RosterExport = function(){
+    cordova.plugins.clipboard.copy("fuck");
+  };
 
   $scope.NukeRoster = function(){
     var confirmPopup = $ionicPopup.confirm({

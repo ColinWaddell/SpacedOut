@@ -1,7 +1,18 @@
 <ion-view hide-nav-bar="true" id="page4" class=" ">
   <ion-content padding="true">
-    {{admin.enabled}}
-    <button ng-click="pass()">Yo</button>
+    <ul class="list">
+      <li class="item">
+        <h1 class="light">Transmit Roster...</h1>
+        <h3 class="light">Send the current roster to <span class="roster-activity">{{settings.alert_email ? settings.alert_email : "No Email Specified in Settings"}}</span></h3>
+        </br>
+        <button
+          ng-click="alertSend()"
+          class="button button-calm">
+          Send Email &nbsp;
+          <i class="icon ion-ios-email-outline"></i>
+        </button>
+      </li>
+    </ul>
   </ion-content>
   <div ng-include src="'templates/adminBar.html'"></div>
 </ion-view>

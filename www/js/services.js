@@ -186,6 +186,7 @@ angular.module('app.services', [])
     )
     .then(function(result){
       $rootScope.$emit('settings-update');
+      notifyObservers();
     });
   }
 
