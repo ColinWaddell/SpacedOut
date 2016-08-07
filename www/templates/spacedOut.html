@@ -3,26 +3,48 @@
     <div class="bar bar-header">
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col col-25">
+            <p>LOGO</p>
           </div>
-          <div class="col col-75">
-            <div class="button-bar">
-              <a class="button button-calm" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
-                All ({{rosterCount('type', 'staff') + rosterCount('type', 'guest')}})
-              </a>
-              <a class="button button-calm" ng-click="interface.type='staff'; interface.status='all'" ng-class="{selected: interface.type=='staff'}">
-                Staff ({{rosterCount('type', 'staff')}})
-              </a>
-              <a class="button button-calm" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
-                Guests ({{rosterCount('type', 'guest')}})
-              </a>
-              <a class="button button-calm" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
-                In ({{rosterCount('status', 'in')}})
-              </a>
-              <a class="button button-calm" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
-                Out ({{rosterCount('status', 'out')}})
-              </a>
+          <div class="col-75">
+            <div class="row">
+              <div class="col col-20">
+                <a class="button button-calm button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
+                  All<br />{{rosterCount('type', 'staff') + rosterCount('type', 'guest')}}
+                </a>
+              </div>
+              <div class="col col-20">
+                <a class="button button-calm button-round" ng-click="interface.type='staff'; interface.status='all'" ng-class="{selected: interface.type=='staff'}">
+                  Staff<br />{{rosterCount('type', 'staff')}}
+                </a>
+              </div>
+              <div class="col col-20">
+                <a class="button button-calm button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
+                  Guests<br />{{rosterCount('type', 'guest')}}
+                </a>
+              </div>
+              <div class="col col-20">
+                <a class="button button-calm button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
+                  In<br />{{rosterCount('status', 'in')}}
+                </a>
+              </div>
+              <div class="col col-20">
+                <a class="button button-calm button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
+                  Out<br />{{rosterCount('status', 'out')}}
+                </a>
+              </div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
       </div>
       <div class="row" ng-if="interface.multiselect" class="filters">
 

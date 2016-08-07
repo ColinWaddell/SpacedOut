@@ -9874,6 +9874,40 @@ a.button {
   box-shadow: none;
   border: 0; }
 
+.button-round {
+  position: absolute;
+  height: 84px;
+  width: 84px;
+  border-radius: 50%;
+  min-height: 56px;
+  padding: 0;
+  padding-top: 14px !important;
+  line-height: 28px !important;
+  border: none;
+  background: linear-gradient(180deg, #333 50%, #316877 50%);
+  color: white;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all linear 220ms;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden; }
+  .button-round.activated {
+    opacity: 1;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2); }
+  .button-round.left {
+    left: 1px;
+    top: 16px; }
+  .button-round.bottom-edge-right {
+    bottom: -24px;
+    right: 16px;
+    z-index: 12; }
+  .button-round.bottom-right {
+    bottom: 0;
+    margin-bottom: 16px;
+    right: 16px;
+    z-index: 2; }
+    .button-round.bottom-right.slide-down {
+      transform: translate3d(0, 88px, 0); }
+
 .item-radio input:checked + .radio-content .item-content {
   /* style the item content when its checked */
   background: #424242; }
