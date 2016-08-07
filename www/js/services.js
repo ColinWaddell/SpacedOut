@@ -97,6 +97,7 @@ angular.module('app.services', [])
         'DELETE FROM log')
       .then(function(result){
         DB.init();
+        notifyObservers();
       });
     }
 
@@ -105,6 +106,20 @@ angular.module('app.services', [])
 
 .factory('Settings', function(DB, $rootScope) {
   var self = this;
+
+  var observerCallbacks = [];
+
+  //register an observer
+  this.registerObserverCallback = function(callback){
+    observerCallbacks.push(callback);
+  };
+
+  //call this when you know 'foo' has been changed
+  var notifyObservers = function(){
+    angular.forEach(observerCallbacks, function(callback){
+      callback();
+    });
+  };
 
   self.preloadSettingsDefaults = function(){
     DB.query(
@@ -120,7 +135,7 @@ angular.module('app.services', [])
         VALUES (?,?,?,?,?,?,?,?)",
       [1, "", "", 0, 0, 0, 1, 0])
     .then(function(result){
-      console.log(result);
+      notifyObservers();
     });
   }
 
@@ -199,6 +214,7 @@ angular.module('app.services', [])
       'DROP TABLE settings')
     .then(function(result){
       DB.init();
+      self.preloadSettingsDefaults();
     });
   }
 
@@ -272,6 +288,7 @@ angular.module('app.services', [])
         'DELETE FROM roster')
       .then(function(result){
         DB.init();
+        notifyObservers();
       });
     }
 

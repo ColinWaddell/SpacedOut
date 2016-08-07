@@ -148,7 +148,7 @@ angular.module('app.routes', [])
     onEnter: function($state, Settings, Admin){
       Settings.get().then(
         function(settings){
-          if(settings.rights_access_settings){
+          if(settings && settings.rights_access_settings){
             if(!Admin.status.enabled){
               Admin.request(
                 "Admin rights are required to access settings",

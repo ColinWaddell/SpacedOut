@@ -236,6 +236,15 @@ angular.module('app.controllers', [])
   });
   $scope.screensaver_times = SS_TIMES;
   $scope.add_options = ADD_OPTIONS;
+
+  $scope.settingsReload = function(settings){
+    Settings.get().then(function(settings){
+      $scope.settings = settings;
+    });
+  };
+
+  Settings.registerObserverCallback($scope.settingsReload);
+
 })
 
 .controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, Admin, USER_DEFAULT) {
