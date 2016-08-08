@@ -189,4 +189,17 @@ angular.module('app.routes', [])
 
   $urlRouterProvider.otherwise('/page1/roster')
 
+})
+
+.directive('hideTabs', function($rootScope) {
+  return {
+      restrict: 'A',
+      link: function($scope, $el) {
+          $rootScope.hideTabs = 'tabs-item-hide';
+          $scope.$on('$destroy', function() {
+              $rootScope.hideTabs = '';
+              console.log('destroy');
+          });
+      }
+  };
 });
