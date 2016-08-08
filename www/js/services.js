@@ -154,7 +154,9 @@ angular.module('app.services', [])
 
   self.onUpdate = function(scope, callback){
     var handler = $rootScope.$on('settings-update', callback);
-    scope.$on('$destroy', handler);
+    if(scope){
+      scope.$on('$destroy', handler);
+    }
   }
 
   self.get = function(){
@@ -379,6 +381,76 @@ angular.module('app.services', [])
     ttl: DEFAULT_ADMIN_TTL,
     cancel: self.timerStopAdmin
   };
+
+  return self;
+})
+
+.factory('Screensaver', function($state, $document, $location, $interval, Settings){
+  var self = this;
+
+  var timerPromise;
+
+  self.tick = function(){
+    if (!self.status.timeout || self.status.sleeping)
+      return;
+
+    self.status.time++;
+    if(self.status.time === self.status.timeout){
+      self.showScreensaver();
+    }
+  }
+
+  self.start = function(){
+    Settings.getSetting('screensaver_time')
+      .then(function(result){
+        self.status.timeout = result.screensaver_time * 3;
+        self.status.time = 0;
+        $interval.cancel(timerPromise);
+        timerPromise = $interval(self.tick, 1000);
+    });
+  };
+
+  self.exit = function(){
+    self.start();
+    $state.go('tabsController.spacedOut');
+  }
+
+  self.cancel = function(){
+    self.status.enabled = false;
+    $interval.cancel(timerPromise);
+  }
+
+  self.status = {
+    sleeping: false,
+    time: 0,
+    timeout: 60,
+    cancel: self.timerStopAdmin
+  };
+
+  self.showScreensaver = function(){
+    self.cancel();
+    self.status.sleeping = true;
+    $location.path('/page1/roster')
+  }
+
+  $document.on('click',function(){
+    if(self.status.sleeping){
+      self.status.sleeping = false;
+        self.exit();
+    }
+    else{
+      self.status.time = 0;
+    }
+  });
+
+  Settings.onUpdate(null, function(){
+    Settings.get().then(
+      function(settings){
+        self.status.timeout = settings.screensaver_time * 60;
+      });
+  });
+
+  self.start();
 
   return self;
 });

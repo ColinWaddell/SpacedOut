@@ -291,7 +291,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, Roster, Settings, Admin, USER_DEFAULT) {
+.controller('spacedOutAddCtrl', function($scope, $state, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
