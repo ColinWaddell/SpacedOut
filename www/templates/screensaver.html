@@ -1,10 +1,13 @@
 <ion-view hide-nav-bar="true" id="page3" class=" " cache-view="false" hide-tabs>
   <ion-content padding="true">
     <ul class="list">
-      <li class="item">
-        <h1 class="light">Screensaver</h1>
+      <li class="item screensaver">
+        <h1>
+          <span class="time">{{info.date | amDateFormat:'H:mm'}}</span> &nbsp;
+          <span class="date">{{info.date | amDateFormat:'dddd, MMMM Do'}}</span>
+        </h1>
+        <h1 class="calm">Click to Sign In <i class="icon ion-log-in"></i></h1>
       </li>
     </ul>
   </ion-content>
-  <div ng-include src="'templates/adminBar.html'"></div>
 </ion-view>

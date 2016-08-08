@@ -1,8 +1,24 @@
 angular.module('app.controllers', [])
 
 
-.controller('screensaverCtrl', function($scope, Screensaver) {
-  console.log('hello');
+.controller('screensaverCtrl', function($scope, $interval, Screensaver) {
+
+  var timerPromise;
+
+  self.tick = function(){
+    $scope.info.date = new Date();
+  }
+
+  self.start = function(){
+    $interval.cancel(timerPromise);
+    timerPromise = $interval(self.tick, 1000);
+  };
+
+  $scope.info = {
+    date: new Date()
+  }
+
+  self.start();
 })
 
 .controller('logCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast) {

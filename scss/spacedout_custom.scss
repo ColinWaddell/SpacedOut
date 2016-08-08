@@ -209,3 +209,15 @@ $floating-button-small-size: 40px;
 .table:first-child{
   background-color: $dark;
 }
+
+.screensaver{
+  .time{
+    font-size: 72pt;
+    color: $light;
+  }
+
+  .date{
+    font-size: 48pt;
+    color: $energized;
+  }
+}

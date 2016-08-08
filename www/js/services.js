@@ -436,8 +436,8 @@ angular.module('app.services', [])
   $document.on('click',function(){
     if(self.status.sleeping){
       self.status.sleeping = false;
-        $state.go('tabsController.spacedOut', {}, {reload: true});
-        self.start();
+      $state.go('tabsController.spacedOut', {}, {reload: true});
+      self.start();
     }
     else{
       self.status.time = 0;
