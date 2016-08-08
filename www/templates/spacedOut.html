@@ -9,27 +9,32 @@
             <div class="row">
               <div class="col col-20">
                 <a class="button button-calm button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
-                  All<br />{{rosterCount('type', 'staff') + rosterCount('type', 'guest')}}
+                  <span class="button-round-value">{{rosterCount('type', 'staff') + rosterCount('type', 'guest')}}</span>
+                  <span class="button-round-label">All</span>
                 </a>
               </div>
               <div class="col col-20">
                 <a class="button button-calm button-round" ng-click="interface.type='staff'; interface.status='all'" ng-class="{selected: interface.type=='staff'}">
-                  Staff<br />{{rosterCount('type', 'staff')}}
+                  <span class="button-round-value">{{rosterCount('type', 'staff')}}</span>
+                  <span class="button-round-label">Staff</span>
                 </a>
               </div>
               <div class="col col-20">
                 <a class="button button-calm button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
-                  Guests<br />{{rosterCount('type', 'guest')}}
+                  <span class="button-round-value">{{rosterCount('type', 'guest')}}</span>
+                  <span class="button-round-label">Guests</span>
                 </a>
               </div>
               <div class="col col-20">
                 <a class="button button-calm button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
-                  In<br />{{rosterCount('status', 'in')}}
+                  <span class="button-round-value">{{rosterCount('status', 'in')}}</span>
+                  <span class="button-round-label">In</span>
                 </a>
               </div>
               <div class="col col-20">
                 <a class="button button-calm button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
-                  Out<br />{{rosterCount('status', 'out')}}
+                  <span class="button-round-value">{{rosterCount('status', 'out')}}</span>
+                  <span class="button-round-label">Out</span>
                 </a>
               </div>
             </div>
@@ -85,8 +90,8 @@
           <div
             class="item item-toggle"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
-            <span class="name">{{entry.name}}</span>
-            <a ng-if="entry.last_activity!==''" class="roster-activity">
+            <span class="name">{{entry.name}}</span><br />
+            <span<a ng-if="entry.last_activity!==''" class="roster-activity">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
             </a>
             <label class="toggle toggle-calm">

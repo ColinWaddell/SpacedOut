@@ -28,8 +28,7 @@
 
 .entries{
   .name{
-    display: inline-block;
-    min-width: 30%;
+
   }
   .guest{
     background: #efefef;
@@ -37,6 +36,9 @@
   }
   .selected{
     background: darken($calm, 5%);
+  }
+  .item-toggle .toggle {
+    top: 21px;
   }
 }
 
@@ -88,51 +90,77 @@ $material-shadow-pressed:        0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 
 $floating-button-size: 56px;
 $floating-button-small-size: 40px;
 
-.button-round{
-  position: absolute;
-  height: $floating-button-size*1.5;
-  width: $floating-button-size*1.5;
-  border-radius: 50%;
-  min-height: $floating-button-size;
-  padding: 0;
-  padding-top: 14px !important;
-  line-height: 28px !important;
-  border: none;
+.button-round-value{
+  display: block;
+}
+.button-round-label{
+  display: block;
+  padding-top: 45px;
+  width: $floating-button-size*0.85;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+}
 
-  background: linear-gradient(180deg, $dark 50%, $calm 50%);
-  color: white;
-
-  box-shadow: $material-shadow;
-  transition: all linear 220ms;
-  transform: translate3d(0,0,0);
-  backface-visibility: hidden;
-
-  &.activated {
-    opacity: 1;
-    box-shadow: $material-shadow-pressed;
+&.selected{
+  .button-round-value{
+    background: $energized !important;
   }
+}
 
-  &.left {
-    left: 1px;
-    top: 16px;
-  }
+.button.button-round{
+  background: none !important;
+  box-shadow: none  !important;
 
-  &.bottom-edge-right {
-    bottom: -24px;
-    right: 16px;
-    z-index: 12;
-  }
+  .button-round-value{
+    position: absolute;
+    height: $floating-button-size*0.85;
+    width: $floating-button-size*0.85;
+    border-radius: 50%;
+    min-height: $floating-button-size*0.85;
+    padding: 0;
+    line-height: 48px;
+    font-size: 18px;
 
-  &.bottom-right {
-    bottom: 0;
-    margin-bottom: 16px;
-    right: 16px;
-    z-index: 2;
+    background: $calm;
+    color: white;
 
-    &.slide-down {
-      transform: translate3d(0,88px,0);
+    box-shadow: $material-shadow;
+    transition: all linear 220ms;
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+
+    &.selected{
+      background: $energized;
     }
 
+    &.activated {
+      opacity: 1;
+      box-shadow: $material-shadow-pressed;
+    }
+
+    &.left {
+      left: 1px;
+      top: 16px;
+    }
+
+    &.bottom-edge-right {
+      bottom: -24px;
+      right: 16px;
+      z-index: 12;
+    }
+
+    &.bottom-right {
+      bottom: 0;
+      margin-bottom: 16px;
+      right: 16px;
+      z-index: 2;
+
+      &.slide-down {
+        transform: translate3d(0,88px,0);
+      }
+
+    }
   }
 }
 
