@@ -1,6 +1,11 @@
 angular.module('app.controllers', [])
 
-.controller('logCtrl', function($scope, Roster, Log, Admin, $ionicPopup, ionicToast) {
+
+.controller('screensaverCtrl', function($scope, Screensaver) {
+  console.log('hello');
+})
+
+.controller('logCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast) {
 
   $scope.logPopulate = function(data){
       $scope.log.entries = JSON.parse(JSON.stringify(data));
@@ -37,7 +42,7 @@ angular.module('app.controllers', [])
   Log.registerObserverCallback($scope.logReload);
 })
 
-.controller('alertCtrl', function($scope, Settings, Roster, Admin, ionicToast) {
+.controller('alertCtrl', function($scope, Settings, Screensaver, Roster, Admin, ionicToast) {
   $scope.alertSend = function() {
     Roster
       .all()
@@ -86,7 +91,7 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Roster, Settings, Admin, Log, SS_TIMES, ADD_OPTIONS) {
+.controller('settingsCtrl', function($scope, $ionicPopup, ionicToast, Screensaver, Roster, Settings, Admin, Log, SS_TIMES, ADD_OPTIONS) {
   $scope.admin = Admin.status;
   $scope.settings = {};
 
@@ -326,7 +331,7 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Admin, Settings) {
+.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Screensaver, Admin, Settings) {
   $scope.roster = {
     'entries': []
   };

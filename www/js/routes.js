@@ -171,6 +171,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.screensaver', {
+    url: '/screensaver',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/screensaver.html',
+        controller: 'screensaverCtrl'
+      }
+    }
+  })
+
   .state('tabsController', {
     url: '/page1',
     templateUrl: 'templates/tabsController.html',

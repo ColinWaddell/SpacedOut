@@ -403,7 +403,7 @@ angular.module('app.services', [])
   self.start = function(){
     Settings.getSetting('screensaver_time')
       .then(function(result){
-        self.status.timeout = result.screensaver_time * 3;
+        self.status.timeout = result.screensaver_time * 5;
         self.status.time = 0;
         $interval.cancel(timerPromise);
         timerPromise = $interval(self.tick, 1000);
@@ -412,7 +412,7 @@ angular.module('app.services', [])
 
   self.exit = function(){
     self.start();
-    $state.go('tabsController.spacedOut');
+    $state.go('tabsController.spacedOut', {}, {reload: true});
   }
 
   self.cancel = function(){
@@ -430,7 +430,7 @@ angular.module('app.services', [])
   self.showScreensaver = function(){
     self.cancel();
     self.status.sleeping = true;
-    $location.path('/page1/roster')
+    $state.go('tabsController.screensaver');
   }
 
   $document.on('click',function(){
