@@ -1,4 +1,7 @@
 
+$font-family-sans-serif:           '-apple-system', "Roboto", "Segoe UI", sans-serif !default;
+$font-family-light-sans-serif:    '-apple-system', "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+
 $font-size-base:                  14px;
 $base-background-color:           #303030;
 $base-color:                      #333;
@@ -15,11 +18,9 @@ $list-header-margin-top:          20px;
 $spaced-out-shadow:               0px 4px 16px -2px rgba(0,0,0,0.2);
 $spaced-out-shadow-mild:          0px 2px 8px -1px rgba(0,0,0,0.1);
 
-$calm:                            #316877;
-$dark:                            #333;
+$calm:                            #119cc1;
 $subdued-color:                   #aaa;
-$darkblue:                        #2a2e31;
-$royal:                           $fadedblue;
+$energized:                       #bba717;
 
 $item-default-bg:                 #424242;
 $item-default-border:             none;
@@ -36,8 +37,8 @@ $item-default-border:             none;
 //$item-default-text:               $item-light-text;
 $item-default-active-bg:          #D9D9D9;
 //$item-default-active-border:      $item-light-active-border;
-$bar-height:                      60px;
-$bar-default-bg:                  darken($calm, 15%);
+$bar-height:                      105px;
+$bar-default-bg:                  $base-background-color;
 //$bar-default-text:                $bar-light-text;
 $bar-default-border:              none;
 //$bar-default-active-bg:           $bar-light-active-bg;

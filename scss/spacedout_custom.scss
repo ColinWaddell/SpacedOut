@@ -1,6 +1,7 @@
 
 .bar .bar-header{
-  box-shadow: $spaced-out-shadow;
+  border-bottom: 1px solid $energized;
+  background: darken($base-background-color, 3%);
 }
 
 .list{
@@ -28,10 +29,10 @@
 
 .entries{
   .name{
-
+    padding-left: 10px;
   }
   .guest{
-    background: #efefef;
+    background: #42392d;
     font-style: italic;
   }
   .selected{
@@ -56,7 +57,7 @@
     box-shadow: none;
     .button-calm.activated{
       box-shadow: none;
-      background: $darkblue !important;
+      background: $dark !important;
     }
   }
 
@@ -71,7 +72,7 @@
 }
 
 .button.button-dark.selected{
-  background: $darkblue !important;
+  background: $dark !important;
 }
 
 .button{
@@ -92,25 +93,29 @@ $floating-button-small-size: 40px;
 
 .button-round-value{
   display: block;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 .button-round-label{
   display: block;
-  padding-top: 45px;
+  padding-top: 50px;
   width: $floating-button-size*0.85;
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
-}
-
-&.selected{
-  .button-round-value{
-    background: $energized !important;
-  }
+  font-size: 11px;
 }
 
 .button.button-round{
   background: none !important;
   box-shadow: none  !important;
+
+  &.selected{
+    .button-round-value{
+      background: $energized !important;
+      box-shadow: $material-shadow;
+    }
+  }
 
   .button-round-value{
     position: absolute;
