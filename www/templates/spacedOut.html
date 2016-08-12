@@ -9,26 +9,26 @@
             <div class="row">
               <div class="col col-25">
                 <a class="button button-calm button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
-                  <span class="button-round-value">{{rosterCount('type', 'staff') + rosterCount('type', 'guest')}}</span>
+                  <span class="button-round-value">{{rosterCount.type.staff + rosterCount.type.guest}}</span>
                   <span class="button-round-label">All</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-calm button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
-                  <span class="button-round-value">{{rosterCount('type', 'guest')}}</span>
-                  <span class="button-round-label">Guests</span>
-                </a>
-              </div>
-              <div class="col col-25">
                 <a class="button button-calm button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
-                  <span class="button-round-value">{{rosterCount('status', 'in')}}</span>
+                  <span class="button-round-value">{{rosterCount.status.in}}</span>
                   <span class="button-round-label">In</span>
                 </a>
               </div>
               <div class="col col-25">
                 <a class="button button-calm button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
-                  <span class="button-round-value">{{rosterCount('status', 'out')}}</span>
+                  <span class="button-round-value">{{rosterCount.status.out}}</span>
                   <span class="button-round-label">Out</span>
+                </a>
+              </div>
+              <div class="col col-25">
+                <a class="button button-calm button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
+                  <span class="button-round-value">{{rosterCount.type.guest}}</span>
+                  <span class="button-round-label">Guests</span>
                 </a>
               </div>
             </div>
@@ -63,7 +63,6 @@
         <div
           on-hold="entry.selected=true; interface.multiselect=true"
           ng-click="selectEntry(entry)"
-          ng-dblclick="entry.status = entry.status==='in'?'out':'in'"
           ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
           <div
             class="item item-divider"
@@ -73,12 +72,13 @@
           </div>
           <div
             class="item item-toggle"
+            ng-dblclick="entry.status = entry.status==='in'?'out':'in'"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
             <i class="icon {{entry.status=='in'?'ion-log-in':'ion-log-out'}}"></i>
             <span class="name">{{entry.name}}</span><br />
-            <span<a ng-if="entry.last_activity!==''" class="roster-activity">
+            <span<a class="roster-activity">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
-            </a>
+            </a></span>
             <label class="toggle toggle-calm">
               <input
                 type="checkbox"

@@ -365,6 +365,11 @@ angular.module('app.controllers', [])
     'entries': []
   };
 
+  $scope.rosterCount = {
+    'status': {'in': 0, 'out': 0},
+    'type': {'staff': 0, 'guest': 0},
+  }
+
   $scope.interface = {
     'status': 'all',
     'type': 'all',
@@ -409,20 +414,22 @@ angular.module('app.controllers', [])
     }
   };
 
-  $scope.rosterCount = function(id, value){
-    var count = 0;
+  $scope.rosterCountUpdate = function(){
+    var count = {
+      'type': {'staff': 0, 'guest': 0},
+      'status': {'in': 0, 'out': 0}
+    };
 
-    if(!$scope.roster.entries)
-      return;
+    if($scope.roster.entries){
+      $scope.roster.entries.forEach(
+        function(entry){
+          count.type[entry.type]++;
+          count.status[entry.status]++;
+        }
+      );
+    }
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        if(entry[id]===value)
-          count++;
-      }
-    );
-
-    return count;
+    $scope.rosterCount = count;
   };
 
   $scope.multiselectCancel = function(){
@@ -486,9 +493,11 @@ angular.module('app.controllers', [])
       });
 
       $scope.multiselectCancel();
+      $scope.rosterCountUpdate();
     }
     else{
       Roster.setStatus(user, user.status);
+      $scope.rosterCountUpdate();
       user.last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
 
       if ($scope.settings.rights_auto_remove_guest && user.status==='out' && user.type==='guest'){
@@ -535,6 +544,7 @@ angular.module('app.controllers', [])
 
   $scope.rosterPopulate = function(data){
       $scope.roster.entries = JSON.parse(JSON.stringify(data));
+      $scope.rosterCountUpdate();
   }
 
   $scope.rosterError = function (){
