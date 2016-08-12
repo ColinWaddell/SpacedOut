@@ -349,7 +349,6 @@ angular.module('app.controllers', [])
 
 .controller('spacedOutCtrl', function(
   $scope,
-  $stateParams,
   $filter,
   $location,
   $anchorScroll,
@@ -577,6 +576,4 @@ angular.module('app.controllers', [])
     $scope.settings = JSON.parse(JSON.stringify(settings));
   });
   $scope.rosterReload();
-
-  $stateParams.blah = 'hey';
 })
