@@ -9961,6 +9961,10 @@ a.button {
 .table:first-child {
   background-color: #444; }
 
+.screensaver .message {
+  text-align: right;
+  margin-top: 0; }
+
 .screensaver .time {
   font-size: 72pt;
   color: #fff; }
@@ -9968,3 +9972,7 @@ a.button {
 .screensaver .date {
   font-size: 48pt;
   color: #bba717; }
+
+.screensaver .branding {
+  width: 100%;
+  margin-top: -5px; }

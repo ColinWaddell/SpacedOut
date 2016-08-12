@@ -211,6 +211,11 @@ $floating-button-small-size: 40px;
 }
 
 .screensaver{
+  .message{
+    text-align: right;
+    margin-top: 0;
+  }
+
   .time{
     font-size: 72pt;
     color: $light;
@@ -219,5 +224,9 @@ $floating-button-small-size: 40px;
   .date{
     font-size: 48pt;
     color: $energized;
+  }
+  .branding{
+    width:100%;
+    margin-top: -5px;
   }
 }

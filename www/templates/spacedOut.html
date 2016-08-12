@@ -63,6 +63,7 @@
         <div
           on-hold="entry.selected=true; interface.multiselect=true"
           ng-click="selectEntry(entry)"
+          ng-dblclick="entry.status=entry.status==='in'?'out':'in'"
           ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
           <div
             class="item item-divider"
