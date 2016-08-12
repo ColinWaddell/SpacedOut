@@ -385,7 +385,7 @@ angular.module('app.services', [])
   return self;
 })
 
-.factory('Screensaver', function($state, $document, $location, $interval, Settings){
+.factory('Screensaver', function($state, $document, $location, $interval, Settings, rosterInterface){
   var self = this;
 
   var timerPromise;
@@ -412,7 +412,7 @@ angular.module('app.services', [])
 
   self.exit = function(){
     self.start();
-    $state.go('tabsController.spacedOut', {}, {reload: true});
+    $state.go('tabsController.spacedOut',{}, {reload: true});
   }
 
   self.cancel = function(){
@@ -436,7 +436,14 @@ angular.module('app.services', [])
   $document.on('click',function(){
     if(self.status.sleeping){
       self.status.sleeping = false;
-      $state.go('tabsController.spacedOut', {}, {reload: true});
+      rosterInterface.update(
+        {
+          'status': 'all',
+          'type': 'all',
+          'multiselect': false
+        }
+      );
+      $state.go('tabsController.spacedOut',{}, {reload: true});
       self.start();
     }
     else{
@@ -454,4 +461,35 @@ angular.module('app.services', [])
   self.start();
 
   return self;
+})
+
+.factory('rosterInterface', function($rootScope) {
+  var sharedService = {};
+
+  sharedService.interface = {
+    'status': 'all',
+    'type': 'all',
+    'multiselect': false
+  };
+
+  var observerCallbacks = [];
+
+  //register an observer
+  sharedService.registerObserverCallback = function(callback){
+    observerCallbacks.push(callback);
+  };
+
+  //call this when you know 'foo' has been changed
+  var notifyObservers = function(itfc){
+    angular.forEach(observerCallbacks, function(callback){
+      callback(itfc);
+    });
+  };
+
+  sharedService.update = function(itfc) {
+      this.interface = itfc;
+      notifyObservers(this.interface);
+  };
+
+  return sharedService;
 });

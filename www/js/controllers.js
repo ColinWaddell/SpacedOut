@@ -347,18 +347,33 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('spacedOutCtrl', function($scope, $filter, $location, $anchorScroll, $ionicPopup, ionicToast, Roster, Screensaver, Admin, Settings) {
+.controller('spacedOutCtrl', function(
+  $scope,
+  $stateParams,
+  $filter,
+  $location,
+  $anchorScroll,
+  $ionicPopup,
+  ionicToast,
+  Roster,
+  Screensaver,
+  Admin,
+  Settings,
+  rosterInterface
+){
   $scope.roster = {
     'entries': []
   };
-
-  $scope.admin = Admin.status;
 
   $scope.interface = {
     'status': 'all',
     'type': 'all',
     'multiselect': false
   }
+
+  rosterInterface.registerObserverCallback(function(itfc){
+    $scope.interface = itfc;
+  });
 
   $scope.deleteSelected = function(){
     var selected = [];
@@ -552,4 +567,6 @@ angular.module('app.controllers', [])
     $scope.settings = JSON.parse(JSON.stringify(settings));
   });
   $scope.rosterReload();
+
+  $stateParams.blah = 'hey';
 })
