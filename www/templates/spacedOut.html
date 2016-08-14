@@ -63,7 +63,7 @@
         <div
           on-hold="entry.selected=true; interface.multiselect=true"
           ng-click="selectEntry(entry)"
-          on-double-click="entry.status=entry.status==='in'?'out':'in'"
+          on-double-click="invertStatus(entry)"
           ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
           <div
             class="item item-divider"

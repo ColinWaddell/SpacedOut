@@ -482,6 +482,11 @@ angular.module('app.controllers', [])
     return fe;
   }
 
+  $scope.invertStatus = function(user){
+    user.status = user.status==='in'?'out':'in';
+    $scope.toggleStatus(user);
+  }
+
   $scope.toggleStatus = function(user){
     if($scope.interface.multiselect){
       $scope.roster.entries.forEach(function(entry){
