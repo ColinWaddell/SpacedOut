@@ -1,4 +1,3 @@
-
 .bar .bar-header{
   border-bottom: 1px solid #95aeb5;
   background: darken($base-background-color, 3%);
@@ -237,4 +236,19 @@ $floating-button-small-size: 40px;
     width:100%;
     margin-top: -10px;
   }
+}
+
+.rotate-90{
+  display: inline-block;
+    transform: rotate(90deg);
+}
+
+.rotate-180{
+  display: inline-block;
+    transform: rotate(180deg);
+}
+
+.rotate-270{
+  display: inline-block;
+    transform: rotate(270deg);
 }

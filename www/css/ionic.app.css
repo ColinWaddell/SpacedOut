@@ -9981,3 +9981,15 @@ a.button {
 .screensaver .branding {
   width: 100%;
   margin-top: -10px; }
+
+.rotate-90 {
+  display: inline-block;
+  transform: rotate(90deg); }
+
+.rotate-180 {
+  display: inline-block;
+  transform: rotate(180deg); }
+
+.rotate-270 {
+  display: inline-block;
+  transform: rotate(270deg); }
