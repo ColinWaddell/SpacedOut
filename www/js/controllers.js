@@ -569,6 +569,8 @@ angular.module('app.controllers', [])
         );
     }
 
+  $scope.admin = Admin.status;
+
   Roster.registerObserverCallback($scope.rosterReload);
 
   Settings.onUpdate($scope, function(){
