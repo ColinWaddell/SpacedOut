@@ -1,7 +1,12 @@
 
 .bar .bar-header{
-  border-bottom: 1px solid $energized;
+  border-bottom: 1px solid #95aeb5;
   background: darken($base-background-color, 3%);
+
+  .logo{
+    height: 100px;
+    margin-top: -10px;
+  }
 }
 
 .list{
@@ -112,8 +117,11 @@ $floating-button-small-size: 40px;
 
   &.selected{
     .button-round-value{
-      background: $energized !important;
+      background: lighten($calm, 20%) !important;
       box-shadow: $material-shadow;
+    }
+    .button-round-label{
+      color: $energized !important;
     }
   }
 
@@ -127,7 +135,7 @@ $floating-button-small-size: 40px;
     line-height: 48px;
     font-size: 18px;
 
-    background: $calm;
+    background: darken($calm, 10%);
     color: white;
 
     box-shadow: $material-shadow;
@@ -136,7 +144,7 @@ $floating-button-small-size: 40px;
     backface-visibility: hidden;
 
     &.selected{
-      background: $energized;
+      background: lighten($calm, 20%);
     }
 
     &.activated {

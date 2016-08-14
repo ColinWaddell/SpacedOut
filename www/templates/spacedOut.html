@@ -3,30 +3,30 @@
     <div class="bar bar-header">
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col col-75">
-            <p>LOGO</p>
+            <img class="logo" src="img/rocket.png"></img>
           </div>
           <div class="col-25">
             <div class="row">
               <div class="col col-25">
-                <a class="button button-calm button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
+                <a class="button button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
                   <span class="button-round-value">{{rosterCount.type.staff + rosterCount.type.guest}}</span>
                   <span class="button-round-label">All</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-calm button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
+                <a class="button button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
                   <span class="button-round-value">{{rosterCount.status.in}}</span>
                   <span class="button-round-label">In</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-calm button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
+                <a class="button button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
                   <span class="button-round-value">{{rosterCount.status.out}}</span>
                   <span class="button-round-label">Out</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-calm button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
+                <a class="button button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
                   <span class="button-round-value">{{rosterCount.type.guest}}</span>
                   <span class="button-round-label">Guests</span>
                 </a>
