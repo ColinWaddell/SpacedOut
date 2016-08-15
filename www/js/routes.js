@@ -182,12 +182,12 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController', {
-    url: '/page1',
+    url: '/spacedout',
     templateUrl: 'templates/tabsController.html',
     abstract:true
   })
 
-  $urlRouterProvider.otherwise('/page1/roster')
+  $urlRouterProvider.otherwise('/spacedout/roster')
 
 })
 
