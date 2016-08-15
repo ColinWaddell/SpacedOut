@@ -5,10 +5,17 @@
           Add New User
         </li>
 
-        <label class="item item-input">
+        <div class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="user.name" placeholder="">
-        </label>
+          <button ng-click="multiname = !multiname"
+            class="button button-dark">
+              <i
+                class="icon" ng-class="{'ion-ios-arrow-down': !multiname, 'ion-ios-arrow-up': multiname}">
+              </i>
+          </button>
+          &nbsp;
+        </div>
 
         <ion-list>
           <ion-radio

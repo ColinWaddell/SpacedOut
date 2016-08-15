@@ -318,6 +318,7 @@ angular.module('app.controllers', [])
     $scope.user.name = "";
     $scope.user.type = 'staff';
     $scope.user.status = 'out';
+    $scope.multiname = false;
     $state
       .go('tabsController.spacedOut');
   };
@@ -372,6 +373,7 @@ angular.module('app.controllers', [])
 
   Settings.get().then(settingsUpdate);
   $scope.user = USER_DEFAULT;
+  $scope.multiname = false;
   $scope.admin = Admin.status;
 })
 
