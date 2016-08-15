@@ -318,7 +318,7 @@ angular.module('app.controllers', [])
     $scope.user.name = "";
     $scope.user.type = 'staff';
     $scope.user.status = 'out';
-    $scope.multiname = false;
+    $scope.multiname = {'show': false, 'names': [""]};
     $state
       .go('tabsController.spacedOut');
   };
@@ -353,7 +353,7 @@ angular.module('app.controllers', [])
       $scope.user.type="staff";
     }
   }
-
+  
   function settingsUpdate(settings){
     $scope.settings = settings;
     if(settings.add_option){
@@ -373,7 +373,7 @@ angular.module('app.controllers', [])
 
   Settings.get().then(settingsUpdate);
   $scope.user = USER_DEFAULT;
-  $scope.multiname = false;
+  $scope.multiname = {'show': false, 'names': [""]};
   $scope.admin = Admin.status;
 })
 

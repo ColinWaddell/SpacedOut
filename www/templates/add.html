@@ -7,15 +7,38 @@
 
         <div class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="user.name" placeholder="">
-          <button ng-click="multiname = !multiname"
+          <input type="text" ng-model="user.name" placeholder="Enter name">
+          <button ng-click="multiname.show=!multiname.show"
             class="button button-dark">
               <i
-                class="icon" ng-class="{'ion-ios-arrow-down': !multiname, 'ion-ios-arrow-up': multiname}">
+                class="icon" ng-class="{'ion-ios-arrow-down': !multiname.show, 'ion-ios-arrow-up': multiname.show}">
               </i>
           </button>
           &nbsp;
         </div>
+
+        <div class="item item-input" ng-if="multiname.show" ng-repeat="name in multiname.names track by $index">
+          <span class="input-label"></span>
+          <input type="text" ng-model="multiname.names[$index]" placeholder="Enter name">
+          <button
+            ng-if="$index===multiname.names.length-1"
+            ng-click="multiname.names.push('')"
+            class="button button-dark">
+              <i
+                class="icon ion-ios-plus-outline">
+              </i>
+          </button>
+          <button
+            ng-if="$index!==multiname.names.length-1"
+            ng-click="multiname.names.splice($index, 1)"
+            class="button button-dark">
+              <i
+                class="icon ion-ios-trash-outline">
+              </i>
+          </button>
+          &nbsp;
+        </div>
+
 
         <ion-list>
           <ion-radio
