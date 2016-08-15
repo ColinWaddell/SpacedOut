@@ -9815,6 +9815,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.darkish {
+  color: #666; }
+
 .bar .bar-header {
   border-bottom: 1px solid #95aeb5;
   background: #282828; }

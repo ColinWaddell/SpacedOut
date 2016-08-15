@@ -310,7 +310,7 @@ angular.module('app.services', [])
     };
 })
 
-.factory('Admin', function($ionicPopup, $state, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
+.factory('Admin', function($ionicPopup, $rootScope, $state, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
   var self = this;
 
   var timerPromise;
@@ -327,12 +327,14 @@ angular.module('app.services', [])
     self.status.ttl = DEFAULT_ADMIN_TTL;
     $interval.cancel(timerPromise);
     timerPromise = $interval(self.timerUpdateAdmin, 1000);
+    $rootScope.$emit('admin-update');
   };
 
   self.timerStopAdmin = function(){
     self.status.enabled = false;
     $interval.cancel(timerPromise);
     $state.go('tabsController.spacedOut');
+    $rootScope.$emit('admin-update');
   }
 
   self.tryPassword = function(attempt, answer, success){
@@ -375,6 +377,13 @@ angular.module('app.services', [])
         }
       });
   };
+
+  self.onUpdate = function(scope, callback){
+    var handler = $rootScope.$on('admin-update', callback);
+    if(scope){
+      scope.$on('$destroy', handler);
+    }
+  }
 
   self.status = {
     enabled: false,

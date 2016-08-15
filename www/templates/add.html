@@ -11,8 +11,18 @@
         </label>
 
         <ion-list>
-          <ion-radio ng-model="user.type" ng-if="!settings.add_option" ng-value="'staff'">Staff</ion-radio>
-          <ion-radio ng-model="user.type" ng-value="'guest'">Guest</ion-radio>
+          <ion-radio
+            ng-model="user.type"
+            ng-class="{darkish: !!admin.enabled !== !!settings.add_option}"
+            ng-click="staffClickAdminTest()"
+            ng-value="'staff'">
+              Staff
+          </ion-radio>
+          <ion-radio
+            ng-model="user.type"
+            ng-value="'guest'">
+              Guest
+            </ion-radio>
         </ion-list>
 
 

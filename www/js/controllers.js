@@ -338,11 +338,39 @@ angular.module('app.controllers', [])
       );
   }
 
+  $scope.staffClickAdminTest = function(){
+    if(!!$scope.admin.enabled !== !!$scope.settings.add_option){
+      $scope.user.type = "guest";
+      Admin.request(
+        "You need to be an admin to add staff",
+        function(){
+          $scope.user.type="staff";
+        }
+      );
+    }
+    else{
+      $scope.user.type="staff";
+    }
+  }
+
+  function settingsUpdate(settings){
+    $scope.settings = settings;
+    if(settings.add_option){
+      $scope.user.type = "guest";
+    }
+  }
+
   Settings.onUpdate($scope, function(){
-    Settings.get().then(function(settings){$scope.settings = settings;});
+    Settings.get().then(settingsUpdate);
   });
 
-  Settings.get().then(function(settings){$scope.settings = settings;});
+  Admin.onUpdate($scope, function(){
+    if(!!$scope.admin.enabled !== !!$scope.settings.add_option){
+      $scope.user.type = "guest";
+    }
+  });
+
+  Settings.get().then(settingsUpdate);
   $scope.user = USER_DEFAULT;
   $scope.admin = Admin.status;
 })
