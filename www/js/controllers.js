@@ -312,7 +312,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
+.controller('spacedOutAddCtrl', function($scope, $state, ionicToast, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
@@ -332,24 +332,33 @@ angular.module('app.controllers', [])
   };
 
   $scope.rosterAdd = function(){
-    if ($scope.user.name.lengh < 2)
+    if ($scope.user.name.lengh < 3)
       return;
 
-    users = $scope.user;
-
+    users = [$scope.user];
+    var error = "";
     if($scope.multiname.show){
-      users = [];
-      users.push($scope.user);
       $scope
         .multiname
         .names
         .forEach(function(name){
+          if (name.length < 3){
+            error = "Names must be longer than 2 letters"
+            return;
+          }
+
           users.push({
             'name': name,
             'type': $scope.user.type,
             'status': $scope.user.status
           });
         });
+    }
+
+    if (error!==""){
+      ionicToast.show(
+        error, 'middle', false, 1500
+      );
     }
 
     Roster

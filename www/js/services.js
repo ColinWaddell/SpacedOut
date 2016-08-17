@@ -251,10 +251,6 @@ angular.module('app.services', [])
     };
 
     self.add = function(user) {
-      last_activity =
-        (user.status === "in") ?
-          $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
-          "";
 
       var query = 'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)';
       var bindings = [];
@@ -269,7 +265,7 @@ angular.module('app.services', [])
           bindings.push(u.status);
           bindings.push(u.type);
 
-          last_activity =
+          var last_activity =
             (u.status === "in") ?
               $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
               "";

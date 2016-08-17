@@ -74,7 +74,7 @@
             class="button button-block button-calm"
             ng-disabled="user.name.length < 2"
             ng-click="rosterAdd()">
-              Add {{add.type}}
+              Add {{user.type.charAt(0).toUpperCase() + user.type.slice(1)}}{{multiname.show&&user.type==='guest'?'s':''}}
           </button>
         </li>
       </div>
