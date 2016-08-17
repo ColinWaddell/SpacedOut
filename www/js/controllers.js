@@ -316,9 +316,13 @@ angular.module('app.controllers', [])
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
-    $scope.user.type = 'staff';
     $scope.user.status = 'out';
     $scope.multiname = {'show': false, 'names': [""]};
+
+    if(!!$scope.admin.enabled !== !!$scope.settings.add_option){
+      $scope.user.type = "guest";
+    }
+
     $state
       .go('tabsController.spacedOut');
   };
@@ -331,8 +335,25 @@ angular.module('app.controllers', [])
     if ($scope.user.name.lengh < 2)
       return;
 
+    users = $scope.user;
+
+    if($scope.multiname.show){
+      users = [];
+      users.push($scope.user);
+      $scope
+        .multiname
+        .names
+        .forEach(function(name){
+          users.push({
+            'name': name,
+            'type': $scope.user.type,
+            'status': $scope.user.status
+          });
+        });
+    }
+
     Roster
-      .add($scope.user)
+      .add(users)
       .then(
         $scope.userAddSuccess,
         $scope.userAddError
@@ -353,7 +374,7 @@ angular.module('app.controllers', [])
       $scope.user.type="staff";
     }
   }
-  
+
   function settingsUpdate(settings){
     $scope.settings = settings;
     if(settings.add_option){

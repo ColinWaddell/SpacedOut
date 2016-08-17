@@ -256,9 +256,34 @@ angular.module('app.services', [])
           $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
           "";
 
+      var query = 'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)';
+      var bindings = [];
+
+      if(user.constructor === Array){
+        var count = 0;
+        user.forEach(function(u, i){
+          if(i!==0){
+            query += ", (?,?,?,?)";
+          }
+          bindings.push(u.name);
+          bindings.push(u.status);
+          bindings.push(u.type);
+
+          last_activity =
+            (u.status === "in") ?
+              $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ') :
+              "";
+
+          bindings.push(last_activity);
+        });
+      }
+      else{
+        bindings = [user.name, user.status, user.type, last_activity];
+      }
+
       return DB.query(
-        'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)',
-        [user.name, user.status, user.type, last_activity])
+        query,
+        bindings)
       .then(function(result){
         notifyObservers();
         Log.log('add', user);
