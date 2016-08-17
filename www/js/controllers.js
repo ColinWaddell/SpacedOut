@@ -312,7 +312,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, ionicToast, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
+.controller('spacedOutAddCtrl', function($scope, $state, $sanitize, ionicToast, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
 
   $scope.userAddSuccess = function(data){
     $scope.user.name = "";
@@ -335,8 +335,14 @@ angular.module('app.controllers', [])
     if ($scope.user.name.lengh < 3)
       return;
 
-    users = [$scope.user];
+    users = [{
+      'name'  : $sanitize($scope.user.name),
+      'type'  : $scope.user.type,
+      'status': $scope.user.status
+    }];
+
     var error = "";
+
     if($scope.multiname.show){
       $scope
         .multiname
@@ -348,7 +354,7 @@ angular.module('app.controllers', [])
           }
 
           users.push({
-            'name': name,
+            'name': $sanitize(name),
             'type': $scope.user.type,
             'status': $scope.user.status
           });
