@@ -377,7 +377,7 @@ angular.module('app.services', [])
       function(result){
         password = result.password;
 
-        if (password.length===0){
+        if (password===null || password.length===0){
           $ionicPopup.alert({
              title: 'Admin Access',
              template: 'You still need to set an Admin Password in Settings'

@@ -9848,6 +9848,7 @@ a.button {
   text-transform: capitalize; }
 
 .entries .guest {
+  background: #42392d;
   font-style: italic; }
 
 .entries .selected {

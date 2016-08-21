@@ -292,19 +292,19 @@ angular.module('app.controllers', [])
 
   Settings.onUpdate($scope, function(){
     Settings.get().then(function(settings){
-      $scope.settings = settings;
+      $scope.settings = JSON.parse(JSON.stringify(settings));
     });
   });
 
   Settings.get().then(function(settings){
-    $scope.settings = settings;
+    $scope.settings = JSON.parse(JSON.stringify(settings));
   });
   $scope.screensaver_times = SS_TIMES;
   $scope.add_options = ADD_OPTIONS;
 
   $scope.settingsReload = function(settings){
     Settings.get().then(function(settings){
-      $scope.settings = settings;
+      $scope.settings = JSON.parse(JSON.stringify(settings));
     });
   };
 
@@ -391,7 +391,7 @@ angular.module('app.controllers', [])
   }
 
   function settingsUpdate(settings){
-    $scope.settings = settings;
+    $scope.settings = JSON.parse(JSON.stringify(settings));
     if(settings.add_option){
       $scope.user.type = "guest";
     }
@@ -407,6 +407,7 @@ angular.module('app.controllers', [])
     }
   });
 
+  $scope.settings = {};
   Settings.get().then(settingsUpdate);
   $scope.user = USER_DEFAULT;
   $scope.multiname = {'show': false, 'names': [""]};
@@ -468,7 +469,7 @@ angular.module('app.controllers', [])
       $scope.multiselectCancel();
     }
 
-    if (Admin.status.enabled){
+    if (Admin.status.enabled || !$scope.settings.rights_add_remove_users){
       deleteEntries();
     }
     else{
