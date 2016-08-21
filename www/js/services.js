@@ -83,9 +83,31 @@ angular.module('app.services', [])
 
     self.log = function(eventType, entry) {
       last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
+
+      var query = 'INSERT INTO log (name, event, status, type, last_activity) VALUES (?,?,?,?,?)';
+      var bindings = [];
+
+      if(entry.constructor === Array){
+        var count = 0;
+        entry.forEach(function(e, i){
+          if(i!==0){
+            query += ", (?,?,?,?,?)";
+          }
+
+          bindings.push(e.name);
+          bindings.push(eventType);
+          bindings.push(e.status);
+          bindings.push(e.type);
+          bindings.push(last_activity);
+        });
+      }
+      else{
+        bindings = [entry.name, eventType, entry.status, entry.type, last_activity];
+      }
+
       return DB.query(
-        'INSERT INTO log (name, event, status, type, last_activity) VALUES (?,?,?,?,?)',
-        [entry.name, eventType, entry.status, entry.type, last_activity])
+        query,
+        bindings)
       .then(function(result){
         notifyObservers();
         return result.insertId;
@@ -251,7 +273,6 @@ angular.module('app.services', [])
     };
 
     self.add = function(user) {
-
       var query = 'INSERT INTO roster (name, status, type, last_activity) VALUES (?,?,?,?)';
       var bindings = [];
 
