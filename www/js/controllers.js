@@ -534,7 +534,13 @@ angular.module('app.controllers', [])
     if (name === undefined)
       return;
 
-    return name.toUpperCase() && name.toUpperCase().charAt(0);
+    var letter = name.toUpperCase() && name.toUpperCase().charAt(0);
+    if (/^[A-Za-z]+$/.test(letter)){
+      return letter;
+    }
+    else{
+      return '#';
+    }
   }
 
   $scope.filterEntries = function(entries, status, type){

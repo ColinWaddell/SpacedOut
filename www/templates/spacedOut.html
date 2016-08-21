@@ -77,7 +77,7 @@
             ng-dblclick="entry.status = entry.status==='in'?'out':'in'"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
             <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
-            <span class="name">{{entry.name}}</span><br />
+            <span class="name" ng-bind-html="entry.name"></span><br />
             <span<a class="roster-activity">
               Signed {{entry.status}} <span am-time-ago="entry.last_activity"></span>
             </a></span>
