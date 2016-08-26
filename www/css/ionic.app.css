@@ -9850,6 +9850,14 @@ a.button {
 .entries .guest {
   background: #42392d;
   font-style: italic; }
+  .entries .guest .label {
+    color: #fff;
+    font-style: normal;
+    font-size: 10px;
+    margin-left: 10px;
+    padding: 5px 10px 5px 10px;
+    background: #333;
+    border-radius: 4px; }
 
 .entries .selected {
   background: #0b637b; }

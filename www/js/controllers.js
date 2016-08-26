@@ -583,14 +583,14 @@ angular.module('app.controllers', [])
           template: user.name + ' is a guest.<br /><br />Remove them from the Roster?',
           buttons: [
             {
-              text: 'No Thanks',
+              text: 'Sign-Out',
               type: 'button-default',
               onTap: function(e) {
                 return false;
               }
             },
             {
-              text: 'Yes Please',
+              text: 'Delete User',
               type: 'button-default',
               onTap: function(e) {
                 return true;

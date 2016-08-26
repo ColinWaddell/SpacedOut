@@ -43,6 +43,15 @@
   .guest{
     background: #42392d;
     font-style: italic;
+    .label{
+      color: #fff;
+      font-style: normal;
+      font-size: 10px;
+      margin-left: 10px;
+      padding: 5px 10px 5px 10px;
+      background: $base-color;
+      border-radius: 4px;
+    }
   }
   .selected{
     background: darken($calm, 15%);
