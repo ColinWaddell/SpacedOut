@@ -39,8 +39,9 @@
           <br />
           <div class="button-bar">
             <button
-              class="button button-icon ion-more button-calm"
+              class="button button-dark"
               ng-click="edit.show($event); popoverInit();">
+              <i class="ion-more"></i>
             </button>
           </div>
         </div>
@@ -48,9 +49,15 @@
         <div class="col">
           <br />
           <div class="button-bar">
-            <a class="button button-calm" ng-click="toggleStatus({'status':'out'})">Out</a>
-            <a class="button button-calm" ng-click="multiselectCancel()">Cancel</a>
-            <a class="button button-calm" ng-click="toggleStatus({'status':'in'})">In</a>
+            <a class="button button-dark" ng-click="multiselectCancel()">
+              CANCEL
+            </a>
+            <a class="button button-calm" ng-click="toggleStatus({'status':'out'})">
+            LOG OUT
+            </a>
+            <a class="button button-calm" ng-click="toggleStatus({'status':'in'})">
+              LOG IN
+            </a>
           </div>
         </div>
 
