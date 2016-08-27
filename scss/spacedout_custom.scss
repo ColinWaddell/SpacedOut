@@ -41,7 +41,7 @@
     text-transform: capitalize;
   }
   .guest{
-    background: #42392d;
+    background: $guest;
     font-style: italic;
     .label{
       color: #fff;
@@ -265,4 +265,15 @@ $floating-button-small-size: 40px;
 .rotate-270{
   display: inline-block;
     transform: rotate(270deg);
+}
+
+.popover .scroll-content{
+  border-radius: 4px;
+  .item{
+    background: $dark;
+
+    &.cancel{
+      background: $guest;
+    }
+  }
 }

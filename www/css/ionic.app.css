@@ -5412,9 +5412,9 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   z-index: 10;
   display: block;
   margin-top: 12px;
-  margin-left: -90px;
-  height: 80px;
-  width: 180px;
+  margin-left: -120px;
+  height: 160px;
+  width: 240px;
   background-color: transparent;
   box-shadow: none;
   opacity: 0; }
@@ -5512,8 +5512,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 
 @media (min-width: 680px) {
   .popover {
-    width: 180px;
-    margin-left: -90px; } }
+    width: 240px;
+    margin-left: -120px; } }
 
 /**
  * Popups
@@ -10005,3 +10005,10 @@ a.button {
 .rotate-270 {
   display: inline-block;
   transform: rotate(270deg); }
+
+.popover .scroll-content {
+  border-radius: 4px; }
+  .popover .scroll-content .item {
+    background: #444; }
+    .popover .scroll-content .item.cancel {
+      background: #42392d; }

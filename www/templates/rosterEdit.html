@@ -1,14 +1,33 @@
 <ion-popover-view>
-  <ion-content>
-    <div class="button-bar">
+  <ion-content ng-controller="editPopover">
+    <div class="button-bar" ng-if="!interface.edit.show">
       <button
         ng-click="deleteSelected()"
         class="button button-assertive icon ion-ios-trash-outline">
       </button>
       <button
-        ng-if="numSelected()==1"
+        ng-click="interface.edit.show=true;"
         class="button button-calm icon ion-edit">
       </button>
     </div>
+
+    <ul class="list light" ng-if="interface.edit.show">
+        <a class="item"
+          ng-if="numSelected()==1"
+          ng-class="editName()">
+          Name
+        </a>
+        <a
+          class="item"
+          ng-class="editType()">
+          Staff / Guest
+        </a>
+        <a
+          class="item cancel"
+          ng-click="editCancel()">
+          Cancel
+        </a>
+    </ul>
+
   </ion-content>
 </ion-popover-view>

@@ -414,6 +414,29 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
+.controller('editPopover', function($scope, $interval, $ionicPopup){
+  $scope.popoverTimer = null;
+
+  $scope.interface.edit = {
+    'show': false
+  }
+
+  $scope.popoverInit = function(){
+    $scope.interface.edit.show = false;
+    $interval.cancel($scope.popoverTimer);
+    $scope.popoverTimer = $interval($scope.popoverTimeout, 10000);
+  }
+
+  $scope.popoverTimeout = function(){
+    $scope.edit.hide();
+  }
+
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.edit.remove();
+  });
+})
+
 .controller('spacedOutCtrl', function(
   $scope,
   $filter,
@@ -483,26 +506,10 @@ angular.module('app.controllers', [])
     }
   };
 
-  var popoverTimer;
-
   $ionicPopover.fromTemplateUrl('templates/rosterEdit.html', {
     scope: $scope,
   }).then(function(popover) {
     $scope.edit = popover;
-  });
-
-  $scope.popoverTimerStart = function(){
-    $interval.cancel(popoverTimer);
-    popoverTimer = $interval($scope.popoverTimeout, 10000);
-  }
-
-  $scope.popoverTimeout = function(){
-    $scope.edit.hide();
-  }
-
-  //Cleanup the popover when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.edit.remove();
   });
 
   $scope.rosterCountUpdate = function(){
