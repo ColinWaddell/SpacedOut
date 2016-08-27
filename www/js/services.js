@@ -391,7 +391,7 @@ angular.module('app.services', [])
     $rootScope.$emit('admin-update');
   }
 
-  self.tryPassword = function(attempt, answer, success){
+  self.tryPassword = function(attempt, answer, success, failure){
       if(answer==attempt){
         self.timerStartAdmin();
         if (success) success();
@@ -401,10 +401,11 @@ angular.module('app.services', [])
         ionicToast.show(
           'Incorrect Password', 'middle', false, 1500
         );
+        if(failure) failure();
       }
   };
 
-  self.request = function(message, success){
+  self.request = function(message, success, failure){
 
     Settings.getSetting('password').then(
       function(result){
@@ -426,7 +427,7 @@ angular.module('app.services', [])
              inputType: 'password',
              inputPlaceholder: 'Your password'
            }).then(function(attempt) {
-             self.tryPassword(attempt, password, success);
+             self.tryPassword(attempt, password, success, failure);
            });
         }
       });

@@ -434,7 +434,6 @@ angular.module('app.controllers', [])
   $scope,
   $interval,
   $ionicPopup,
-  Settings,
   Roster
 ){
   $scope.interface.edit = {
@@ -593,8 +592,27 @@ angular.module('app.controllers', [])
   });
 
   $scope.popoverInit = function(){
-    $scope.popoverTimerCancel();
-    popoverTimer = $interval($scope.popoverTimeout, 10000);
+
+    var edit = function(){
+      $scope.popoverTimerCancel();
+      popoverTimer = $interval($scope.popoverTimeout, 10000);
+    };
+
+    var cancel = function(){
+      $scope.edit.hide();
+    }
+
+    if($scope.settings.rights_add_remove_users){
+     if(!Admin.status.enabled){
+       Admin.request(
+         "Admin rights are required to edit users",
+         edit, cancel
+       );
+     }
+    }
+    else{
+     edit();
+    }
   }
 
   $scope.popoverTimerCancel = function(){
