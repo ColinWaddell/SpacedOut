@@ -417,7 +417,9 @@ angular.module('app.controllers', [])
 .controller('editPopover', function(
   $scope,
   $interval,
-  $ionicPopup
+  $ionicPopup,
+  Settings,
+  Roster
 ){
   $scope.interface.edit = {
     'show': false
@@ -425,6 +427,23 @@ angular.module('app.controllers', [])
 
   $scope.editName = function(){
     var selected = $scope.getSelected();
+
+    if (selected.length!==1)
+      return;
+
+    var user = selected[0];
+
+    $ionicPopup.prompt({
+       title: 'Enter a new name for' + user.name,
+       inputPlaceholder: selected[0].name
+     }).then(function(name) {
+       if(name!==""){
+         user.name = name;
+         Roster.update(user);
+       }
+     });
+
+     $scope.editCancel();
   }
 
   $scope.editType = function(){
@@ -458,9 +477,13 @@ angular.module('app.controllers', [])
      });
 
      typeSelect.then(function(res) {
-       console.log(res);
+       selected.forEach(function(user){
+         user.type = res;
+         Roster.update(user);
+       })
      });
 
+     $scope.editCancel();
   }
 
   $scope.editCancel = function(){

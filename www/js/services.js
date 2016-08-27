@@ -308,6 +308,18 @@ angular.module('app.services', [])
       });
     }
 
+    self.update = function(user) {
+      last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
+      return DB.query(
+        'UPDATE roster SET name=(?), status=(?), type=(?), last_activity=(?) WHERE id = (?)',
+        [user.name, user.status, user.type, last_activity, user.id])
+        .then(function(result){
+          notifyObservers();
+          Log.log('update', user);
+        });
+    }
+
+
     self.setStatus = function(user, status){
       last_activity = $filter('date')(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ');
       return DB.query(
