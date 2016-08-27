@@ -577,9 +577,13 @@ angular.module('app.controllers', [])
   });
 
   $scope.popoverInit = function(){
+    $scope.popoverTimerCancel();
+    popoverTimer = $interval($scope.popoverTimeout, 10000);
+  }
+
+  $scope.popoverTimerCancel = function(){
     $scope.interface.edit.show = false;
     $interval.cancel(popoverTimer);
-    popoverTimer = $interval($scope.popoverTimeout, 10000);
   }
 
   $scope.popoverTimeout = function(){
@@ -591,6 +595,11 @@ angular.module('app.controllers', [])
   $scope.$on('$destroy', function() {
     $scope.edit.remove();
   });
+
+  // Execute action on hide popover
+ $scope.$on('popover.hidden', function() {
+   $scope.popoverTimerCancel();
+ });
 
   $scope.rosterCountUpdate = function(){
     var count = {
