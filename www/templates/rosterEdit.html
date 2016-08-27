@@ -1,0 +1,14 @@
+<ion-popover-view>
+  <ion-content>
+    <div class="button-bar">
+      <button
+        ng-click="deleteSelected()"
+        class="button button-assertive icon ion-ios-trash-outline">
+      </button>
+      <button
+        ng-if="numSelected()==1"
+        class="button button-calm icon ion-edit">
+      </button>
+    </div>
+  </ion-content>
+</ion-popover-view>

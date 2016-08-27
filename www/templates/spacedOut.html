@@ -39,8 +39,7 @@
           <br />
           <div class="button-bar">
             <button
-              ng-click="deleteSelected()"
-              class="button button-assertive icon ion-ios-trash-outline">
+              class="button button-icon ion-more button-calm" ng-click="edit.show($event); popoverTimerStart();">
             </button>
           </div>
         </div>
@@ -48,7 +47,7 @@
         <div class="col">
           <br />
           <div class="button-bar">
-            <a class="button button-calm" ng-click="toggleStatus({'status':'ou'})">Out</a>
+            <a class="button button-calm" ng-click="toggleStatus({'status':'out'})">Out</a>
             <a class="button button-calm" ng-click="multiselectCancel()">Cancel</a>
             <a class="button button-calm" ng-click="toggleStatus({'status':'in'})">In</a>
           </div>
@@ -62,7 +61,7 @@
     <div class="entries" ng-if="roster.entries">
       <ul class="list">
         <div
-          on-hold="entry.selected=true; interface.multiselect=true"
+          on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
           ng-click="selectEntry(entry)"
           on-double-click="invertStatus(entry)"
           ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">

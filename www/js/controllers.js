@@ -420,6 +420,8 @@ angular.module('app.controllers', [])
   $location,
   $anchorScroll,
   $ionicPopup,
+  $ionicPopover,
+  $interval,
   ionicToast,
   Roster,
   Screensaver,
@@ -467,6 +469,7 @@ angular.module('app.controllers', [])
       }
 
       $scope.multiselectCancel();
+      $scope.edit.hide()
     }
 
     if (Admin.status.enabled || !$scope.settings.rights_add_remove_users){
@@ -479,6 +482,28 @@ angular.module('app.controllers', [])
       );
     }
   };
+
+  var popoverTimer;
+
+  $ionicPopover.fromTemplateUrl('templates/rosterEdit.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.edit = popover;
+  });
+
+  $scope.popoverTimerStart = function(){
+    $interval.cancel(popoverTimer);
+    popoverTimer = $interval($scope.popoverTimeout, 10000);
+  }
+
+  $scope.popoverTimeout = function(){
+    $scope.edit.hide();
+  }
+
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.edit.remove();
+  });
 
   $scope.rosterCountUpdate = function(){
     var count = {
@@ -511,18 +536,31 @@ angular.module('app.controllers', [])
     );
   }
 
+  $scope.numSelected = function(){
+    var numselected=0;
+
+    if(!$scope.roster){
+      return 0
+    }
+    else if (!$scope.roster.entries){
+      return 0;
+    }
+
+    $scope.roster.entries.forEach(
+      function(entry){
+        if(entry.selected)
+          numselected++
+      }
+    );
+
+    return numselected;
+  }
+
   $scope.selectEntry = function(entry){
     if($scope.interface.multiselect){
       entry.selected = !(entry.selected==true);
-      var numselected=0;
-      $scope.roster.entries.forEach(
-        function(entry){
-          if(entry.selected)
-            numselected++
-        }
-      );
 
-      if(!numselected)
+      if(!$scope.numSelected())
         $scope.multiselectCancel();
     }
   }
