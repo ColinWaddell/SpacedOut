@@ -448,8 +448,30 @@ angular.module('app.services', [])
   return self;
 })
 
-.factory('Screensaver', function($state, $document, $location, $interval, Settings, rosterInterface){
+.factory('Screensaver', function(
+  $state,
+  $document,
+  $location,
+  $interval,
+  $rootScope,
+  Settings,
+  rosterInterface
+){
   var self = this;
+
+  var observerCallbacks = [];
+
+  //register an observer
+  self.registerObserverCallback = function(callback){
+    observerCallbacks.push(callback);
+  };
+
+  //call this when you know 'foo' has been changed
+  var notifyObservers = function(){
+    angular.forEach(observerCallbacks, function(callback){
+      callback();
+    });
+  };
 
   var timerPromise;
 
@@ -507,12 +529,21 @@ angular.module('app.services', [])
         }
       );
       $state.go('tabsController.spacedOut',{}, {reload: true});
+      $rootScope.$emit('screensaver-exit');
+      notifyObservers();
       self.start();
     }
     else{
       self.status.time = 0;
     }
   });
+
+  self.onExit = function(scope, callback){
+    var handler = $rootScope.$on('screensaver-exit', callback);
+    if(scope){
+      scope.$on('$destroy', handler);
+    }
+  }
 
   Settings.onUpdate(null, function(){
     Settings.get().then(

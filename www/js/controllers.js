@@ -582,12 +582,15 @@ angular.module('app.controllers', [])
   }
 
   $scope.popoverTimerCancel = function(){
-    $scope.interface.edit.show = false;
+    if($scope.interface.edit){
+      $scope.interface.edit.show = false;
+    }
     $interval.cancel(popoverTimer);
   }
 
   $scope.popoverTimeout = function(){
     $scope.edit.hide();
+    $scope.popoverTimerCancel();
     $scope.multiselectCancel();
   }
 
@@ -754,8 +757,8 @@ angular.module('app.controllers', [])
   };
 
   $scope.rosterPopulate = function(data){
-      $scope.roster.entries = JSON.parse(JSON.stringify(data));
-      $scope.rosterCountUpdate();
+    $scope.roster.entries = JSON.parse(JSON.stringify(data));
+    $scope.rosterCountUpdate();
   }
 
   $scope.rosterError = function (){
@@ -790,4 +793,8 @@ angular.module('app.controllers', [])
     $scope.settings = JSON.parse(JSON.stringify(settings));
   });
   $scope.rosterReload();
+
+  Screensaver.onExit($scope, function(){
+    $scope.multiselectCancel();
+  })
 })
