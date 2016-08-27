@@ -414,27 +414,59 @@ angular.module('app.controllers', [])
   $scope.admin = Admin.status;
 })
 
-.controller('editPopover', function($scope, $interval, $ionicPopup){
-  $scope.popoverTimer = null;
-
+.controller('editPopover', function(
+  $scope,
+  $interval,
+  $ionicPopup
+){
   $scope.interface.edit = {
     'show': false
   }
 
-  $scope.popoverInit = function(){
-    $scope.interface.edit.show = false;
-    $interval.cancel($scope.popoverTimer);
-    $scope.popoverTimer = $interval($scope.popoverTimeout, 10000);
+  $scope.editName = function(){
+    var selected = $scope.getSelected();
   }
 
-  $scope.popoverTimeout = function(){
+  $scope.editType = function(){
+    var selected = $scope.getSelected();
+
+    if (!selected.length)
+      return;
+
+    var name = (selected.length > 1)
+             ? 'Users'
+             : selected[0].name;
+
+     var typeSelect = $ionicPopup.confirm({
+       title: name + ' should be...',
+       buttons: [
+         {
+           text: 'Guest',
+           type: 'button-default',
+           onTap: function(e) {
+             return 'guest';
+           }
+         },
+         {
+           text: 'Staff',
+           type: 'button-default',
+           onTap: function(e) {
+             return 'staff';
+           }
+         }
+     ]
+     });
+
+     typeSelect.then(function(res) {
+       console.log(res);
+     });
+
+  }
+
+  $scope.editCancel = function(){
     $scope.edit.hide();
-  }
-
-  //Cleanup the popover when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.edit.remove();
-  });
+    $scope.multiselectCancel();
+  };
 })
 
 .controller('spacedOutCtrl', function(
@@ -471,17 +503,24 @@ angular.module('app.controllers', [])
     $scope.interface = itfc;
   });
 
-  $scope.deleteSelected = function(){
+  $scope.getSelected = function(){
     var selected = [];
 
-    var deleteEntries = function(){
-      $scope.roster.entries.forEach(
-        function(entry){
-          if(entry.selected){
-            selected.push(entry);
-          }
+    $scope.roster.entries.forEach(
+      function(entry){
+        if(entry.selected){
+          selected.push(entry);
         }
-      );
+      }
+    );
+
+    return selected;
+  }
+
+  $scope.deleteSelected = function(){
+
+    var deleteEntries = function(){
+      selected = $scope.getSelected();
 
       selected.forEach(function(entry){
         Roster.delete(entry);
@@ -506,10 +545,28 @@ angular.module('app.controllers', [])
     }
   };
 
+  var popoverTimer;
+
   $ionicPopover.fromTemplateUrl('templates/rosterEdit.html', {
     scope: $scope,
   }).then(function(popover) {
     $scope.edit = popover;
+  });
+
+  $scope.popoverInit = function(){
+    $scope.interface.edit.show = false;
+    $interval.cancel(popoverTimer);
+    popoverTimer = $interval($scope.popoverTimeout, 10000);
+  }
+
+  $scope.popoverTimeout = function(){
+    $scope.edit.hide();
+    $scope.multiselectCancel();
+  }
+
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.edit.remove();
   });
 
   $scope.rosterCountUpdate = function(){

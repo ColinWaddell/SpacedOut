@@ -14,12 +14,12 @@
     <ul class="list light" ng-if="interface.edit.show">
         <a class="item"
           ng-if="numSelected()==1"
-          ng-class="editName()">
+          ng-click="editName()">
           Name
         </a>
         <a
           class="item"
-          ng-class="editType()">
+          ng-click="editType()">
           Staff / Guest
         </a>
         <a
