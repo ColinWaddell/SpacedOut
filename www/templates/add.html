@@ -19,7 +19,7 @@
 
         <div class="item item-input" ng-if="multiname.show" ng-repeat="name in multiname.names track by $index">
           <span class="input-label"></span>
-          <input type="text" ng-model="multiname.names[$index]" placeholder="Enter name">
+          <input type="text" ng-model="multiname.names[$index]" placeholder="Additional name">
           <button
             ng-if="$index===multiname.names.length-1"
             ng-click="multiname.names.push('')"
@@ -38,7 +38,6 @@
           </button>
           &nbsp;
         </div>
-
 
         <ion-list>
           <ion-radio
