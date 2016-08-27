@@ -312,9 +312,19 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('spacedOutAddCtrl', function($scope, $state, $sanitize, ionicToast, Screensaver, Roster, Settings, Admin, USER_DEFAULT) {
+.controller('spacedOutAddCtrl', function(
+  $scope,
+  $state,
+  $sanitize,
+  ionicToast,
+  Screensaver,
+  Roster,
+  Settings,
+  Admin,
+  USER_DEFAULT)
+{
 
-  $scope.userAddSuccess = function(data){
+  $scope.userAddReset = function(){
     $scope.user.name = "";
     $scope.user.status = 'out';
     $scope.multiname = {'show': false, 'names': [""]};
@@ -322,6 +332,10 @@ angular.module('app.controllers', [])
     if(!!$scope.admin.enabled !== !!$scope.settings.add_option){
       $scope.user.type = "guest";
     }
+  }
+
+  $scope.userAddSuccess = function(data){
+    $scope.userAddReset();
 
     $state
       .go('tabsController.spacedOut');
@@ -396,6 +410,8 @@ angular.module('app.controllers', [])
       $scope.user.type = "guest";
     }
   }
+
+  Screensaver.onExit($scope, $scope.userAddReset);
 
   Settings.onUpdate($scope, function(){
     Settings.get().then(settingsUpdate);
