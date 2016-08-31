@@ -489,7 +489,7 @@ angular.module('app.services', [])
   self.start = function(){
     Settings.getSetting('screensaver_time')
       .then(function(result){
-        self.status.timeout = result.screensaver_time * 60;
+        self.status.timeout = result.screensaver_time * 6;
         self.status.time = 0;
         $interval.cancel(timerPromise);
         timerPromise = $interval(self.tick, 1000);
