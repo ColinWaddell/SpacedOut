@@ -831,4 +831,4 @@ angular.module('app.controllers', [])
   Screensaver.onExit($scope, function(){
     $scope.multiselectCancel();
   })
-})
+});
