@@ -1,10 +1,16 @@
-<ion-footer-bar align-title="left" class="bar-assertive" ng-if="admin.enabled">
-  <h1 class="title">Admin Mode</h1>
-  <div class="buttons" ng-click="doSomething()">
-    <button
-      class="button icon-right ion-ios-locked-outline"
-      ng-click="admin.cancel()">
-        Exit Admin Mode ({{admin.ttl}}) &nbsp;
-      </button>
+<ion-footer-bar align-title="left" class="admin-bar bar-assertive" ng-if="admin.enabled">
+
+  <div class="row">
+    <div class="col col-67">
+      <h1>Admin Mode</h1>
+    </div>
+    <div class="col col-33">
+      <button
+        class="button icon-right ion-ios-locked-outline"
+        ng-click="admin.cancel()">
+          Exit Admin Mode ({{admin.ttl}}) &nbsp;
+        </button>
+    </div>
   </div>
+
 </ion-footer-bar>

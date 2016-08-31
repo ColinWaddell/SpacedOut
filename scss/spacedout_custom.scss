@@ -12,6 +12,16 @@
   }
 }
 
+.admin-bar{
+  height: 75px;
+  h1{
+    color: white;
+  }
+  button{
+    margin-top: 5px;
+  }
+}
+
 .list{
   box-shadow: $spaced-out-shadow;
 }
