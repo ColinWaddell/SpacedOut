@@ -9962,6 +9962,9 @@ a.button {
   /* style the item content when its checked */
   background: #424242; }
 
+.tabs-background-dark > .tabs {
+  border-top: 1px solid #60560c !important; }
+
 .table .header .col {
   background-color: #119cc1; }
 

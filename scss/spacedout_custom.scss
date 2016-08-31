@@ -209,6 +209,10 @@ $floating-button-small-size: 40px;
   }
 }
 
+.tabs-background-dark > .tabs{
+  border-top: 1px solid darken($energized, 20%) !important;
+}
+
 .table{
   .header .col {
     background-color: $calm;
