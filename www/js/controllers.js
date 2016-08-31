@@ -58,6 +58,41 @@ angular.module('app.controllers', [])
   Log.registerObserverCallback($scope.logReload);
 })
 
+.controller('backupCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast) {
+
+  $scope.export = function(){
+
+  }
+
+  $scope.import = function(){
+
+  }
+
+  $scope.save = function(){
+
+  }
+
+  $scope.rosterdump = "";
+  $scope.rosterdumpHTML = "";
+  Roster
+    .all()
+    .then(
+      function(data){
+        var entries = JSON.parse(JSON.stringify(data));
+
+        $scope.rosterdump = "";
+        $scope.rosterdumpHTML = "";
+
+        entries.forEach(
+          function(entry){
+            var s = (entry.type==="guest"?'#':'') + entry.name;
+            $scope.rosterdump +=  s + '\n';
+            $scope.rosterdumpHTML += s + "<br />";
+          }
+        );
+    });
+})
+
 .controller('alertCtrl', function($scope, Settings, Screensaver, Roster, Admin, ionicToast) {
   $scope.alertSend = function() {
     Roster

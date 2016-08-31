@@ -171,6 +171,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.backup', {
+    url: '/backup',
+    views: {
+      'tab4': {
+        templateUrl: 'templates/backup.html',
+        controller: 'backupCtrl'
+      }
+    }
+  })
+
   .state('tabsController.screensaver', {
     url: '/screensaver',
     views: {
