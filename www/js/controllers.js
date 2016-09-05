@@ -877,7 +877,7 @@ angular.module('app.controllers', [])
     /* HERE IS THE EASTER EGG */
     if(user.name==="Paul Yarr"){
       ionicToast.show(
-        'YARRRR', 'middle', false, 1500
+        '<img src="/img/yarr.jpg"></img>', 'top', false, 2000
       );
     }
   }
