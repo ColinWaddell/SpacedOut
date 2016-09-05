@@ -77,7 +77,7 @@ angular.module('app.controllers', [])
 
   var importParser = function(data){
     var entries = [];
-    var splitter = /(#|\$)\w{2,}/g;
+    var splitter = /(#|\$)\w+( \w+)*/g;
     var e;
 
     while ((e = splitter.exec(data)) !== null) {
@@ -653,6 +653,7 @@ angular.module('app.controllers', [])
   $anchorScroll,
   $ionicPopup,
   $ionicPopover,
+  $ionicScrollDelegate,
   $interval,
   ionicToast,
   Roster,
@@ -679,6 +680,10 @@ angular.module('app.controllers', [])
   rosterInterface.registerObserverCallback(function(itfc){
     $scope.interface = itfc;
   });
+
+  $scope.scrollTop = function() {
+    $ionicScrollDelegate.scrollTop();
+  };
 
   $scope.getSelected = function(){
     var selected = [];
@@ -868,6 +873,13 @@ angular.module('app.controllers', [])
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
+
+    /* HERE IS THE EASTER EGG */
+    if(user.name==="Paul Yarr"){
+      ionicToast.show(
+        'YARRRR', 'middle', false, 1500
+      );
+    }
   }
 
   $scope.toggleStatus = function(user){

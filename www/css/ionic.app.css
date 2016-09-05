@@ -9845,6 +9845,9 @@ a.button {
 .item-divider + .item {
   border-top: none; }
 
+.index-letter {
+  font-size: 24px; }
+
 .roster-activity {
   color: #999;
   font-style: italic;
@@ -9963,7 +9966,8 @@ a.button {
   background: #424242; }
 
 .tabs-background-dark > .tabs {
-  border-top: 1px solid #60560c !important; }
+  border-top: 1px solid #60560c !important;
+  background: #282828; }
 
 .table .header .col {
   background-color: #119cc1; }

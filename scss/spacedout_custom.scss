@@ -39,6 +39,10 @@
   border-top: none;
 }
 
+.index-letter{
+  font-size: 24px;
+}
+
 .roster-activity{
   color: #999;
   font-style: italic;
@@ -211,6 +215,7 @@ $floating-button-small-size: 40px;
 
 .tabs-background-dark > .tabs{
   border-top: 1px solid darken($energized, 20%) !important;
+  background: #282828;
 }
 
 .table{

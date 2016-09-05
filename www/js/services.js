@@ -341,6 +341,8 @@ angular.module('app.services', [])
     }
 
     self.deleteAll= function () {
+      Log.log('DELETE ALL', {});
+
       return DB.query(
         'DELETE FROM roster')
       .then(function(result){

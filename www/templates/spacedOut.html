@@ -8,25 +8,25 @@
           <div class="col-25">
             <div class="row">
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.type='all'; interface.status='all'" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
+                <a class="button button-round" ng-click="interface.type='all'; interface.status='all'; scrollTop();" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
                   <span class="button-round-value">{{rosterCount.type.staff + rosterCount.type.guest}}</span>
                   <span class="button-round-label">All</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.status='in'; interface.type='all'"  ng-class="{selected: interface.status=='in'}">
+                <a class="button button-round" ng-click="interface.status='in'; interface.type='all'; scrollTop();"  ng-class="{selected: interface.status=='in'}">
                   <span class="button-round-value">{{rosterCount.status.in}}</span>
                   <span class="button-round-label">In</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.status='out'; interface.type='all'" ng-class="{selected: interface.status=='out'}">
+                <a class="button button-round" ng-click="interface.status='out'; interface.type='all'; scrollTop();" ng-class="{selected: interface.status=='out'}">
                   <span class="button-round-value">{{rosterCount.status.out}}</span>
                   <span class="button-round-label">Out</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.type='guest'; interface.status='all'" ng-class="{selected: interface.type=='guest'}">
+                <a class="button button-round" ng-click="interface.type='guest'; interface.status='all'; scrollTop();" ng-class="{selected: interface.type=='guest'}">
                   <span class="button-round-value">{{rosterCount.type.guest}}</span>
                   <span class="button-round-label">Guests</span>
                 </a>
@@ -74,7 +74,7 @@
           on-double-click="invertStatus(entry)"
           ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
           <div
-            class="item item-divider"
+            class="item item-divider index-letter"
             id="shortcut{{firstLetter(entry.name)}}"
             ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
             {{firstLetter(entry.name)}}
