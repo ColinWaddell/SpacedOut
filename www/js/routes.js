@@ -93,7 +93,7 @@ angular.module('app.routes', [])
           if(settings.rights_add_remove_users){
             if(!Admin.status.enabled){
               Admin.request(
-                "Admin rights are required to add and remove users",
+                "Admin rights are required to add users",
                 function(){$state.go('tabsController.spacedOutAdd');}
               );
             }
@@ -127,7 +127,7 @@ angular.module('app.routes', [])
           if(settings.rights_send_alert){
             if(!Admin.status.enabled){
               Admin.request(
-                "Admin rights are required to send alert email",
+                "Admin rights are required to send alert emails",
                 function(){$state.go('tabsController.alert');}
               );
             }
