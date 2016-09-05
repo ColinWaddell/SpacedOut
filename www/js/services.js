@@ -259,9 +259,9 @@ angular.module('app.services', [])
     };
 
     //call this when you know 'foo' has been changed
-    var notifyObservers = function(){
+    var notifyObservers = function(e){
       angular.forEach(observerCallbacks, function(callback){
-        callback();
+        callback(e);
       });
     };
 
@@ -302,7 +302,7 @@ angular.module('app.services', [])
         query,
         bindings)
       .then(function(result){
-        notifyObservers();
+        notifyObservers('add');
         Log.log('add', user);
         return result.insertId;
       });
@@ -314,7 +314,7 @@ angular.module('app.services', [])
         'UPDATE roster SET name=(?), status=(?), type=(?), last_activity=(?) WHERE id = (?)',
         [user.name, user.status, user.type, last_activity, user.id])
         .then(function(result){
-          notifyObservers();
+          notifyObservers('update');
           Log.log('update', user);
         });
     }
@@ -326,7 +326,7 @@ angular.module('app.services', [])
         'UPDATE roster SET status = (?), last_activity = (?) WHERE id = (?)',
         [status, last_activity, user.id])
         .then(function(result){
-          notifyObservers();
+          notifyObservers('status');
           Log.log('status', user);
         });
     }
@@ -335,7 +335,7 @@ angular.module('app.services', [])
       return DB.query(
         'DELETE FROM roster WHERE id = ?', [user.id])
         .then(function(result){
-          notifyObservers();
+          notifyObservers('delete');
           Log.log('delete', user);
         });
     }
@@ -347,7 +347,7 @@ angular.module('app.services', [])
         'DELETE FROM roster')
       .then(function(result){
         DB.init();
-        notifyObservers();
+        notifyObservers('deleteall');
       });
     }
 

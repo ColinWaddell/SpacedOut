@@ -963,7 +963,9 @@ angular.module('app.controllers', [])
     });
   }
 
-  $scope.rosterReload = function(){
+  $scope.rosterReload = function(e){
+    if(e==='status') return;
+
     $scope.roster =
       Roster
         .all()
