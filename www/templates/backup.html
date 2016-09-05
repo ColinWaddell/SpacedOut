@@ -18,16 +18,16 @@
           <hr />
 
           <h1 class="light">Import</h1>
-          <p>Paste a backup roster below to import.</p>
-          <p><b class="assertive">Warning</b>, this will overwrite the current roster<br /><br /></p>
+          <p>Paste a backup roster in the box below to import.</p>
+          <p><b class="assertive">Warning</b> &nbsp;Importing will overwrite the current roster<br /><br /></p>
 
           <button
             class="button button-energized"
             ng-click="save()">
-              Import Roster
+              <i class="icon ion-log-in"></i> Import Roster
             </button>
 
-          <textarea class="rosterImport">{{rosterImport}}</textarea>
+          <textarea class="rosterImport" ng-model="data.import"></textarea>
 
           </div>
 

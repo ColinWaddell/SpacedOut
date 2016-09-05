@@ -58,41 +58,143 @@ angular.module('app.controllers', [])
   Log.registerObserverCallback($scope.logReload);
 })
 
-.controller('backupCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast) {
+.controller('backupCtrl', function(
+  $scope,
+  $sanitize,
+  Roster,
+  Screensaver,
+  Settings,
+  Log,
+  Admin,
+  $ionicPopup,
+  ionicToast
+) {
 
-  $scope.export = function(){
+  $scope.data = {
+    'import': '',
+    'export': ''
+  };
 
-  }
+  var importParser = function(data){
+    var entries = [];
+    var splitter = /(#|\$)\w{2,}/g;
+    var e;
 
-  $scope.import = function(){
+    while ((e = splitter.exec(data)) !== null) {
+      if (e.index === splitter.lastIndex) {
+          splitter.lastIndex++;
+      }
 
+      if(e[0] && e[0].length>4){
+        // Get Name
+        var name = e[0].substr(1);
+        // Guest or Staff?
+        var type = (e[0].charAt(0)==='#' ? 'guest' : 'staff');
+
+        // Build entry
+        var entry = {
+          'name'  : $sanitize(name),
+          'type'  : type,
+          'status': 'out'
+        };
+
+        entries.push(entry);
+      }
+    }
+
+    return entries;
   }
 
   $scope.save = function(){
 
+    var entries = importParser($scope.data.import);
+
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Import ' + entries.length + ' Entries',
+      template: 'Importing will wipe the current roster and replace it with this one. Are you sure you want to continue?',
+      buttons: [
+        {
+          text: 'Cancel Import',
+          type: 'button-default',
+          onTap: function(e) {
+            return false;
+          }
+        },
+        {
+          text: 'Overwrite Roster',
+          type: 'button-default',
+          onTap: function(e) {
+            return true;
+          }
+        }
+    ]
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        Roster.deleteAll();
+
+        Roster
+          .add(entries)
+          .then(
+            $scope.importSuccess,
+            $scope.importError
+          );
+      }
+    });
+  };
+
+
+  $scope.importSuccess = function(){
+    ionicToast.show(
+      'Roster Imported Successfully', 'middle', false, 1500
+    );
   }
 
-  $scope.rosterdumpExport = "";
-  $scope.rosterdumpExportHTML = "";
+  $scope.importError = function(){
+    ionicToast.show(
+      'Error with database. Can\'t import roster.', 'middle', false, 1500
+    );
+  }
+
+  $scope.export = function() {
+    if(window.plugins && window.plugins.emailComposer) {
+        window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+            console.log("Response -> " + result);
+        },
+        "Spaced Out Roster Backup",              // Subject
+        $scope.rosterdumpExportHTML,      // Body
+        [$scope.settings.alert_email],    // To
+        null,                             // CC
+        null,                             // BCC
+        true,                             // isHTML
+        null,                             // Attachments
+        null);                            // Attachment Data
+    }
+  }
+
   Roster
     .all()
     .then(
       function(data){
         var entries = JSON.parse(JSON.stringify(data));
 
-        $scope.rosterdump = "";
-        $scope.rosterdumpHTML = "";
+        $scope.data.export = "";
 
         entries.forEach(
           function(entry){
-            var s = (entry.type==="guest"?'#':'') + entry.name;
-            $scope.rosterdump +=  s + '\n';
-            $scope.rosterdumpHTML += s + "<br />";
+            var s = (entry.type==="guest"?'#':'$') + entry.name;
+            $scope.data.export += s + "<br />";
           }
         );
     });
 
-  $scope.rosterImport = "";
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){$scope.settings = settings;});
+  });
+  Settings.get().then(function(settings){
+    $scope.settings = settings;
+  });
 })
 
 .controller('alertCtrl', function($scope, Settings, Screensaver, Roster, Admin, ionicToast) {
