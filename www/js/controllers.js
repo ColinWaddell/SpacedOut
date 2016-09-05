@@ -785,7 +785,7 @@ angular.module('app.controllers', [])
 
  $scope.showInfo = function(){
    var info = $templateCache.get('info.html');
-   console.log(info);
+   
    ionicToast.show(
      info, 'middle', false, 2000
    );
