@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true" id="page4" class=" " cache-view="false" hide-tabs>
+<ion-view hide-nav-bar="true" id="page4" class="backup" cache-view="false" hide-tabs>
     <ion-content padding="true">
       <ul class="list">
         <li class="item item-divider">
@@ -8,23 +8,27 @@
           </a>
         </li>
         <li class="item">
+          <h1 class="light">Export</h1>
           <button
             class="button button-stable"
             ng-click="export()">
-              <i class="icon ion-log-out rotate-180"></i> Export Roster To Clipboard
+              <i class="icon ion-log-out rotate-180"></i> Export Roster Via Email
             </button>
-          <button
-            class="button button-stable"
-            ng-click="import()">
-              <i class="icon ion-log-in"></i> Import Roster From Clipboard
-            </button>
+
+          <hr />
+
+          <h1 class="light">Import</h1>
+          <p>Paste a backup roster below to import.</p>
+          <p><b class="assertive">Warning</b>, this will overwrite the current roster<br /><br /></p>
+
           <button
             class="button button-energized"
             ng-click="save()">
-              Save
+              Import Roster
             </button>
 
-          <div class="backup" ng-bind-html="rosterdumpHTML">
+          <textarea class="rosterImport">{{rosterImport}}</textarea>
+
           </div>
 
         </li>

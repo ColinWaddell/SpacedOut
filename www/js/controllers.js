@@ -72,8 +72,8 @@ angular.module('app.controllers', [])
 
   }
 
-  $scope.rosterdump = "";
-  $scope.rosterdumpHTML = "";
+  $scope.rosterdumpExport = "";
+  $scope.rosterdumpExportHTML = "";
   Roster
     .all()
     .then(
@@ -91,6 +91,8 @@ angular.module('app.controllers', [])
           }
         );
     });
+
+  $scope.rosterImport = "";
 })
 
 .controller('alertCtrl', function($scope, Settings, Screensaver, Roster, Admin, ionicToast) {
