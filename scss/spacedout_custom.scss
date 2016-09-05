@@ -319,3 +319,18 @@ $floating-button-small-size: 40px;
     color: #000;
   }
 }
+
+.appinfo{
+  h1{
+    color: $energized;
+    margin-top: 25px;
+  }
+  .colin{
+    img{
+      width: 100%;
+      max-width: 100px;
+    }
+    background: $stable;
+    border-radius: 4px;
+  }
+}

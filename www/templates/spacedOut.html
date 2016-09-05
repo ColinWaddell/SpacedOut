@@ -3,7 +3,7 @@
     <div class="bar bar-header">
       <div class="row" ng-if="!interface.multiselect" class="filters">
           <div class="col col-75">
-            <img class="logo" src="img/rocket.png"></img>
+            <img class="logo" on-hold="showInfo();" src="img/rocket.png"></img>
           </div>
           <div class="col-25">
             <div class="row">
@@ -115,4 +115,5 @@
     </div>
   </ion-content>
   <div ng-include src="'templates/adminBar.html'"></div>
+  <div ng-include src="'templates/info.html'"></div>
 </ion-view>

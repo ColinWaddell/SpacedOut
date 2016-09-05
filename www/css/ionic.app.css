@@ -10044,3 +10044,14 @@ a.button {
   padding: 10px;
   margin-top: 20px;
   color: #000; }
+
+.appinfo h1 {
+  color: #bba717;
+  margin-top: 25px; }
+
+.appinfo .colin {
+  background: #f8f8f8;
+  border-radius: 4px; }
+  .appinfo .colin img {
+    width: 100%;
+    max-width: 100px; }

@@ -655,6 +655,7 @@ angular.module('app.controllers', [])
   $ionicPopover,
   $ionicScrollDelegate,
   $interval,
+  $templateCache,
   ionicToast,
   Roster,
   Screensaver,
@@ -781,6 +782,14 @@ angular.module('app.controllers', [])
  $scope.$on('popover.hidden', function() {
    $scope.popoverTimerCancel();
  });
+
+ $scope.showInfo = function(){
+   var info = $templateCache.get('info.html');
+   console.log(info);
+   ionicToast.show(
+     info, 'middle', false, 2000
+   );
+ }
 
   $scope.rosterCountUpdate = function(){
     var count = {
