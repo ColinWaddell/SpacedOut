@@ -940,7 +940,6 @@ angular.module('app.controllers', [])
 
       }
     }
-
   }
 
   $scope.shortcutJump = function(letter) {
@@ -951,7 +950,7 @@ angular.module('app.controllers', [])
     setTimeout(function() {
       $location.hash(id);
       $ionicScrollDelegate.anchorScroll();
-    },10);
+    },1);
   };
 
   $scope.rosterPopulate = function(data){
@@ -997,4 +996,7 @@ angular.module('app.controllers', [])
   Screensaver.onExit($scope, function(){
     $scope.multiselectCancel();
   })
+
+  // Scroll to top after 30seconds of inactivity
+  Screensaver.addTimeout(30, $scope.scrollTop);
 });

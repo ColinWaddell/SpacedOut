@@ -62,16 +62,20 @@
         </div>
       </div>
     </div>
+    <div class="shortcutbar">
+      <div class="row">
+        <div ng-repeat="entry in roster.entries" class="col"
+          scroll-to="shortcut{{firstLetter(entry.name)}}"
+          ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
+          <a class="calm" ng-click="shortcutJump(firstLetter(entry.name))">{{firstLetter(entry.name)}}</a>
+        </div>
+      </div>
+    </div>
   </ion-header-bar>
 
+
+
   <ion-content padding="true" class="has-header">
-    <div class="row">
-          <div ng-repeat="entry in roster.entries" class="col"
-            scroll-to="shortcut{{firstLetter(entry.name)}}"
-            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
-            <a ng-click="shortcutJump(firstLetter(entry.name))">{{firstLetter(entry.name)}}</a>
-          </div>
-    </div>
     <div class="entries" ng-if="roster.entries">
       <ul class="list">
         <div

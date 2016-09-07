@@ -464,6 +464,8 @@ angular.module('app.services', [])
 
   var observerCallbacks = [];
 
+  var customTimeouts = [];
+
   //register an observer
   self.registerObserverCallback = function(callback){
     observerCallbacks.push(callback);
@@ -486,6 +488,15 @@ angular.module('app.services', [])
     if(self.status.time === self.status.timeout){
       self.showScreensaver();
     }
+
+    // test custom timeouts
+    customTimeouts.forEach(
+      function(ct){
+        if(self.status.time == ct.time){
+          ct.callback();
+        }
+      }
+    );
   }
 
   self.start = function(){
@@ -497,6 +508,15 @@ angular.module('app.services', [])
         timerPromise = $interval(self.tick, 1000);
     });
   };
+
+  self.addTimeout = function(time, callback){
+    customTimeouts.push(
+      {
+        'time': time,
+        'callback': callback
+      }
+    );
+  }
 
   self.exit = function(){
     self.start();
