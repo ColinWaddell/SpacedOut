@@ -34,10 +34,10 @@
             </div>
           </div>
       </div>
-      <div class="row" ng-if="interface.multiselect" class="filters">
+      <div class="row filters" ng-if="interface.multiselect">
         <div class="col col-10">
           <br />
-          <div class="button-bar">
+          <div class="button-bar multiselect">
             <button
               class="button button-dark"
               ng-click="edit.show($event); popoverInit();">
@@ -48,7 +48,7 @@
 
         <div class="col">
           <br />
-          <div class="button-bar">
+          <div class="button-bar multiselect">
             <a class="button button-dark" ng-click="multiselectCancel()">
               <b>CANCEL</b>
             </a>

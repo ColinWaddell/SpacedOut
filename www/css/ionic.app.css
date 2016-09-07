@@ -9853,32 +9853,33 @@ a.button {
   font-style: italic;
   font-size: 0.9em; }
 
-.entries .name {
-  padding-left: 10px;
-  text-transform: capitalize; }
+.entries {
+  padding-top: 30px; }
+  .entries .name {
+    padding-left: 10px;
+    text-transform: capitalize; }
+  .entries .guest {
+    background: #42392d;
+    font-style: italic; }
+    .entries .guest .label {
+      color: #fff;
+      font-style: normal;
+      font-size: 10px;
+      margin-left: 10px;
+      padding: 2px 10px 1px 10px;
+      background: #333;
+      border-radius: 4px;
+      position: absolute;
+      top: 12px; }
+  .entries .selected {
+    background: #0b637b; }
+  .entries .item-toggle .toggle {
+    top: 21px; }
 
-.entries .guest {
-  background: #42392d;
-  font-style: italic; }
-  .entries .guest .label {
-    color: #fff;
-    font-style: normal;
-    font-size: 10px;
-    margin-left: 10px;
-    padding: 2px 10px 1px 10px;
-    background: #333;
-    border-radius: 4px;
-    position: absolute;
-    top: 12px; }
-
-.entries .selected {
-  background: #0b637b; }
-
-.entries .item-toggle .toggle {
-  top: 21px; }
-
-.filters .selected {
-  background-color: #262626; }
+.filters {
+  padding-top: 0px; }
+  .filters .selected {
+    background-color: #262626; }
 
 .button-bar {
   box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.1); }
@@ -9961,6 +9962,9 @@ a.button {
       .button.button-round .button-round-value.bottom-right.slide-down {
         transform: translate3d(0, 88px, 0); }
 
+.multiselect .button {
+  padding: 5px 0; }
+
 .item-radio input:checked + .radio-content .item-content {
   /* style the item content when its checked */
   background: #424242; }
@@ -9994,21 +9998,20 @@ a.button {
 .table:first-child {
   background-color: #444; }
 
-.screensaver .message {
-  text-align: right;
-  margin-top: 0; }
-
-.screensaver .time {
-  font-size: 72pt;
-  color: #fff; }
-
-.screensaver .date {
-  font-size: 38pt;
-  color: #bba717; }
-
-.screensaver .branding {
-  width: 100%;
-  margin-top: -10px; }
+.screensaver {
+  margin-top: 50px; }
+  .screensaver .message {
+    text-align: right;
+    margin-top: 0; }
+  .screensaver .time {
+    font-size: 72pt;
+    color: #fff; }
+  .screensaver .date {
+    font-size: 24pt;
+    color: #bba717; }
+  .screensaver .branding {
+    width: 100%;
+    margin-top: 10px; }
 
 .rotate-90 {
   display: inline-block;
@@ -10055,3 +10058,7 @@ a.button {
   .appinfo .colin img {
     width: 100%;
     max-width: 100px; }
+
+.tabs {
+  height: 60px;
+  padding-top: 8px; }

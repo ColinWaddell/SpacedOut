@@ -50,9 +50,6 @@
     <splash src="resources/ios/splash/Default-Portrait~ipad.png" width="768" height="1024"/>
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
-    <feature name="Insomnia">
-      <param name="ios-package" value="Insomnia" />
-    </feature>
   </platform>
   <icon src="resources/ios/icon/icon-small@3x.png"/>
 </widget>

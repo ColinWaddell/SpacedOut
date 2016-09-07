@@ -50,6 +50,7 @@
 }
 
 .entries{
+  padding-top: 30px;
   .name{
     padding-left: 10px;
     text-transform: capitalize;
@@ -81,6 +82,7 @@
   .selected{
     background-color: #262626;
   }
+  padding-top: 0px;
 }
 
 .button-bar{
@@ -206,6 +208,12 @@ $floating-button-small-size: 40px;
   }
 }
 
+.multiselect{
+  .button{
+    padding: 5px 0;
+  }
+}
+
 .item-radio input {
   &:checked + .radio-content .item-content {
     /* style the item content when its checked */
@@ -253,6 +261,8 @@ $floating-button-small-size: 40px;
 }
 
 .screensaver{
+  margin-top: 50px;
+
   .message{
     text-align: right;
     margin-top: 0;
@@ -264,12 +274,12 @@ $floating-button-small-size: 40px;
   }
 
   .date{
-    font-size: 38pt;
+    font-size: 24pt;
     color: $energized;
   }
   .branding{
     width:100%;
-    margin-top: -10px;
+    margin-top: 10px;
   }
 }
 
@@ -333,4 +343,9 @@ $floating-button-small-size: 40px;
     background: $stable;
     border-radius: 4px;
   }
+}
+
+.tabs{
+  height: 60px;
+  padding-top: 8px;
 }
