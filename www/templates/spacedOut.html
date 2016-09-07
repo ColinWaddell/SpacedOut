@@ -86,7 +86,7 @@
           <div
             class="item item-divider index-letter"
             id="shortcut{{firstLetter(entry.name)}}"
-            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
+            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[entry.index-1].name)">
             {{firstLetter(entry.name)}}
           </div>
 
@@ -97,7 +97,7 @@
             ng-true-value="'in'" ng-false-value="'out'"
             toggle-class="toggle-calm"
             ng-class="{selected: entry.selected}">
-            
+
             <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
             <span class="name" ng-bind-html="entry.name"></span>
             <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
