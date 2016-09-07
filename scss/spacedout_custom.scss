@@ -362,5 +362,8 @@ $floating-button-small-size: 40px;
   border-bottom-left-radius: 4px;
   a{
     text-shadow: 1px 1px 2px transparentize(darken($calm,30%), 0.8);
+    width: 100%;
+    text-align: center;
+    display: block;
   }
 }
