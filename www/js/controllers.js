@@ -683,7 +683,7 @@ angular.module('app.controllers', [])
   });
 
   $scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop();
+    $ionicScrollDelegate.scrollTop(true);
   };
 
   $scope.getSelected = function(){
@@ -949,7 +949,7 @@ angular.module('app.controllers', [])
     // https://goo.gl/zzDoHl
     setTimeout(function() {
       $location.hash(id);
-      $ionicScrollDelegate.anchorScroll();
+      $ionicScrollDelegate.anchorScroll(true);
     },1);
   };
 
