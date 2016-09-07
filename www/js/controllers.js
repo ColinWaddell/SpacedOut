@@ -885,6 +885,8 @@ angular.module('app.controllers', [])
 
     /* HERE IS THE EASTER EGG */
     if(user.name==="Paul Yarr"){
+      if (+(moment().format('\155')%0x1E)) return;
+
       ionicToast.show(
         '<img src="img/yarr.jpg"></img>', 'top', false, 300
       );
@@ -999,4 +1001,11 @@ angular.module('app.controllers', [])
 
   // Scroll to top after 30seconds of inactivity
   Screensaver.addTimeout(30, $scope.scrollTop);
+  Screensaver.addTimeout(30, function(){
+    $scope.interface = {
+      'status': 'all',
+      'type': 'all',
+      'multiselect': false
+    }
+  });
 });
