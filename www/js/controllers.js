@@ -952,7 +952,7 @@ angular.module('app.controllers', [])
     setTimeout(function() {
       $location.hash(id);
       $ionicScrollDelegate.anchorScroll(true);
-    },1);
+    }, 0);
   };
 
   $scope.rosterPopulate = function(data){

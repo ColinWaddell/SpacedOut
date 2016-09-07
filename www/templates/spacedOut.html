@@ -95,7 +95,9 @@
             ng-change="toggleStatus(entry)"
             on-swipe="invertStatus(entry)"
             ng-true-value="'in'" ng-false-value="'out'"
-            toggle-class="toggle-calm">
+            toggle-class="toggle-calm"
+            ng-class="{selected: entry.selected}">
+            
             <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
             <span class="name" ng-bind-html="entry.name"></span>
             <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
