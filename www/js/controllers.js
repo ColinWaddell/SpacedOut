@@ -785,7 +785,7 @@ angular.module('app.controllers', [])
 
  $scope.showInfo = function(){
    var info = $templateCache.get('info.html');
-   
+
    ionicToast.show(
      info, 'middle', false, 2000
    );
@@ -943,11 +943,15 @@ angular.module('app.controllers', [])
 
   }
 
-  $scope.shortcutJump = function(id) {
-    id = "shortcut"+id;
-    var old = $location.hash();
-    $location.hash(id);
-    $anchorScroll();
+  $scope.shortcutJump = function(letter) {
+    var id = "shortcut"+letter;
+    // Using a timeout forces the
+    // correct DOM to be used
+    // https://goo.gl/zzDoHl
+    setTimeout(function() {
+      $location.hash(id);
+      $ionicScrollDelegate.anchorScroll();
+    },10);
   };
 
   $scope.rosterPopulate = function(data){
