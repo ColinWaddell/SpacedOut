@@ -1,9 +1,14 @@
 angular.module('app.controllers', [])
 
 
-.controller('screensaverCtrl', function($scope, $interval, Screensaver) {
+.controller('screensaverCtrl', function($scope, $interval, $timeout, Screensaver) {
 
   var timerPromise;
+
+  $scope.swipe = function(){
+    $scope.message='Loading Roster...';
+    Screensaver.exit();
+  }
 
   self.tick = function(){
     $scope.info.date = new Date();
@@ -1009,8 +1014,8 @@ angular.module('app.controllers', [])
   })
 
   // Scroll to top after 30seconds of inactivity
-  Screensaver.addTimeout(30, $scope.scrollTop);
-  Screensaver.addTimeout(30, function(){
+  Screensaver.addTimeout(3, $scope.scrollTop);
+  Screensaver.addTimeout(3, function(){
     $scope.interface = {
       'status': 'all',
       'type': 'all',

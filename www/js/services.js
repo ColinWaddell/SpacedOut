@@ -481,8 +481,6 @@ angular.module('app.services', [])
   var timerPromise;
 
   self.tick = function(){
-    if (!self.status.timeout || self.status.sleeping)
-      return;
 
     self.status.time++;
     if(self.status.time === self.status.timeout){
@@ -523,11 +521,6 @@ angular.module('app.services', [])
     $state.go('tabsController.spacedOut',{}, {reload: true});
   }
 
-  self.cancel = function(){
-    self.status.enabled = false;
-    $interval.cancel(timerPromise);
-  }
-
   self.status = {
     sleeping: false,
     time: 0,
@@ -536,7 +529,7 @@ angular.module('app.services', [])
   };
 
   self.showScreensaver = function(){
-    self.cancel();
+    self.status.enabled = false;
     self.status.sleeping = true;
     $state.go('tabsController.screensaver');
   }

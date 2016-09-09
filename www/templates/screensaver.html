@@ -1,4 +1,11 @@
-<ion-view hide-nav-bar="true" id="page3" ng-click="message='Loading Roster...'" class=" " cache-view="false" hide-tabs>
+<ion-view
+  hide-nav-bar="true" id="page3"
+  on-swipe-left="swipe(); $event.stopPropagation();"
+  on-swipe-right="swipe(); $event.stopPropagation();"
+  ng-click="message='Loading Roster...'"
+  class=" "
+  cache-view="false" hide-tabs>
+
   <ion-content padding="true">
     <ul class="list">
       <br />
