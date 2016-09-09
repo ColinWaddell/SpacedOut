@@ -8127,7 +8127,7 @@ input:checked + .checkbox-icon:after {
   transition-property: background-color, border;
   display: inline-block;
   box-sizing: border-box;
-  width: 150px;
+  width: 50px;
   height: 31px;
   border: solid 2px #e6e6e6;
   border-radius: 20px;
@@ -8165,8 +8165,8 @@ input:checked + .checkbox-icon:after {
     content: " "; }
 
 .toggle input:checked + .track .handle {
-  -webkit-transform: translate3d(119px, 0, 0);
-  transform: translate3d(119px, 0, 0);
+  -webkit-transform: translate3d(19px, 0, 0);
+  transform: translate3d(19px, 0, 0);
   background-color: #fff; }
 
 .item-toggle.active {
@@ -8174,7 +8174,7 @@ input:checked + .checkbox-icon:after {
 
 .item-toggle,
 .item-toggle.item-complex .item-content {
-  padding-right: 198px; }
+  padding-right: 98px; }
 
 .item-toggle.item-complex {
   padding-right: 0; }
@@ -10064,6 +10064,7 @@ a.button {
   padding-top: 8px; }
 
 .shortcutbar {
+  visibility: hidden;
   background: black;
   position: relative;
   width: 100%;
@@ -10078,3 +10079,6 @@ a.button {
     width: 100%;
     text-align: center;
     display: block; }
+
+.popup-container input {
+  color: black; }

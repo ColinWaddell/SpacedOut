@@ -18,6 +18,8 @@ angular.module('app.controllers', [])
     date: new Date()
   }
 
+  $scope['message'] = "Tap to Sign In";
+
   self.start();
 })
 
@@ -589,7 +591,8 @@ angular.module('app.controllers', [])
 
     $ionicPopup.prompt({
        title: 'Enter a new name for' + user.name,
-       inputPlaceholder: selected[0].name
+       inputPlaceholder: selected[0].name,
+       defaultText: selected[0].name
      }).then(function(name) {
        if(name!==""){
          user.name = name;

@@ -520,7 +520,6 @@ angular.module('app.services', [])
 
   self.exit = function(){
     self.start();
-    $scope.message = "Loading Roster...";
     $state.go('tabsController.spacedOut',{}, {reload: true});
   }
 
@@ -539,7 +538,6 @@ angular.module('app.services', [])
   self.showScreensaver = function(){
     self.cancel();
     self.status.sleeping = true;
-    $scope.message = "Tap to Sign In";
     $state.go('tabsController.screensaver');
   }
 
@@ -553,7 +551,6 @@ angular.module('app.services', [])
           'multiselect': false
         }
       );
-      $scope.message = "Loading Roster...";
       $state.go('tabsController.spacedOut',{}, {reload: true});
       $rootScope.$emit('screensaver-exit');
       notifyObservers();
