@@ -957,14 +957,10 @@ angular.module('app.controllers', [])
   }
 
   $scope.shortcutJump = function(letter) {
-    var id = "shortcut"+letter;
-    // Using a timeout forces the
-    // correct DOM to be used
-    // https://goo.gl/zzDoHl
-    setTimeout(function() {
-      $location.hash(id);
-      $ionicScrollDelegate.anchorScroll(true);
-    }, 0);
+    var id = "#shortcut"+letter;
+    var loc = "#" + $location.path()+ id;
+    console.log(loc);
+    history.pushState(null, null, loc);
   };
 
   $scope.rosterPopulate = function(data){
@@ -1018,8 +1014,8 @@ angular.module('app.controllers', [])
   })
 
   // Scroll to top after 30seconds of inactivity
-  Screensaver.addTimeout(3, $scope.scrollTop);
-  Screensaver.addTimeout(3, function(){
+  Screensaver.addTimeout(30, $scope.scrollTop);
+  Screensaver.addTimeout(30, function(){
     $scope.interface = {
       'status': 'all',
       'type': 'all',

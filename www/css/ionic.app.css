@@ -10068,7 +10068,6 @@ ion-content {
   padding-top: 8px; }
 
 .shortcutbar {
-  visibility: hidden;
   background: black;
   position: relative;
   width: 100%;
