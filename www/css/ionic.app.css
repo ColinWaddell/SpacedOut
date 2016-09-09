@@ -10008,6 +10008,7 @@ ion-content {
     margin-top: 0; }
   .screensaver .time {
     font-size: 72pt;
+    font-weight: bold;
     color: #fff; }
   .screensaver .date {
     font-size: 24pt;
