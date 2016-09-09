@@ -25,6 +25,10 @@ angular.module('app.controllers', [])
 
   $scope['message'] = "Tap to Sign In";
 
+  Screensaver.addTimeout(30 * 60, function(){
+    document.location.href = 'index.html';
+  });
+
   self.start();
 })
 
