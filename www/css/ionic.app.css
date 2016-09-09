@@ -9861,6 +9861,8 @@ ion-content {
   .entries .name {
     padding-left: 10px;
     text-transform: capitalize; }
+    .entries .name.signedout {
+      color: #bfbfbf; }
   .entries .guest {
     background: #42392d;
     font-style: italic; }
@@ -10082,6 +10084,8 @@ ion-content {
     width: 100%;
     text-align: center;
     display: block; }
+    .shortcutbar a.activated {
+      color: #bba717; }
 
 .popup-container input {
   color: black; }
