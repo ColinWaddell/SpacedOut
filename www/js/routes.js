@@ -69,7 +69,10 @@ angular.module('app.routes', [])
   'DEFAULT_ADMIN_TTL', 60
 )
 
-
+.config(function($ionicConfigProvider) {
+  // get rid of janky scrolling
+  $ionicConfigProvider.scrolling.jsScrolling(false);
+})
 
 .config(function($stateProvider, $urlRouterProvider) {
 
