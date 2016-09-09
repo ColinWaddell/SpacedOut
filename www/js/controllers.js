@@ -959,9 +959,8 @@ angular.module('app.controllers', [])
   $scope.shortcutJump = function(letter) {
     /*
      * A very roundabout way of making the
-     * scrolling action less janky.
+     * shortcut scrolling action less janky.
     */
-
     var id = "#shortcut"+letter;
     var loc = "#" + $location.path()+ id;
     history.pushState(null, null, loc);
