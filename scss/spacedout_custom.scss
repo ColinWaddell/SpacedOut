@@ -129,8 +129,8 @@ ion-content{
 
 $disabledText:                    rgba(black, 0.26) !default;
 
-$material-shadow:                0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
-$material-shadow-pressed:        0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2) !default;
+$material-shadow:                none;
+$material-shadow-pressed:        none;
 $floating-button-size: 56px;
 $floating-button-small-size: 40px;
 
@@ -138,7 +138,6 @@ $floating-button-small-size: 40px;
   display: block;
   font-weight: bold;
   font-size: 20px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 .button-round-label{
   display: block;
@@ -365,11 +364,10 @@ $floating-button-small-size: 40px;
   top: 120px;
   height: 40px;
   z-index: 100000;
-  background: transparentize($list-header-color, 0.05);
+  background: transparentize($list-header-color, 0.0);
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   a{
-    text-shadow: 1px 1px 2px transparentize(darken($calm,30%), 0.8);
     width: 100%;
     text-align: center;
     display: block;
