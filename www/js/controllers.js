@@ -716,7 +716,7 @@ angular.module('app.controllers', [])
   });
 
   $scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop(true);
+    $ionicScrollDelegate.scrollTop(false);
   };
 
   $scope.getSelected = function(){
