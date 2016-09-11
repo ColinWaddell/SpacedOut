@@ -901,17 +901,6 @@ angular.module('app.controllers', [])
     }
   }
 
-  $scope.filterEntries = function(entries, status, type){
-    fe = [];
-    entries.forEach(function(entry){
-      if(status==='all' || status==entry.status)
-        if(type==='all' || type==entry.type)
-          fe.push(entry);
-    });
-
-    return fe;
-  }
-
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
