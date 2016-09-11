@@ -87,7 +87,7 @@ ion-content{
 
 .toggle .handle {
   box-shadow: none;
-  background: $calm;
+  background: darken($light, 40%);
 }
 
 .filters{
