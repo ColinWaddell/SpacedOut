@@ -64,9 +64,10 @@
     </div>
     <div class="shortcutbar">
       <div class="row">
-        <div ng-repeat="entry in roster.entries" class="col"
+        <div ng-repeat="entry in filteredEntries = (roster.entries | filterEntries:interface | orderBy : 'name')"
+          class="col"
           ng-click="shortcutJump(firstLetter(entry.name))"
-          ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[$index-1].name)">
+          ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
           <a class="calm">{{firstLetter(entry.name)}}</a>
         </div>
       </div>
@@ -82,11 +83,11 @@
           on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
           ng-click="selectEntry(entry)"
           on-double-click="invertStatus(entry)"
-          ng-repeat="entry in roster.entries | filterEntries:interface | orderBy : 'name'">
+          ng-repeat="entry in filteredEntries = (roster.entries | filterEntries:interface | orderBy : 'name')">
           <div
             class="item item-divider index-letter"
             id="shortcut{{firstLetter(entry.name)}}"
-            ng-if="firstLetter(entry.name) !== firstLetter(roster.entries[entry.index-1].name)">
+            ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
             {{firstLetter(entry.name)}}
           </div>
 

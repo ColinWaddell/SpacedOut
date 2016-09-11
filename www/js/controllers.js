@@ -978,12 +978,6 @@ angular.module('app.controllers', [])
 
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
-    var i = 0;
-    $scope.roster.entries.forEach(function(entry){
-      entry['index'] = i;
-      i++;
-    })
-
     $scope.rosterCountUpdate();
   }
 
