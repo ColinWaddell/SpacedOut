@@ -9881,6 +9881,10 @@ ion-content {
   .entries .item-toggle .toggle {
     top: 21px; }
 
+.toggle .handle {
+  box-shadow: none;
+  background: #119cc1; }
+
 .filters {
   padding-top: 0px; }
   .filters .selected {

@@ -85,6 +85,11 @@ ion-content{
   }
 }
 
+.toggle .handle {
+  box-shadow: none;
+  background: $calm;
+}
+
 .filters{
   .selected{
     background-color: #262626;
