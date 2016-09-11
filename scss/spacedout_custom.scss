@@ -382,3 +382,15 @@ $floating-button-small-size: 40px;
 .popup-container input{
   color: black;
 }
+
+.spacefact{
+  padding-top: 20px;
+  p{
+    font-style: italic;
+    font-size: 18px;
+    color: $balanced;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}

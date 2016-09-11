@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 
 
-.controller('screensaverCtrl', function($scope, $interval, $timeout, Screensaver) {
+.controller('screensaverCtrl', function($scope, $interval, $timeout, $http, Screensaver) {
 
   var timerPromise;
 
@@ -25,9 +25,30 @@ angular.module('app.controllers', [])
 
   $scope['message'] = "Tap to Sign In";
 
+
   Screensaver.addTimeout(30 * 60, function(){
     document.location.href = 'index.html';
   });
+
+  /*
+   * SPACE FACTS
+   */
+
+  var spacefacts = [""];
+
+  $http.get('/json/facts.json')
+  .then(function(result){
+      spacefacts = result.data;
+      loadSpacefact();
+  });
+
+  var loadSpacefact =  function(){
+    var id = Math.floor( Math.random() * spacefacts.length );
+    $scope.spacefact = spacefacts[id];
+  };
+
+  $scope['spacefact'] = "Loading fact...";
+  Screensaver.addTimeout(5 * 60, loadSpacefact);
 
   self.start();
 })
