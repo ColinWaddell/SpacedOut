@@ -10097,5 +10097,6 @@ ion-content {
     font-size: 18px;
     color: #17bb9f;
     display: block;
-    width: 100%;
+    width: 500px;
+    margin: 0 auto;
     text-align: center; }
