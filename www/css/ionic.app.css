@@ -10006,8 +10006,10 @@ ion-content {
 .screensaver {
   margin-top: 50px; }
   .screensaver .message {
-    text-align: right;
-    margin-top: 0; }
+    text-align: left;
+    margin-top: 0;
+    padding-bottom: 4px;
+    padding-left: 10px; }
   .screensaver .time {
     font-size: 72pt;
     font-weight: bold;

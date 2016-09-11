@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
   var timerPromise;
 
   $scope.swipe = function(){
-    $scope.message='Loading Roster...';
+    $scope.message='Loading Roster   ';
     Screensaver.exit();
   }
 

@@ -271,8 +271,10 @@ $floating-button-small-size: 40px;
   margin-top: 50px;
 
   .message{
-    text-align: right;
+    text-align: left;
     margin-top: 0;
+    padding-bottom: 4px;
+    padding-left: 10px;
   }
 
   .time{
