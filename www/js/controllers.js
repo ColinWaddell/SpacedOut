@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
   var timerPromise;
 
   $scope.swipe = function(){
-    $scope.message='Loading Roster...';
+    $scope.message='Loading Roster   ';
     Screensaver.exit();
   }
 
@@ -716,7 +716,7 @@ angular.module('app.controllers', [])
   });
 
   $scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop(true);
+    $ionicScrollDelegate.scrollTop(false);
   };
 
   $scope.getSelected = function(){
@@ -901,17 +901,6 @@ angular.module('app.controllers', [])
     }
   }
 
-  $scope.filterEntries = function(entries, status, type){
-    fe = [];
-    entries.forEach(function(entry){
-      if(status==='all' || status==entry.status)
-        if(type==='all' || type==entry.type)
-          fe.push(entry);
-    });
-
-    return fe;
-  }
-
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
@@ -989,12 +978,6 @@ angular.module('app.controllers', [])
 
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
-    var i = 0;
-    $scope.roster.entries.forEach(function(entry){
-      entry['index'] = i;
-      i++;
-    })
-
     $scope.rosterCountUpdate();
   }
 
