@@ -9861,8 +9861,10 @@ ion-content {
   .entries .name {
     padding-left: 10px;
     text-transform: capitalize; }
-    .entries .name.signedout {
-      color: #bfbfbf; }
+  .entries .signedout {
+    background: #3d3d3d; }
+    .entries .signedout .name {
+      color: #a6a6a6; }
   .entries .guest {
     background: #42392d;
     font-style: italic; }
@@ -9881,9 +9883,12 @@ ion-content {
   .entries .item-toggle .toggle {
     top: 21px; }
 
+.toggle .track {
+  background: #55747d;
+  border: solid 2px #55747d; }
+
 .toggle .handle {
-  box-shadow: none;
-  background: #cccccc; }
+  box-shadow: none; }
 
 .filters {
   padding-top: 0px; }

@@ -58,8 +58,11 @@ ion-content{
   .name{
     padding-left: 10px;
     text-transform: capitalize;
-    &.signedout{
-      color: darken($light, 25%);
+  }
+  .signedout{
+    background: darken($item-default-bg, 2%);
+    .name{
+      color: darken($light, 35%);
     }
   }
   .guest{
@@ -85,9 +88,14 @@ ion-content{
   }
 }
 
-.toggle .handle {
-  box-shadow: none;
-  background: darken($light, 20%);
+.toggle{
+  .track{
+    background: desaturate($calm, 65%);
+    border: solid 2px desaturate($calm, 65%);
+  }
+  .handle {
+    box-shadow: none;
+  }
 }
 
 .filters{

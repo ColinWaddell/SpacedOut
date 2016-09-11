@@ -97,13 +97,14 @@
             on-swipe="invertStatus(entry)"
             ng-true-value="'in'" ng-false-value="'out'"
             toggle-class="toggle-energized"
+            class="{{entry.status=='in'?'signedin':'signedout'}}"
             ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
 
             <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
-            <span class="name {{entry.status=='in'?'signedin':'signedout'}}" ng-bind-html="entry.name"></span>
+            <span class="name" ng-bind-html="entry.name"></span>
             <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
             <span<a class="roster-activity">
-              Signed <span class="light">{{entry.status}}</span> <span am-time-ago="entry.last_activity"></span>
+              Signed <b>{{entry.status}}</b> <span am-time-ago="entry.last_activity"></span>
             </a></span>
           </ion-toggle>
         </div>
