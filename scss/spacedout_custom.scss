@@ -390,8 +390,10 @@ $floating-button-small-size: 40px;
     font-size: 18px;
     color: $balanced;
     display: block;
-    width: 500px;
+    width: 350px;
     margin: 0 auto;
     text-align: center;
+    font-weight: lighter;
+    letter-spacing: 1px;
   }
 }
