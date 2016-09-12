@@ -36,7 +36,7 @@ angular.module('app.controllers', [])
 
   var spacefacts = [""];
 
-  $http.get('/json/facts.json')
+  $http.get('json/facts.json')
   .then(function(result){
       spacefacts = result.data;
       loadSpacefact();
