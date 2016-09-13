@@ -90,7 +90,8 @@
           </div>
 
           <div
-            class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}} {{entry.type}}"
+            class="item entry"
+            ng-class="{'signedout': entry.status=='out', 'selected': entry.selected, 'guest':entry.type=='guest'}"
             on-tap="entryTap(entry)"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)">

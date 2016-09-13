@@ -9870,7 +9870,9 @@ ion-content {
       letter-spacing: 2px;
       line-height: 38px;
       font-weight: bold;
-      border-radius: 4px; }
+      border-radius: 4px;
+      background: #bba717;
+      color: #fff; }
     .entries .entry.item.guest {
       background: #42392d;
       font-style: italic; }
@@ -9883,15 +9885,13 @@ ion-content {
         background: #333;
         border-radius: 4px;
         position: absolute;
-        top: 12px; }
+        top: 12px;
+        margin-top: -3px; }
   .entries .entry.signedout .name {
     color: #a6a6a6; }
   .entries .entry.signedout button {
     background: #606e72;
     color: #2b2b2b; }
-  .entries .entry.signedin button {
-    background: #bba717;
-    color: #fff; }
   .entries .entry.selected {
     background: #0b637b; }
   .entries .entry.activated {
