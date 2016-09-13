@@ -91,7 +91,7 @@
 
           <div
             class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}}"
-            ng-click="entryTap(entry)"
+            on-tap="entryTap(entry)"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)">
             <div class="row">
