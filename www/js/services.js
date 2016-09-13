@@ -354,18 +354,6 @@ angular.module('app.services', [])
     return self;
 })
 
-.filter('filterEntries', function() {
-    return function( items, interface ) {
-      var filtered = [];
-      angular.forEach(items, function(item) {
-        if(interface.status==='all' || interface.status==item.status)
-          if(interface.type==='all' || interface.type==item.type)
-            filtered.push(item);
-      });
-      return filtered;
-    };
-})
-
 .factory('Admin', function($ionicPopup, $rootScope, $state, $interval, Settings, ionicToast, DEFAULT_ADMIN_TTL){
   var self = this;
 

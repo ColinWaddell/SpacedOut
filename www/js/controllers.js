@@ -904,6 +904,7 @@ angular.module('app.controllers', [])
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
+    $scope.rosterFilter();
 
     /* HERE IS THE EASTER EGG */
     if(user.name==="Paul Yarr"){
@@ -966,6 +967,15 @@ angular.module('app.controllers', [])
     }
   }
 
+  $scope.entryTap = function(entry){
+    if($scope.interface.multiselect){
+      $scope.selectEntry(entry);
+    }
+    else{
+      $scope.invertStatus(entry);
+    }
+  }
+
   $scope.shortcutJump = function(letter) {
     /*
      * A very roundabout way of making the
@@ -976,10 +986,26 @@ angular.module('app.controllers', [])
     history.pushState(null, null, loc);
   };
 
+  var applyFilters = function(entries){
+    var filtered = [];
+    angular.forEach(entries, function(item) {
+      if($scope.interface.status==='all' || $scope.interface.status==item.status)
+        if($scope.interface.type==='all' || $scope.interface.type==item.type)
+          filtered.push(item);
+    });
+    return filtered;
+  }
+
+  $scope.rosterFilter = function(){
+    $scope.roster.entriesFiltered =
+      applyFilters($scope.roster.entries);
+  };
+
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
+    $scope.rosterFilter();
     $scope.rosterCountUpdate();
-  }
+  };
 
   $scope.rosterError = function (){
     var alertPopup = $ionicPopup.alert({

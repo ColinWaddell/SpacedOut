@@ -8,25 +8,25 @@
           <div class="col-25">
             <div class="row">
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.type='all'; interface.status='all'; scrollTop();" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
+                <a class="button button-round" ng-click="interface.type='all'; interface.status='all'; rosterFilter(); scrollTop();" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
                   <span class="button-round-value">{{rosterCount.type.staff + rosterCount.type.guest}}</span>
                   <span class="button-round-label">All</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.status='in'; interface.type='all'; scrollTop();"  ng-class="{selected: interface.status=='in'}">
+                <a class="button button-round" ng-click="interface.status='in'; interface.type='all'; rosterFilter(); scrollTop();"  ng-class="{selected: interface.status=='in'}">
                   <span class="button-round-value">{{rosterCount.status.in}}</span>
                   <span class="button-round-label">In</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.status='out'; interface.type='all'; scrollTop();" ng-class="{selected: interface.status=='out'}">
+                <a class="button button-round" ng-click="interface.status='out'; interface.type='all'; rosterFilter(); scrollTop();" ng-class="{selected: interface.status=='out'}">
                   <span class="button-round-value">{{rosterCount.status.out}}</span>
                   <span class="button-round-label">Out</span>
                 </a>
               </div>
               <div class="col col-25">
-                <a class="button button-round" ng-click="interface.type='guest'; interface.status='all'; scrollTop();" ng-class="{selected: interface.type=='guest'}">
+                <a class="button button-round" ng-click="interface.type='guest'; interface.status='all'; rosterFilter(); scrollTop();" ng-class="{selected: interface.type=='guest'}">
                   <span class="button-round-value">{{rosterCount.type.guest}}</span>
                   <span class="button-round-label">Guests</span>
                 </a>
@@ -64,7 +64,7 @@
     </div>
     <div class="shortcutbar">
       <div class="row">
-        <div ng-repeat="entry in filteredEntries = (roster.entries | filterEntries:interface | orderBy : 'name')"
+        <div ng-repeat="entry in filteredEntries = (roster.entriesFiltered | orderBy : 'name')"
           class="col"
           ng-click="shortcutJump(firstLetter(entry.name))"
           ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
@@ -77,11 +77,11 @@
 
 
   <ion-content padding="true" class="has-header">
-    <div class="entries" ng-if="roster.entries">
+    <div class="entries" ng-if="roster.entriesFiltered">
       <ul class="list">
         <div
           on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
-          ng-repeat="entry in filteredEntries = (roster.entries | filterEntries:interface | orderBy : 'name')">
+          ng-repeat="entry in filteredEntries = (roster.entriesFiltered | orderBy : 'name')">
           <div
             class="item item-divider index-letter"
             id="shortcut{{firstLetter(entry.name)}}"
@@ -91,10 +91,9 @@
 
           <div
             class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}}"
-            ng-click="interface.multiselect?selectEntry(entry):invertStatus(entry)"
-            ng-swipe-left="invertStatus(entry)"
-            ng-swipe-right="invertStatus(entry)"
-            on-double-click="invertStatus(entry)">
+            ng-click="entryTap(entry)"
+            on-swipe-left="entryTap(entry)"
+            on-swipe-right="entryTap(entry)">
             <div class="row">
               <div class="col col-80">
                 <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
