@@ -9859,7 +9859,6 @@ ion-content {
 .entries {
   padding-top: 70px; }
   .entries .name {
-    padding-left: 10px;
     text-transform: capitalize; }
   .entries .entry.item {
     padding: 0 10px; }
