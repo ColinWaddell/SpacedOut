@@ -9883,7 +9883,7 @@ ion-content {
   .entries .entry.selected {
     background: #0b637b; }
   .entries .entry.activated {
-    background: rgba(128, 128, 128, 0); }
+    background: #293d43; }
   .entries .guest {
     background: #42392d;
     font-style: italic; }

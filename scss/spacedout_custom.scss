@@ -92,7 +92,7 @@ ion-content{
       background: darken($calm, 15%);
     }
     &.activated{
-      background: lighten($list-header-bg, 50%);
+      background: darken(desaturate($calm, 60%), 20%);
     }
   }
   .guest{
