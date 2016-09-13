@@ -90,7 +90,7 @@
           </div>
 
           <div
-            class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}}"
+            class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}} {{entry.type}}"
             on-tap="entryTap(entry)"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)">

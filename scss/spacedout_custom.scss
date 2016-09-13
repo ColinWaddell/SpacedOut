@@ -72,6 +72,21 @@ ion-content{
         font-weight: bold;
         border-radius: 4px;
       }
+      &.guest{
+        background: $guest;
+        font-style: italic;
+        .label{
+          color: #fff;
+          font-style: normal;
+          font-size: 10px;
+          margin-left: 10px;
+          padding: 2px 10px 1px 10px;
+          background: $base-color;
+          border-radius: 4px;
+          position: absolute;
+          top: 12px;
+        }
+      }
     }
     &.signedout{
       .name{
@@ -94,24 +109,6 @@ ion-content{
     &.activated{
       background: darken(desaturate($calm, 60%), 20%);
     }
-  }
-  .guest{
-    background: $guest;
-    font-style: italic;
-    .label{
-      color: #fff;
-      font-style: normal;
-      font-size: 10px;
-      margin-left: 10px;
-      padding: 2px 10px 1px 10px;
-      background: $base-color;
-      border-radius: 4px;
-      position: absolute;
-      top: 12px;
-    }
-  }
-  .item-toggle .toggle {
-    top: 21px;
   }
 }
 

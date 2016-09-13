@@ -9872,6 +9872,19 @@ ion-content {
       line-height: 38px;
       font-weight: bold;
       border-radius: 4px; }
+    .entries .entry.item.guest {
+      background: #42392d;
+      font-style: italic; }
+      .entries .entry.item.guest .label {
+        color: #fff;
+        font-style: normal;
+        font-size: 10px;
+        margin-left: 10px;
+        padding: 2px 10px 1px 10px;
+        background: #333;
+        border-radius: 4px;
+        position: absolute;
+        top: 12px; }
   .entries .entry.signedout .name {
     color: #a6a6a6; }
   .entries .entry.signedout button {
@@ -9884,21 +9897,6 @@ ion-content {
     background: #0b637b; }
   .entries .entry.activated {
     background: #293d43; }
-  .entries .guest {
-    background: #42392d;
-    font-style: italic; }
-    .entries .guest .label {
-      color: #fff;
-      font-style: normal;
-      font-size: 10px;
-      margin-left: 10px;
-      padding: 2px 10px 1px 10px;
-      background: #333;
-      border-radius: 4px;
-      position: absolute;
-      top: 12px; }
-  .entries .item-toggle .toggle {
-    top: 21px; }
 
 .filters {
   padding-top: 0px; }
