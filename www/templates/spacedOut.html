@@ -64,7 +64,7 @@
     </div>
     <div class="shortcutbar">
       <div class="row">
-        <div ng-repeat="entry in filteredEntries = (roster.entriesFiltered | orderBy : 'name')"
+        <div ng-repeat="entry in filteredEntries = (roster.entries | orderBy : 'name')"
           class="col"
           ng-click="shortcutJump(firstLetter(entry.name))"
           ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
@@ -77,11 +77,11 @@
 
 
   <ion-content padding="true" class="has-header">
-    <div class="entries" ng-if="roster.entriesFiltered">
+    <div class="entries" ng-if="roster.entries">
       <ul class="list">
         <div
           on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
-          ng-repeat="entry in filteredEntries = (roster.entriesFiltered | orderBy : 'name')">
+          ng-repeat="entry in filteredEntries = (roster.entries | orderBy : 'name')">
           <div
             class="item item-divider index-letter"
             id="shortcut{{firstLetter(entry.name)}}"
@@ -92,6 +92,7 @@
           <div
             class="item entry"
             ng-class="{'signedout': entry.status=='out', 'selected': entry.selected, 'guest':entry.type=='guest'}"
+            ng-hide="entry.hide"
             on-tap="entryTap(entry)"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)">

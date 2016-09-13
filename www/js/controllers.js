@@ -986,19 +986,15 @@ angular.module('app.controllers', [])
     history.pushState(null, null, loc);
   };
 
-  var applyFilters = function(entries){
-    var filtered = [];
-    angular.forEach(entries, function(item) {
+  $scope.rosterFilter = function(){
+    angular.forEach($scope.roster.entries, function(item) {
+      var hide = true;
       if($scope.interface.status==='all' || $scope.interface.status==item.status)
         if($scope.interface.type==='all' || $scope.interface.type==item.type)
-          filtered.push(item);
-    });
-    return filtered;
-  }
+          hide = false;
 
-  $scope.rosterFilter = function(){
-    $scope.roster.entriesFiltered =
-      applyFilters($scope.roster.entries);
+      item.hide = hide;
+    });
   };
 
   $scope.rosterPopulate = function(data){
