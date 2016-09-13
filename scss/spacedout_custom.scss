@@ -59,10 +59,40 @@ ion-content{
     padding-left: 10px;
     text-transform: capitalize;
   }
-  .signedout{
-    background: darken($item-default-bg, 2%);
-    .name{
-      color: darken($light, 35%);
+  .entry{
+    &.item{
+      padding: 0 10px;
+      button{
+        margin:0;
+        min-height: 40px;
+        height: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        line-height: 38px;
+        font-weight: bold;
+        border-radius: 4px;
+      }
+    }
+    &.signedout{
+      .name{
+        color: darken($light, 35%);
+      }
+      button{
+        background: desaturate($calm, 75%);
+        color: darken($dark, 10%);
+      }
+    }
+    &.signedin{
+      button{
+        background: $energized;
+        color: $light;
+      }
+    }
+    &.selected{
+      background: darken($calm, 15%);
+    }
+    &.activated{
+      background: lighten($list-header-bg, 50%);
     }
   }
   .guest{
@@ -80,21 +110,8 @@ ion-content{
       top: 12px;
     }
   }
-  .selected{
-    background: darken($calm, 15%);
-  }
   .item-toggle .toggle {
     top: 21px;
-  }
-}
-
-.toggle{
-  .track{
-    background: desaturate($calm, 65%);
-    border: solid 2px desaturate($calm, 65%);
-  }
-  .handle {
-    box-shadow: none;
   }
 }
 

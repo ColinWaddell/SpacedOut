@@ -81,8 +81,6 @@
       <ul class="list">
         <div
           on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
-          ng-click="selectEntry(entry)"
-          on-double-click="invertStatus(entry)"
           ng-repeat="entry in filteredEntries = (roster.entries | filterEntries:interface | orderBy : 'name')">
           <div
             class="item item-divider index-letter"
@@ -91,22 +89,29 @@
             {{firstLetter(entry.name)}}
           </div>
 
-          <ion-toggle
-            ng-model="entry.status"
-            ng-change="toggleStatus(entry)"
-            on-swipe="invertStatus(entry)"
-            ng-true-value="'in'" ng-false-value="'out'"
-            toggle-class="toggle-energized"
-            class="{{entry.status=='in'?'signedin':'signedout'}}"
-            ng-class="{selected: entry.selected, guest: entry.type=='guest'}">
-
-            <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
-            <span class="name" ng-bind-html="entry.name"></span>
-            <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
-            <span<a class="roster-activity">
-              Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b> <span am-time-ago="entry.last_activity"></span>
-            </a></span>
-          </ion-toggle>
+          <div
+            class="item entry {{entry.status=='in'?'signedin':'signedout'}} {{entry.selected?'selected':''}}"
+            ng-click="interface.multiselect?selectEntry(entry):invertStatus(entry)"
+            ng-swipe-left="invertStatus(entry)"
+            ng-swipe-right="invertStatus(entry)"
+            on-double-click="invertStatus(entry)">
+            <div class="row">
+              <div class="col col-80">
+                <i class="icon {{entry.status=='in'?'ion-log-in energized':'ion-log-out calm rotate-180'}}"></i>
+                <span class="name" ng-bind-html="entry.name"></span>
+                <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
+                <span<a class="roster-activity">
+                  Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b> <span am-time-ago="entry.last_activity"></span>
+                </a></span>
+              </div>
+              <div class="col col-20">
+                <button
+                  class="button button-full">
+                  {{entry.status}}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </ul>
     </div>
