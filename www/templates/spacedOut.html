@@ -52,10 +52,10 @@
             <a class="button button-dark" ng-click="multiselectCancel()">
               <b>CANCEL</b>
             </a>
-            <a class="button button-calm" ng-click="toggleStatus({'status':'out'})">
+            <a class="button button-calm" ng-click="toggleStatus({'status':'out'}); rosterFilter();">
             &larr; LOG <b>OUT</b>
             </a>
-            <a class="button button-energized" ng-click="toggleStatus({'status':'in'})">
+            <a class="button button-energized" ng-click="toggleStatus({'status':'in'}); rosterFilter();">
               LOG <b>IN</b> &rarr;
             </a>
           </div>
