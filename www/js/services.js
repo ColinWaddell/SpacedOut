@@ -444,6 +444,7 @@ angular.module('app.services', [])
   $document,
   $location,
   $interval,
+  $timeout,
   $rootScope,
   Settings,
   rosterInterface
@@ -524,18 +525,20 @@ angular.module('app.services', [])
 
   $document.on('click',function(){
     if(self.status.sleeping){
-      self.status.sleeping = false;
-      rosterInterface.update(
-        {
-          'status': 'all',
-          'type': 'all',
-          'multiselect': false
-        }
-      );
-      $state.go('tabsController.spacedOut',{}, {reload: true});
-      $rootScope.$emit('screensaver-exit');
-      notifyObservers();
-      self.start();
+      $timeout(function () {
+        self.status.sleeping = false;
+        rosterInterface.update(
+          {
+            'status': 'all',
+            'type': 'all',
+            'multiselect': false
+          }
+        );
+        $state.go('tabsController.spacedOut',{}, {reload: true});
+        $rootScope.$emit('screensaver-exit');
+        notifyObservers();
+        self.start();
+      }, 250);
     }
     else{
       self.status.time = 0;
