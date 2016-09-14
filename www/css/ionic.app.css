@@ -10026,12 +10026,18 @@ ion-content {
     padding-bottom: 4px;
     padding-left: 10px; }
   .screensaver .time {
-    font-size: 72pt;
+    font-size: 84pt;
     font-weight: bold;
-    color: #fff; }
+    color: #fff;
+    text-align: center;
+    display: block;
+    width: 100%; }
   .screensaver .date {
-    font-size: 24pt;
-    color: #bba717; }
+    font-size: 32pt;
+    color: #bba717;
+    text-align: right;
+    display: block;
+    width: 100%; }
   .screensaver .branding {
     width: 100%;
     margin-top: 10px; }

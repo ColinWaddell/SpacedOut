@@ -505,6 +505,10 @@ angular.module('app.services', [])
     );
   }
 
+  self.kick = function(){
+    self.status.time = 0;
+  }
+
   self.exit = function(){
     self.start();
     $state.go('tabsController.spacedOut',{}, {reload: true});

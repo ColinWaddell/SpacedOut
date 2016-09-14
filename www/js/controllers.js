@@ -816,6 +816,10 @@ angular.module('app.controllers', [])
    $scope.popoverTimerCancel();
  });
 
+ $scope.screensaverKick = function(){
+   Screensaver.kick();
+ }
+
  $scope.showInfo = function(){
    var info = $templateCache.get('info.html');
 

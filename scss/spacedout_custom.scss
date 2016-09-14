@@ -305,14 +305,20 @@ $floating-button-small-size: 40px;
   }
 
   .time{
-    font-size: 72pt;
+    font-size: 84pt;
     font-weight: bold;
     color: $light;
+    text-align: center;
+    display: block;
+    width: 100%;
   }
 
   .date{
-    font-size: 24pt;
+    font-size: 32pt;
     color: $energized;
+    text-align: right;
+    display: block;
+    width: 100%;
   }
   .branding{
     width:100%;
