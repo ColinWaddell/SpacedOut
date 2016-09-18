@@ -445,6 +445,7 @@ angular.module('app.services', [])
   $location,
   $interval,
   $timeout,
+  $window,
   $rootScope,
   Settings,
   rosterInterface
@@ -506,7 +507,25 @@ angular.module('app.services', [])
   }
 
   self.kick = function(){
-    self.status.time = 0;
+    if(self.status.sleeping){
+      $timeout(function () {
+        self.status.sleeping = false;
+        rosterInterface.update(
+          {
+            'status': 'all',
+            'type': 'all',
+            'multiselect': false
+          }
+        );
+        $state.go('tabsController.spacedOut',{}, {reload: true});
+        $rootScope.$emit('screensaver-exit');
+        notifyObservers();
+        self.start();
+      }, 250);
+    }
+    else{
+      self.status.time = 0;
+    }
   }
 
   self.exit = function(){
@@ -527,27 +546,7 @@ angular.module('app.services', [])
     $state.go('tabsController.screensaver');
   }
 
-  $document.on('click',function(){
-    if(self.status.sleeping){
-      $timeout(function () {
-        self.status.sleeping = false;
-        rosterInterface.update(
-          {
-            'status': 'all',
-            'type': 'all',
-            'multiselect': false
-          }
-        );
-        $state.go('tabsController.spacedOut',{}, {reload: true});
-        $rootScope.$emit('screensaver-exit');
-        notifyObservers();
-        self.start();
-      }, 250);
-    }
-    else{
-      self.status.time = 0;
-    }
-  });
+  $document.on('click', self.kick);
 
   self.onExit = function(scope, callback){
     var handler = $rootScope.$on('screensaver-exit', callback);

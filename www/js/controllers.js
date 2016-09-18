@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
   $scope['message'] = "Tap to Sign In";
 
 
-  Screensaver.addTimeout(30 * 60, function(){
+  Screensaver.addTimeout(30 * 6, function(){
     document.location.href = 'index.html';
   });
 
@@ -48,7 +48,7 @@ angular.module('app.controllers', [])
   };
 
   $scope['spacefact'] = "Loading fact...";
-  Screensaver.addTimeout(5 * 60, loadSpacefact);
+  Screensaver.addTimeout(5 * 6, loadSpacefact);
 
   self.start();
 })
@@ -688,6 +688,7 @@ angular.module('app.controllers', [])
   $ionicPopover,
   $ionicScrollDelegate,
   $interval,
+  $timeout,
   $templateCache,
   ionicToast,
   Roster,
@@ -816,8 +817,15 @@ angular.module('app.controllers', [])
    $scope.popoverTimerCancel();
  });
 
+ var scrolleventCounter = 0;
  $scope.screensaverKick = function(){
-   Screensaver.kick();
+   if(!scrolleventCounter){
+     $timeout(function(){
+       Screensaver.kick();
+       scrolleventCounter = 0;
+     }, 1000);
+   }
+  scrolleventCounter++;
  }
 
  $scope.showInfo = function(){
