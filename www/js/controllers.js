@@ -692,6 +692,7 @@ angular.module('app.controllers', [])
   ionicToast,
   Roster,
   Screensaver,
+  firstLetter,
   Admin,
   Settings,
   rosterInterface
@@ -892,18 +893,7 @@ angular.module('app.controllers', [])
     $scope.interface.status = status;
   }
 
-  $scope.firstLetter = function(name) {
-    if (name === undefined)
-      return;
-
-    var letter = name.toUpperCase() && name.toUpperCase().charAt(0);
-    if (/^[A-Za-z]+$/.test(letter)){
-      return letter;
-    }
-    else{
-      return '#';
-    }
-  }
+  $scope.firstLetter = firstLetter.get;
 
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
