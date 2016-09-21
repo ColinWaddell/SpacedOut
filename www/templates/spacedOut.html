@@ -63,7 +63,7 @@
       </div>
     </div>
     <div class="row shortcutbar">
-      <div ng-repeat="(index, entries) in roster.entries"
+      <div ng-repeat="(index, entries) in filteredRoster"
         class="col"
         ng-if="entries.length"
         ng-click="shortcutJump(index)">
@@ -73,8 +73,23 @@
   </ion-header-bar>
 
   <ion-content padding="true" class="has-header" on-scroll-complete="screensaverKick();">
+    <div
+      class="item item-divider index-letter"
+      ng-if="entries.length"
+      id="shortcut{{index}}">
+      {{index}}
+    </div>
     <div class="entries" ng-if="filteredRoster">
       <ul class="list">
+        <div ng-if="rosterCount.type[interface.type]==0">
+          <div class="item item-divider">
+            Filtered Roster
+          </div>
+          <div class="item">
+            Nothing to show
+          </div>
+        </div>
+
         <div
           ng-repeat="(index, entries) in filteredRoster">
           <div
