@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  title="" id="page3" class="">
   <ion-header-bar align-title="left">
     <div class="bar bar-header">
-      <div class="row" ng-if="!interface.multiselect" class="filters">
+      <div class="row filters" ng-if="!interface.multiselect">
           <div class="col col-75">
             <img class="logo" on-hold="showInfo();" src="img/rocket.png"></img>
           </div>
@@ -62,19 +62,15 @@
         </div>
       </div>
     </div>
-    <div class="shortcutbar">
-      <div class="row">
-        <div ng-repeat="(index, entries) in roster.entries"
-          class="col"
-          ng-if="entries.length"
-          ng-click="shortcutJump(index)">
-          <a class="calm">{{index}}</a>
-        </div>
+    <div class="row shortcutbar">
+      <div ng-repeat="(index, entries) in roster.entries"
+        class="col"
+        ng-if="entries.length"
+        ng-click="shortcutJump(index)">
+        <a class="calm">{{index}}</a>
       </div>
     </div>
   </ion-header-bar>
-
-
 
   <ion-content padding="true" class="has-header" on-scroll-complete="screensaverKick();">
     <div class="entries" ng-if="filteredRoster">
