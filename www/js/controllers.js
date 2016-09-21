@@ -897,9 +897,39 @@ angular.module('app.controllers', [])
     }
   }
 
-  $scope.filterStatus = function(status){
-    $scope.interface.status = status;
+  var showFilteredEntry = function(entry){
+    var show = false;
+    if($scope.interface.status==='all' || $scope.interface.status==entry.status)
+      if($scope.interface.type==='all' || $scope.interface.type==entry.type)
+        show = true;
+
+    return show
   }
+
+  $scope.rosterFilter = function(){
+    /* build prototype roster */
+    var roster = {'#':[]};
+
+    var frm = "A".charCodeAt(0);
+    var to  = "Z".charCodeAt(0);
+
+    for(a=frm; a<=to; a++){
+      var id = String.fromCharCode(a);
+      roster[id] = [];
+    }
+
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(showFilteredEntry(entry))
+              roster[index].push(entry);
+          });
+      });
+
+    $scope.filteredRoster = roster;
+  }
+
 
   $scope.firstLetter = firstLetter.get;
 
@@ -995,6 +1025,7 @@ angular.module('app.controllers', [])
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
     $scope.rosterCountUpdate();
+    $scope.rosterFilter()
   };
 
   $scope.rosterError = function (){
