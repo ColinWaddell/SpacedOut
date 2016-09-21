@@ -153,9 +153,10 @@ angular.module('app.services', [])
          rights_access_settings,   \
          rights_add_remove_users,  \
          rights_auto_remove_guest, \
-         add_option)               \
-        VALUES (?,?,?,?,?,?,?,?)",
-      [1, "", "", 0, 0, 0, 1, 0])
+         add_option,               \
+         roster_show_datetime)     \
+        VALUES (?,?,?,?,?,?,?,?,?)",
+      [1, "", "", 0, 0, 0, 1, 0, 1])
     .then(function(result){
       notifyObservers();
     });
@@ -196,7 +197,8 @@ angular.module('app.services', [])
          rights_access_settings=(?),              \
          rights_add_remove_users=(?),             \
          rights_auto_remove_guest=(?),            \
-         add_option=(?)                           \
+         add_option=(?),                          \
+         roster_show_datetime=(?)                 \
          WHERE id=1",
       [
         settings.screensaver_time,
@@ -205,6 +207,7 @@ angular.module('app.services', [])
         settings.rights_access_settings,
         settings.rights_add_remove_users,
         settings.rights_auto_remove_guest,
+        settings.roster_show_datetime,
         settings.add_option
       ]
     )

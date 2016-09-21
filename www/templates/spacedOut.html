@@ -101,7 +101,8 @@
                 <span class="name" ng-bind-html="entry.name"></span>
                 <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
                 <span<a class="roster-activity">
-                  Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b> <span am-time-ago="entry.last_activity"></span>
+                  Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b>
+                  <span ng-if="settings.roster_show_datetime" am-time-ago="entry.last_activity"></span>
                 </a></span>
               </div>
               <div class="col col-20">

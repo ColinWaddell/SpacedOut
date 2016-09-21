@@ -31,6 +31,7 @@ angular.module('app.routes', [])
         columns: [
           {name: 'id', type: 'integer primary key'},
           {name: 'screensaver_time', type: 'integer'},
+          {name: 'roster_show_datetime', type: 'integer'},
           {name: 'add_option', type: 'integer'},
           {name: 'alert_email', type: 'text'},
           {name: 'password', type: 'text'},
