@@ -268,10 +268,29 @@ angular.module('app.services', [])
       });
     };
 
+    var formatRoster = function(rows){
+
+      /* build prototype roster */
+      var roster = {'#':[]};
+
+      var frm = "a".charCodeAt(0);
+      var to  = "z".charCodeAt(0);
+
+      for(a=frm; a<=to; a++){
+        var id = String.fromCharCode(a);
+        roster[id] = [];
+      }
+
+      /* parse roster and categorise */
+      rows.forEach(function(row){
+        
+      })
+    }
+
     self.all = function() {
         return DB.query('SELECT * FROM roster ORDER BY lower(name)')
         .then(function(result){
-            return DB.fetchAll(result);
+            return formatRoster(DB.fetchAll(result));
         });
     };
 
