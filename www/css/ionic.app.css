@@ -9862,6 +9862,10 @@ ion-content {
     text-transform: capitalize; }
   .entries .entry.item {
     padding: 0 10px; }
+    .entries .entry.item.selected {
+      background: #0b637b !important; }
+    .entries .entry.item.activated {
+      background: #293d43; }
     .entries .entry.item button {
       margin: 0;
       min-height: 40px;
@@ -9892,10 +9896,6 @@ ion-content {
   .entries .entry.signedout button {
     background: #606e72;
     color: #2b2b2b; }
-  .entries .entry.selected {
-    background: #0b637b; }
-  .entries .entry.activated {
-    background: #293d43; }
 
 .filters {
   padding-top: 0px; }

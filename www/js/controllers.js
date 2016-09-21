@@ -723,13 +723,15 @@ angular.module('app.controllers', [])
   $scope.getSelected = function(){
     var selected = [];
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        if(entry.selected){
-          selected.push(entry);
-        }
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(entry.selected){
+              selected.push(entry);
+            }
+          });
+      });
 
     return selected;
   }
@@ -855,11 +857,13 @@ angular.module('app.controllers', [])
     if(!$scope.roster.entries)
       return;
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        entry.selected = false;
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            entry.selected = false;
+          });
+      });
   }
 
   $scope.numSelected = function(){
@@ -872,12 +876,14 @@ angular.module('app.controllers', [])
       return 0;
     }
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        if(entry.selected)
-          numselected++
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(entry.selected)
+              numselected++
+          });
+      });
 
     return numselected;
   }
@@ -913,12 +919,17 @@ angular.module('app.controllers', [])
 
   $scope.toggleStatus = function(user){
     if($scope.interface.multiselect){
-      $scope.roster.entries.forEach(function(entry){
-        if(entry.selected){
-          entry.status = user.status;
-          Roster.setStatus(entry, user.status);
-        }
-      });
+
+      angular.forEach($scope.roster.entries,
+        function(entries, index){
+          angular.forEach(entries,
+            function(entry){
+              if(entry.selected){
+                entry.status = user.status;
+                Roster.setStatus(entry, user.status);
+              }
+            });
+        });
 
       $scope.multiselectCancel();
       $scope.rosterCountUpdate();

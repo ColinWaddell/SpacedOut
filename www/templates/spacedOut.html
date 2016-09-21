@@ -90,13 +90,14 @@
 
           <div
             class="item entry"
+            ng-repeat="entry in filteredEntries = (entries | orderBy : 'name')"
+            on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
             ng-class="{'signedout': entry.status=='out', 'selected': entry.selected, 'guest':entry.type=='guest'}"
             ng-hide="entry.hide"
             on-tap="entryTap(entry)"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)"
-            ng-if="entries.length"
-            ng-repeat="entry in filteredEntries = (entries | orderBy : 'name')">
+            ng-if="entries.length">
             <div class="row">
               <div class="col col-80">
                 <span class="name" ng-bind-html="entry.name"></span>
