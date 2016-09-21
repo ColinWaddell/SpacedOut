@@ -835,14 +835,14 @@ angular.module('app.controllers', [])
       'status': {'in': 0, 'out': 0}
     };
 
-    if($scope.roster.entries){
-      $scope.roster.entries.forEach(
-        function(entry){
-          count.type[entry.type]++;
-          count.status[entry.status]++;
-        }
-      );
-    }
+    // if($scope.roster.entries){
+    //   $scope.roster.entries.forEach(
+    //     function(entry){
+    //       count.type[entry.type]++;
+    //       count.status[entry.status]++;
+    //     }
+    //   );
+    // }
 
     $scope.rosterCount = count;
   };

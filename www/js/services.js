@@ -304,14 +304,14 @@ angular.module('app.services', [])
         roster[id].push(row);
       })
 
-      console.log(roster);
+      return roster;
+
     }
 
     self.all = function() {
         return DB.query('SELECT * FROM roster ORDER BY lower(name)')
         .then(function(result){
-            formatRoster(DB.fetchAll(result));
-            return (DB.fetchAll(result));
+            return formatRoster(DB.fetchAll(result));
         });
     };
 
