@@ -835,14 +835,16 @@ angular.module('app.controllers', [])
       'status': {'in': 0, 'out': 0}
     };
 
-    // if($scope.roster.entries){
-    //   $scope.roster.entries.forEach(
-    //     function(entry){
-    //       count.type[entry.type]++;
-    //       count.status[entry.status]++;
-    //     }
-    //   );
-    // }
+    if($scope.roster.entries){
+      angular.forEach($scope.roster.entries,
+        function(entries, index){
+          angular.forEach(entries,
+            function(entry){
+              count.type[entry.type]++;
+              count.status[entry.status]++;
+            });
+        });
+    }
 
     $scope.rosterCount = count;
   };
@@ -898,7 +900,6 @@ angular.module('app.controllers', [])
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
-    $scope.rosterFilter();
 
     /* HERE IS THE EASTER EGG */
     if(user.name==="Paul Yarr"){
@@ -980,20 +981,8 @@ angular.module('app.controllers', [])
     history.pushState(null, null, loc);
   };
 
-  $scope.rosterFilter = function(){
-    angular.forEach($scope.roster.entries, function(item) {
-      var hide = true;
-      if($scope.interface.status==='all' || $scope.interface.status==item.status)
-        if($scope.interface.type==='all' || $scope.interface.type==item.type)
-          hide = false;
-
-      item.hide = hide;
-    });
-  };
-
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
-    $scope.rosterFilter();
     $scope.rosterCountUpdate();
   };
 
