@@ -2,10 +2,10 @@
   <ion-header-bar align-title="left">
     <div class="bar bar-header">
       <div class="row filters" ng-if="!interface.multiselect">
-          <div class="col col-75">
+          <div class="col col-67">
             <img class="logo" on-hold="showInfo();" src="img/rocket.png"></img>
           </div>
-          <div class="col-25">
+          <div class="col-33">
             <div class="row">
               <div class="col col-25">
                 <a class="button button-round" ng-click="interface.type='all'; interface.status='all'; rosterFilter(); scrollTop();" ng-class="{selected: interface.type=='all'&&interface.status=='all'}">
@@ -72,7 +72,7 @@
     </div>
   </ion-header-bar>
 
-  <ion-content padding="true" class="has-header" style="margin-top: 40px;" scrolly="screensaverKick()">
+  <ion-content padding="true" class="has-header" style="margin-top: 20px;" scrolly="screensaverKick()">
     <div
       class="item item-divider index-letter"
       ng-if="entries.length"

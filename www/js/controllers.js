@@ -1083,6 +1083,7 @@ angular.module('app.controllers', [])
       'status': 'all',
       'type': 'all',
       'multiselect': false
-    }
+    };
+    $scope.rosterFilter();
   });
 });
