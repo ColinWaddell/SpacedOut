@@ -717,7 +717,7 @@ angular.module('app.controllers', [])
   });
 
   $scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop(false);
+    //$ionicScrollDelegate.scrollTop(false);
   };
 
   $scope.getSelected = function(){
@@ -907,6 +907,7 @@ angular.module('app.controllers', [])
   }
 
   $scope.rosterFilter = function(){
+
     /* build prototype roster */
     var roster = {'#':[]};
 
@@ -962,7 +963,7 @@ angular.module('app.controllers', [])
         });
 
       $scope.multiselectCancel();
-      $scope.rosterCountUpdate();
+      $scope.rosterFilter();
     }
     else{
       Roster.setStatus(user, user.status);
