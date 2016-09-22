@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  title="" id="page3" class="">
   <ion-header-bar align-title="left">
     <div class="bar bar-header">
-      <div class="row" ng-if="!interface.multiselect" class="filters">
+      <div class="row filters" ng-if="!interface.multiselect">
           <div class="col col-75">
             <img class="logo" on-hold="showInfo();" src="img/rocket.png"></img>
           </div>
@@ -62,38 +62,49 @@
         </div>
       </div>
     </div>
-    <div class="shortcutbar">
-      <div class="row">
-        <div ng-repeat="entry in filteredEntries = (roster.entries | orderBy : 'name')"
-          class="col"
-          ng-click="shortcutJump(firstLetter(entry.name))"
-          ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
-          <a class="calm">{{firstLetter(entry.name)}}</a>
-        </div>
+    <div class="row shortcutbar">
+      <div ng-repeat="(index, entries) in filteredRoster"
+        class="col"
+        ng-if="entries.length"
+        ng-click="shortcutJump(index)">
+        <a class="calm">{{index}}</a>
       </div>
     </div>
   </ion-header-bar>
 
-
-
-  <ion-content padding="true" class="has-header" scrolly="screensaverKick()">
-    <div class="entries" ng-if="roster.entries">
+  <ion-content padding="true" class="has-header" style="margin-top: 40px;" scrolly="screensaverKick()">
+    <div
+      class="item item-divider index-letter"
+      ng-if="entries.length"
+      id="shortcut{{index}}">
+      {{index}}
+    </div>
+    <div class="entries" ng-if="filteredRoster">
       <ul class="list">
+        <div ng-if="rosterCount.type[interface.type]==0">
+          <div class="item item-divider">
+            These are not the users you are looking for
+          </div>
+          <div class="item">
+            Nothing to see here
+          </div>
+        </div>
+
         <div
-          on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
-          ng-repeat="entry in filteredEntries = (roster.entries | orderBy : 'name')">
+          ng-repeat="(index, entries) in filteredRoster">
           <div
             class="item item-divider index-letter"
-            id="shortcut{{firstLetter(entry.name)}}"
-            ng-if="firstLetter(entry.name) !== firstLetter(filteredEntries[$index-1].name)">
-            {{firstLetter(entry.name)}}
+            ng-if="entries.length"
+            id="shortcut{{index}}">
+            {{index}}
           </div>
 
           <div
             class="item entry"
+            ng-repeat="entry in filteredEntries = (entries | orderBy : 'name')"
+            on-hold="entry.selected=true; interface.multiselect=true; multiselectTimerStart();"
             ng-class="{'signedout': entry.status=='out', 'selected': entry.selected, 'guest':entry.type=='guest'}"
-            ng-hide="entry.hide"
-            on-tap="entryTap(entry)"
+            on-tap="entryTap(entry); rosterFilter();"
             on-swipe-left="entryTap(entry)"
             on-swipe-right="entryTap(entry)">
             <div class="row">
@@ -101,7 +112,8 @@
                 <span class="name" ng-bind-html="entry.name"></span>
                 <span ng-if="entry.type=='guest'" class="label">GUEST</span><br />
                 <span<a class="roster-activity">
-                  Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b> <span am-time-ago="entry.last_activity"></span>
+                  Signed <b ng-class="{light: entry.status=='in'}">{{entry.status}}</b>
+                  <span ng-if="settings.roster_show_datetime" am-time-ago="entry.last_activity"></span>
                 </a></span>
               </div>
               <div class="col col-20">
@@ -118,12 +130,12 @@
     <div class="row" ng-if="interface.type=='all'&&interface.status=='all'">
       <div class="col">
         <br />
-        <br />
         <p>
           <a href="#/spacedout/add" class="button button-calm">
             <i class="icon ion-ios-personadd-outline"></i>
           </a>
         </p>
+        <br />
       </div>
     </div>
   </ion-content>

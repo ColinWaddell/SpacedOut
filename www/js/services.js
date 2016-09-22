@@ -56,6 +56,23 @@ angular.module('app.services', [])
     return self;
 })
 
+.factory('firstLetter', function() {
+  return{
+    'get': function(name){
+      if (name === undefined)
+        return;
+
+      var letter = name.toUpperCase() && name.toUpperCase().charAt(0);
+      if (/^[A-Za-z]+$/.test(letter)){
+        return letter;
+      }
+      else{
+        return '#';
+      }
+    }
+  }
+})
+
 .factory('Log', function(DB, $filter) {
     var self = this;
 
@@ -153,9 +170,10 @@ angular.module('app.services', [])
          rights_access_settings,   \
          rights_add_remove_users,  \
          rights_auto_remove_guest, \
-         add_option)               \
-        VALUES (?,?,?,?,?,?,?,?)",
-      [1, "", "", 0, 0, 0, 1, 0])
+         add_option,               \
+         roster_show_datetime)     \
+        VALUES (?,?,?,?,?,?,?,?,?)",
+      [1, "", "", 0, 0, 0, 1, 0, 1])
     .then(function(result){
       notifyObservers();
     });
@@ -196,7 +214,8 @@ angular.module('app.services', [])
          rights_access_settings=(?),              \
          rights_add_remove_users=(?),             \
          rights_auto_remove_guest=(?),            \
-         add_option=(?)                           \
+         add_option=(?),                          \
+         roster_show_datetime=(?)                 \
          WHERE id=1",
       [
         settings.screensaver_time,
@@ -205,6 +224,7 @@ angular.module('app.services', [])
         settings.rights_access_settings,
         settings.rights_add_remove_users,
         settings.rights_auto_remove_guest,
+        settings.roster_show_datetime,
         settings.add_option
       ]
     )
@@ -248,7 +268,7 @@ angular.module('app.services', [])
 })
 
 
-.factory('Roster', function(DB, Log, $filter) {
+.factory('Roster', function(DB, Log, $filter, firstLetter) {
     var self = this;
 
     var observerCallbacks = [];
@@ -265,10 +285,33 @@ angular.module('app.services', [])
       });
     };
 
+    var formatRoster = function(rows){
+
+      /* build prototype roster */
+      var roster = {'#':[]};
+
+      var frm = "A".charCodeAt(0);
+      var to  = "Z".charCodeAt(0);
+
+      for(a=frm; a<=to; a++){
+        var id = String.fromCharCode(a);
+        roster[id] = [];
+      }
+
+      /* parse roster and categorise */
+      rows.forEach(function(row){
+        var id = firstLetter.get(row.name);
+        roster[id].push(row);
+      })
+
+      return roster;
+
+    }
+
     self.all = function() {
         return DB.query('SELECT * FROM roster ORDER BY lower(name)')
         .then(function(result){
-            return DB.fetchAll(result);
+            return formatRoster(DB.fetchAll(result));
         });
     };
 

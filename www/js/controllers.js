@@ -693,6 +693,7 @@ angular.module('app.controllers', [])
   ionicToast,
   Roster,
   Screensaver,
+  firstLetter,
   Admin,
   Settings,
   rosterInterface
@@ -717,19 +718,21 @@ angular.module('app.controllers', [])
   });
 
   $scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop(false);
+    //$ionicScrollDelegate.scrollTop(false);
   };
 
   $scope.getSelected = function(){
     var selected = [];
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        if(entry.selected){
-          selected.push(entry);
-        }
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(entry.selected){
+              selected.push(entry);
+            }
+          });
+      });
 
     return selected;
   }
@@ -843,12 +846,14 @@ angular.module('app.controllers', [])
     };
 
     if($scope.roster.entries){
-      $scope.roster.entries.forEach(
-        function(entry){
-          count.type[entry.type]++;
-          count.status[entry.status]++;
-        }
-      );
+      angular.forEach($scope.roster.entries,
+        function(entries, index){
+          angular.forEach(entries,
+            function(entry){
+              count.type[entry.type]++;
+              count.status[entry.status]++;
+            });
+        });
     }
 
     $scope.rosterCount = count;
@@ -860,11 +865,13 @@ angular.module('app.controllers', [])
     if(!$scope.roster.entries)
       return;
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        entry.selected = false;
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            entry.selected = false;
+          });
+      });
   }
 
   $scope.numSelected = function(){
@@ -877,12 +884,14 @@ angular.module('app.controllers', [])
       return 0;
     }
 
-    $scope.roster.entries.forEach(
-      function(entry){
-        if(entry.selected)
-          numselected++
-      }
-    );
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(entry.selected)
+              numselected++
+          });
+      });
 
     return numselected;
   }
@@ -896,27 +905,46 @@ angular.module('app.controllers', [])
     }
   }
 
-  $scope.filterStatus = function(status){
-    $scope.interface.status = status;
+  var showFilteredEntry = function(entry){
+    var show = false;
+    if($scope.interface.status==='all' || $scope.interface.status==entry.status)
+      if($scope.interface.type==='all' || $scope.interface.type==entry.type)
+        show = true;
+
+    return show
   }
 
-  $scope.firstLetter = function(name) {
-    if (name === undefined)
-      return;
+  $scope.rosterFilter = function(){
 
-    var letter = name.toUpperCase() && name.toUpperCase().charAt(0);
-    if (/^[A-Za-z]+$/.test(letter)){
-      return letter;
+    /* build prototype roster */
+    var roster = {'#':[]};
+
+    var frm = "A".charCodeAt(0);
+    var to  = "Z".charCodeAt(0);
+
+    for(a=frm; a<=to; a++){
+      var id = String.fromCharCode(a);
+      roster[id] = [];
     }
-    else{
-      return '#';
-    }
+
+    angular.forEach($scope.roster.entries,
+      function(entries, index){
+        angular.forEach(entries,
+          function(entry){
+            if(showFilteredEntry(entry))
+              roster[index].push(entry);
+          });
+      });
+
+    $scope.filteredRoster = roster;
   }
+
+
+  $scope.firstLetter = firstLetter.get;
 
   $scope.invertStatus = function(user){
     user.status = user.status==='in'?'out':'in';
     $scope.toggleStatus(user);
-    $scope.rosterFilter();
 
     /* HERE IS THE EASTER EGG */
     if(user.name==="Paul Yarr"){
@@ -930,15 +958,20 @@ angular.module('app.controllers', [])
 
   $scope.toggleStatus = function(user){
     if($scope.interface.multiselect){
-      $scope.roster.entries.forEach(function(entry){
-        if(entry.selected){
-          entry.status = user.status;
-          Roster.setStatus(entry, user.status);
-        }
-      });
+
+      angular.forEach($scope.roster.entries,
+        function(entries, index){
+          angular.forEach(entries,
+            function(entry){
+              if(entry.selected){
+                entry.status = user.status;
+                Roster.setStatus(entry, user.status);
+              }
+            });
+        });
 
       $scope.multiselectCancel();
-      $scope.rosterCountUpdate();
+      $scope.rosterFilter();
     }
     else{
       Roster.setStatus(user, user.status);
@@ -998,21 +1031,10 @@ angular.module('app.controllers', [])
     history.pushState(null, null, loc);
   };
 
-  $scope.rosterFilter = function(){
-    angular.forEach($scope.roster.entries, function(item) {
-      var hide = true;
-      if($scope.interface.status==='all' || $scope.interface.status==item.status)
-        if($scope.interface.type==='all' || $scope.interface.type==item.type)
-          hide = false;
-
-      item.hide = hide;
-    });
-  };
-
   $scope.rosterPopulate = function(data){
     $scope.roster.entries = JSON.parse(JSON.stringify(data));
-    $scope.rosterFilter();
     $scope.rosterCountUpdate();
+    $scope.rosterFilter()
   };
 
   $scope.rosterError = function (){

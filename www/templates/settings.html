@@ -32,6 +32,21 @@
         </li>
 
         <li class="item item-toggle">
+          Show sign-in/out time?
+          <label class="toggle toggle-energized">
+            <input
+              type="checkbox"
+              ng-model="settings.roster_show_datetime"
+              ng-true-value="1" ng-false-value="0"
+              ng-change="update();"
+            >
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        <li class="item item-toggle">
           Ask to remove Guests on Logout?
           <label class="toggle toggle-energized">
             <input
