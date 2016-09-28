@@ -41,18 +41,4 @@ angular.module('app.directives', [])
       });
     }
   };
-})
-
-.directive('scrolly', function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function ($scope, $element, $attrs) {
-            var raw = $element[0];
-            $element.bind('scroll', function () {
-              $scope.$apply(function () {
-                $scope.$eval($attrs.scrolly);
-              });
-            });
-        }
-    };
 });

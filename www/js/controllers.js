@@ -826,7 +826,7 @@ angular.module('app.controllers', [])
      $timeout(function(){
        Screensaver.kick();
        scrolleventCounter = 0;
-     }, 30000);
+     }, 3000);
    }
   scrolleventCounter++;
  }
