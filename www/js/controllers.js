@@ -25,11 +25,6 @@ angular.module('app.controllers', [])
 
   $scope['message'] = "Tap to Sign In";
 
-
-  Screensaver.addTimeout(30 * 6, function(){
-    document.location.href = 'index.html';
-  });
-
   /*
    * SPACE FACTS
    */
@@ -53,7 +48,7 @@ angular.module('app.controllers', [])
   self.start();
 })
 
-.controller('logCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast) {
+.controller('logCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast, moment) {
 
   $scope.logPopulate = function(data){
       $scope.log.entries = JSON.parse(JSON.stringify(data));
@@ -86,6 +81,41 @@ angular.module('app.controllers', [])
           $scope.logError
         );
   };
+
+  var logToHTML = function(){
+    var email = "<table>";
+    email += "<tr><th>Time</th><th>Time</th><th>Type</th><th>Event</th></tr>"
+
+    angular.forEach($scope.log.entries,
+      function(entry, index){
+        var event = (entry.event == "status")
+                    ? 'Signed '+ entry.status.toUpperCase()
+                    : 'User ' + entry.event.toUpperCase();
+        var last_activity = moment(entry.last_activity).format('dd/MM/yy @ h:mma');
+        email += "<tr><td>" + last_activity + "</td><td>" + entry.name + "</td><td>" + entry.type + "</td><td>" + event + "</td></tr>";
+      });
+
+    email += "</table>";
+    console.log(email);
+    return email;
+  };
+
+  $scope.Backup = function(){
+    logToHTML();
+    if(window.plugins && window.plugins.emailComposer) {
+        window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+            console.log("Response -> " + result);
+        },
+        "Spaced Out Log Backup",          // Subject
+        logToHTML(),                      // Body
+        [$scope.settings.alert_email],    // To
+        null,                             // CC
+        null,                             // BCC
+        true,                             // isHTML
+        null,                             // Attachments
+        null);                            // Attachment Data
+    }
+  }
 
   Log.registerObserverCallback($scope.logReload);
 })
@@ -243,7 +273,7 @@ angular.module('app.controllers', [])
 
               entries.forEach(
                 function(entry){
-                  email += "<tr><th>" + entry.name + "</th><th>Signed " + entry.status.toUpperCase() + "</th></tr>";
+                  email += "<tr><td>" + entry.name + "</td><td>Signed " + entry.status.toUpperCase() + "</td></tr>";
                 }
               );
 

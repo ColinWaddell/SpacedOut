@@ -2,10 +2,21 @@
     <ion-content padding="true">
       <ul class="list">
         <li class="item item-divider">
-          <a href="#/spacedout/settings" class="button button-calm">
-            <i class="icon ion-arrow-left-b"></i>
-            &nbsp; Back to Settings
-          </a>
+          <div class="row">
+            <div class="col item-button-left">
+              <a href="#/spacedout/settings" class="button button-calm">
+                <i class="icon ion-arrow-left-b"></i>
+                &nbsp; Back to Settings
+              </a>
+            </div>
+            <div class="col item-button-right">
+              <a ng-click="Backup()" class="button button-energized">
+                Export Log &nbsp;
+                <i class="icon ion-ios-email-outline"></i>
+              </a>
+              <br />
+            </div>
+          </div>
         </li>
         <li class="item">
           <div class="table row header">
