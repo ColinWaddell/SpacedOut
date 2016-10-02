@@ -96,12 +96,11 @@ angular.module('app.controllers', [])
       });
 
     email += "</table>";
-    console.log(email);
+
     return email;
   };
 
   $scope.Backup = function(){
-    logToHTML();
     if(window.plugins && window.plugins.emailComposer) {
         window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
             console.log("Response -> " + result);
