@@ -10107,6 +10107,7 @@ ion-content {
     width: 100%;
     text-align: center;
     display: block;
+    font-weight: lighter;
     font-size: 18pt; }
     .shortcutbar a.activated {
       color: #bba717; }

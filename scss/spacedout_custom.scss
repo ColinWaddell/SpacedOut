@@ -406,6 +406,7 @@ $floating-button-small-size: 40px;
     width: 100%;
     text-align: center;
     display: block;
+    font-weight: lighter;
     font-size: 18pt;
     &.activated{
       color: $energized;
