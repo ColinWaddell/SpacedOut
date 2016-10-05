@@ -48,7 +48,7 @@ angular.module('app.controllers', [])
   self.start();
 })
 
-.controller('logCtrl', function($scope, Roster, Screensaver, Log, Admin, $ionicPopup, ionicToast, moment) {
+.controller('logCtrl', function($scope, Roster, Screensaver, Settings, Log, Admin, $ionicPopup, ionicToast, moment) {
 
   $scope.logPopulate = function(data){
       $scope.log.entries = JSON.parse(JSON.stringify(data));
@@ -84,7 +84,7 @@ angular.module('app.controllers', [])
 
   var logToHTML = function(){
     var email = "<table>";
-    email += "<tr><th>Time</th><th>Time</th><th>Type</th><th>Event</th></tr>"
+    email += "<tr><th>Time</th><th>Name</th><th>Type</th><th>Event</th></tr>"
 
     angular.forEach($scope.log.entries,
       function(entry, index){
@@ -117,6 +117,16 @@ angular.module('app.controllers', [])
   }
 
   Log.registerObserverCallback($scope.logReload);
+
+  Settings.onUpdate($scope, function(){
+    Settings.get().then(function(settings){
+      $scope.settings = JSON.parse(JSON.stringify(settings));
+    });
+  })
+
+  Settings.get().then(function(settings){
+    $scope.settings = JSON.parse(JSON.stringify(settings));
+  });
 })
 
 .controller('backupCtrl', function(
@@ -270,11 +280,12 @@ angular.module('app.controllers', [])
               var email = "<table>";
               email += "<tr><th>Name</th><th>Status</th></tr>"
 
-              entries.forEach(
+              angular.forEach(entries,
                 function(entry){
-                  email += "<tr><td>" + entry.name + "</td><td>Signed " + entry.status.toUpperCase() + "</td></tr>";
-                }
-              );
+                  angular.forEach(entry, function(e){
+                    email += "<tr><td>" + e.name + "</td><td>Signed " + e.status.toUpperCase() + "</td></tr>";
+                });
+              });
 
               email += "</table>";
 
